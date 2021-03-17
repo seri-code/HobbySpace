@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comp.hobbyspace.mapper.SearchMapper">
+	<select id="searchKeyword"
+		resultType="com.comp.hobbyspace.beans.SearchBean">
+<![CDATA[ 
+SELECT  CT_CATE as ctName,sp_code as spCode, sp_topimg as spImg, sp_name as spName, sp_location as spLocation
+FROM SP INNER JOIN CT ON SP.SP_CTCODE = CT.CT_CODE
+where sp_location LIKE '%'||#{keyword}||'%' OR sp_name LIKE '%'||#{keyword}||'%' OR 
+	  SP_COMMENT LIKE '%'||#{keyword}||'%' OR SP_LONG LIKE '%'||#{keyword}||'%' OR CT_CATE=#{keyword}
+]]>
+	</select>
+	<select id="getCategoryName"
+		resultType="com.comp.hobbyspace.beans.SearchBean">
+<![CDATA[ 
+SELECT ct_cate as ctName
+FROM CT WHERE CT_CODE=#{ctCode}
+]]>
+	</select>
+
+	<select id="scCategory"
+		resultType="com.comp.hobbyspace.beans.SearchBean">
+<![CDATA[ 
+select sp_code as spCode, sp_topimg as spImg, sp_name as spName, sp_location as spLocation
+from sp 
+where sp_ctcode=#{ctCode}
+]]>
+	</select>
+	<!-- 상세검색 -->
+	<select id="searchOptions"
+		resultType="com.comp.hobbyspace.beans.SearchBean">
+<![CDATA[ 
+select CT_CATE as ctName, sp_code as spCode, sp_topimg as spImg, sp_name as spName, sp_location as spLocation,max(ro_people) as maxPeople
+from sp INNER JOIN ct on sp.sp_ctcode = ct.ct_code 
+INNER JOIN ca on sp.sp_code = ca.ca_rospcode
+INNER JOIN ro on sp.sp_code = ro.ro_spcode
+where TO_CHAR(ca.ca_date, 'YYYYMMDD') != #{seDate} and ct_code = #{ctCode} and sp.sp_location LIKE #{spLocation}||'%' and ro_people >= #{maxPeople}
+GROUP by CT_CATE, sp.sp_code, SP_TOPIMG, SP_NAME, SP_LOCATION, sp_code
+]]>
+	</select>
+</mapper>
