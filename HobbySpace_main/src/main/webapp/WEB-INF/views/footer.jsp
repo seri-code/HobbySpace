@@ -71,7 +71,7 @@ appearance: none;
 		<link rel="stylesheet" href="resources/assets/css/main.css" >
 		<link rel="icon" type="image/x-icon" sizes="16x16" href="resources/images/favicon.ico">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 		 
 	</head>
 <body>

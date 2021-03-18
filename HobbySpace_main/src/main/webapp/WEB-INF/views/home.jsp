@@ -15,6 +15,9 @@
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Poor+Story&display=swap" rel="stylesheet">
 </head>
 <body class="is-preload" onLoad="init();init2();init3();init4()">
 
@@ -37,30 +40,86 @@
 						style="cursor: pointer">로그아웃</div></a></li>
 		</ul>
 	</nav>
+	
+	
+	
 
 	<!-- Banner -->
-
+   
 	<div class="slideshow-container">
 
-		<div class="mySlides fade">
-			<div class="numbertext">1 / 3</div>
-			<img id="mainImage" name="sp_topimg"
-				style="width: 100%; cursor: pointer; height:30rem;" onclick="spaceDetail()" />
-			<div class="text">별점 최고 공간</div>
+		
+			
+<!-- 		마우스롤오버	 -->
+<!-- 			<figure class="snip1200"> -->
+<!--   <img id="mainImage" class="bg-image" name="sp_topimg" -->
+<!-- 				style="width: 100%; height:50rem; cursor: pointer;" onclick="spaceDetail()" /> -->
+<!--   <figcaption> -->
+<!--     <p>사진 클릭 시 공간 상세로 이동합니다. 당신만의 시간을 즐겨보세요!</p> -->
+<!--     <div class="heading"> -->
+<!--       <h2>Hobby<span> Space</span></h2> -->
+<!--     </div> -->
+<!--   </figcaption> -->
+<!--   <a href="spaceDetail()"></a> -->
+<!-- </figure> -->
+<!-- 		마우스롤오버	 -->
+
+		<div class="mySlides fade" > 
+		<div class="numbertext">1 / 3</div>
+			<figure class="snip1200">
+			<img id="mainImage" class="bg-image" name="sp_topimg"
+				style="width: 100%; height:50rem; cursor: pointer;" onclick="spaceDetail()" />
+			<figcaption>
+			<p style="font-size:30px">사진 클릭 시 공간 상세로 이동합니다. </p>
+         <div class="heading">
+     	 <h2>별점 최고<span> 추천공간</span></h2>
+    	</div>
+  			</figcaption>
+  			<a onClick="spaceDetail()"></a>
+			</figure>
 		</div>
 
-		<div class="mySlides fade">
-			<div class="numbertext">2 / 3</div>
-			<img id="mainImage" name="sp_topimg"
-				style="width: 100%; cursor: pointer" onclick="spaceDetail2()" />
-			<div class="text">예약 최다 공간</div>
+<!-- 		<div class="mySlides fade" > -->
+<!-- 			<div class="numbertext">1 / 3</div> -->
+<!-- 			<img id="mainImage" class="bg-image" name="sp_topimg" -->
+<!-- 				style="width: 100%; height:50rem; cursor: pointer;" onclick="spaceDetail()" /> -->
+				
+<!-- 		    <div class="bg-text"> -->
+<!--   			<h1 style="font-size:50px">★가장 높은 별점의 추천공간입니다.</h1> -->
+<!--   			<h3 style="font-size:20px">원하는 공간을 찾아보세요.</h3> -->
+<!-- 			</div> -->
+<!-- 			<div class="text">별점 최고 공간</div> -->
+<!-- 		</div> -->
+	
+		<div class="mySlides fade" > 
+		<div class="numbertext">2 / 3</div>
+		<figure class="snip1200">
+			<img id="mainImage" class="bg-image" name="sp_topimg"
+				style="width: 100%; height:50rem; cursor: pointer;" onclick="spaceDetail2()" />
+			<figcaption>
+			<p style="font-size:30px">사진 클릭 시 공간 상세로 이동합니다. </p>
+         <div class="heading">
+     	 <h2>예약 최다<span> 추천공간</span></h2>
+    	</div>
+  			</figcaption>
+  			<a onClick="spaceDetail2()"></a>
+			</figure>
 		</div>
-
-		<div class="mySlides fade">
-			<div class="numbertext">3 / 3</div>
-			<img id="mainImage" name="sp_topimg"
-				style="width: 100%; cursor: pointer" onclick="spaceDetail3()" />
-			<div class="text">찜 최다 공간</div>
+		
+		
+		<div class="mySlides fade" > 
+		<div class="numbertext">3 / 3</div>
+		<figure class="snip1200">
+			<img id="mainImage" class="bg-image" name="sp_topimg"
+				style="width: 100%; height:50rem; cursor: pointer;" onclick="spaceDetail3()" />
+			<figcaption>
+			<p style="font-size:30px">사진 클릭 시 공간 상세로 이동합니다. </p>
+         <div class="heading">
+     	 <h2>찜 클릭 수 최다<span> 추천공간</span></h2>
+    	</div>
+  			</figcaption>
+  			<a onClick="spaceDetail3()"></a>
+			</figure>
 		</div>
 
 		<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a class="next"
@@ -90,11 +149,12 @@
 		<div class="inner">
 			<div class="highlights">
 				<section>
-					<div class="content">
+					<div class="content" onMouseOver="this.style.backgroundColor='#FFAA28';" onMouseOut="this.style.backgroundColor='#FFFFFF'"
+					onclick="searchCate0()" style="cursor: pointer;">
 						<header>
 							<div class="image">
 								<input type="image" name="cate" value="04"
-									src="resources/images/Soccer.jpg" onclick="searchCate0()"
+									src="resources/images/Soccer.jpg" 
 									width="150" height="150">
 							</div>
 							<h3>운동</h3>
@@ -104,11 +164,12 @@
 
 				</section>
 				<section>
-					<div class="content">
+					<div class="content" onMouseOver="this.style.backgroundColor='#FFAA28';" onMouseOut="this.style.backgroundColor='#FFFFFF'"
+					onclick="searchCate1()" style="cursor: pointer;">
 						<header>
 							<div class="image">
 								<input type="image" name="cate" value="06"
-									src="resources/images/photo.jpg" onclick="searchCate1()"
+									src="resources/images/photo.jpg" 
 									width="150" height="150">
 							</div>
 							<h3>사진 스튜디오</h3>
@@ -117,11 +178,12 @@
 					</div>
 				</section>
 				<section>
-					<div class="content">
+					<div class="content" onMouseOver="this.style.backgroundColor='#FFAA28';" onMouseOut="this.style.backgroundColor='#FFFFFF'"
+					onclick="searchCate2()" style="cursor: pointer;">
 						<header>
 							<div class="image">
 								<input type="image" name="cate" value="07"
-									src="resources/images/cooking.jpg" onclick="searchCate2()"
+									src="resources/images/cooking.jpg" 
 									width="150" height="150">
 
 							</div>
@@ -131,11 +193,12 @@
 					</div>
 				</section>
 				<section>
-					<div class="content">
+					<div class="content"  onMouseOver="this.style.backgroundColor='#FFAA28';" onMouseOut="this.style.backgroundColor='#FFFFFF'"
+					onclick="searchCate3()" style="cursor: pointer;">
 						<header>
 							<div class="image">
 								<input type="image" name="cate" value="01"
-									src="resources/images/drink.jpg" onclick="searchCate3()"
+									src="resources/images/drink.jpg"
 									width="150" height="150">
 							</div>
 							<h3>주조</h3>
@@ -144,11 +207,12 @@
 					</div>
 				</section>
 				<section>
-					<div class="content">
+					<div class="content"  onMouseOver="this.style.backgroundColor='#FFAA28';" onMouseOut="this.style.backgroundColor='#FFFFFF'"
+					onclick="searchCate4()" style="cursor: pointer;">
 						<header>
 							<div class="image">
 								<input type="image" name="cate" value="08"
-									src="resources/images/sing.jpg" onclick="searchCate4()"
+									src="resources/images/sing.jpg" 
 									width="150" height="150">
 							</div>
 							<h3>녹음실</h3>
@@ -157,11 +221,12 @@
 					</div>
 				</section>
 				<section>
-					<div class="content">
+					<div class="content"  onMouseOver="this.style.backgroundColor='#FFAA28';" onMouseOut="this.style.backgroundColor='#FFFFFF'"
+					onclick="searchCate5()" style="cursor: pointer;">
 						<header>
 							<div class="image">
 								<input type="image" name="cate" value="05"
-									src="resources/images/tree.jpg" onclick="searchCate5()"
+									src="resources/images/tree.jpg"
 									width="150" height="150">
 							</div>
 							<h3>목공</h3>
@@ -173,118 +238,145 @@
 		</div>
 	</section>
 
+<!-- <figure class="snip1141"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" /> -->
+<!--   <figcaption> -->
+<!--     <div class="circle"><i class="ion-ios-plus-empty"> </i></div> -->
+<!--     <h2>Paris York</h2> -->
+<!--   </figcaption> -->
+<!--   <a href="#"></a> -->
+<!-- </figure> -->
+
 	<!-- Testimonials -->
 	<section class="wrapper">
 		<div class="inner">
 			<header class="special">
-				<h2>이용자 리뷰</h2>
+				<h2 style="color:#000000">이용자 리뷰</h2>
 				<p>이용자들의 생생한 후기를 만나보세요!</p>
 			</header>
 			<div class="testimonials">
 				<section>
+				<figure class="snip1141" onClick="reviewToSpace(loadReview[0].spCode)" style="cursor: pointer;">
+						<div class="image" id="rv_img"></div>
 					<div class="content">
-						<blockquote>
-							<p>
-							<div id="rv_content" style="cursor: pointer;"></div>
-							</p>
-						</blockquote>
+							
+						<blockquote>						
+							<div class="circle"><i class="ion-ios-plus-empty"> </i></div>
+							 </blockquote>
+						
+<!-- 						 <div id="rv_content" style="cursor: pointer;"></div> -->
+						
 						<div class="author">
-							<div class="image" id="rv_img"></div>
+
 							<p class="credit">
-								- <strong id="p"><span id="rv_star"
-									class="star-prototype"></span></strong> <span></span>
+								<h2>Click</h2>  <strong id="p"><span id="rv_star"
+									class="star-prototype"></span></strong> <span id="span"></span>				
 							</p>
+							
+							<figcaption style="height:450px;">
+								
+							<a style="float:left;"></a>
+							 <div id="rv_content" style="cursor: pointer;"></div>
+							</figcaption>
+							
 						</div>
 					</div>
+					
+					</figure>
 				</section>
+
+				
 				<section>
+				<figure class="snip1141" onClick="reviewToSpace(loadReview[1].spCode)" style="cursor: pointer;">
+						<div class="image" id="rv_img2"></div>
 					<div class="content">
+							
 						<blockquote>
-							<p>
-							<div id="rv_content2" style="cursor: pointer;"></div>
-							</p>
-						</blockquote>
+							
+							
+							<div class="circle"><i class="ion-ios-plus-empty"> </i></div>
+							 </blockquote>
+						
+						
 						<div class="author">
-							<div class="image" id="rv_img2"></div>
+
 							<p class="credit">
-								- <strong id="p"><span id="rv_star2"
-									class="star-prototype"></span></strong>
+								<h2>Click</h2>  <strong id="p"><span id="rv_star2"
+									class="star-prototype"></span></strong> <span id="span2"></span>									
 							</p>
+							
+							<figcaption style="height:450px;">
+								
+							<a style="float:left;"></a>
+							 <div id="rv_content2" style="cursor: pointer;"></div>
+							</figcaption>
+							
 						</div>
 					</div>
+					
+					</figure>
 				</section>
+				
+				
+<!-- 				<section> -->
+<!-- 					<div class="content"> -->
+<!-- 						<blockquote> -->
+<!-- 							<p> -->
+<!-- 							<div id="rv_content3" style="cursor: pointer;"></div> -->
+<!-- 							</p> -->
+<!-- 						</blockquote> -->
+<!-- 						<div class="author"> -->
+<!-- 							<div class="image" id="rv_img3"></div> -->
+<!-- 							<p class="credit"> -->
+<!-- 								- <strong id="p"><span id="rv_star3" -->
+<!-- 									class="star-prototype"></span></strong> -->
+<!-- 							</p> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</section> -->
+
 				<section>
-					<div class="content">
+				<figure class="snip1141" onClick="reviewToSpace(loadReview[2].spCode)" style="cursor: pointer;">
+						<div class="image" id="rv_img3"></div>
+					<div class="content">							
 						<blockquote>
-							<p>
-							<div id="rv_content3" style="cursor: pointer;"></div>
-							</p>
-						</blockquote>
+													
+							<div class="circle"><i class="ion-ios-plus-empty"> </i></div>
+							 </blockquote>						
+						
 						<div class="author">
-							<div class="image" id="rv_img3"></div>
+
 							<p class="credit">
-								- <strong id="p"><span id="rv_star3"
-									class="star-prototype"></span></strong>
+								<h2>Click</h2>  <strong id="p"><span id="rv_star3"
+									class="star-prototype"></span></strong> 
+									<span id="span3"></span>									
 							</p>
+							
+							<figcaption style="height:450px;">
+								
+							<a style="float:left;"></a>
+							 <div id="rv_content3" style="cursor: pointer;"></div>
+							</figcaption>						
 						</div>
 					</div>
+					</figure>
 				</section>
+				
+
 			</div>
 		</div>
 	</section>
 
 
 
-	<!-- Footer -->
-	<footer id="footer">
-		<div class="inner">
-			<div class="content">
-				<section>
-					<h3>Accumsan montes viverra</h3>
-					<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing
-						gravida odio porttitor sem non mi integer non faucibus ornare mi
-						ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien
-						lorem accumsan varius montes viverra nibh in adipiscing. Lorem
-						ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum.
-						Blandit adipiscing eu felis iaculis volutpat ac adipiscing sed
-						feugiat eu faucibus. Integer ac sed amet praesent. Nunc lacinia
-						ante nunc ac gravida.</p>
-				</section>
-				<section>
-					<h4>Sem turpis amet semper</h4>
-					<ul class="alt">
-						<li><a href="#">Dolor pulvinar sed etiam.</a></li>
-						<li><a href="#">Etiam vel lorem sed amet.</a></li>
-						<li><a href="#">Felis enim feugiat viverra.</a></li>
-						<li><a href="#">Dolor pulvinar magna etiam.</a></li>
-					</ul>
-				</section>
-				<section>
-					<h4>Magna sed ipsum</h4>
-					<ul class="plain">
-						<li><a href="#"><i class="icon fa-twitter">&nbsp;</i>Twitter</a></li>
-						<li><a href="#"><i class="icon fa-facebook">&nbsp;</i>Facebook</a></li>
-						<li><a href="#"><i class="icon fa-instagram">&nbsp;</i>Instagram</a></li>
-						<li><a href="#"><i class="icon fa-github">&nbsp;</i>Github</a></li>
-					</ul>
-				</section>
-			</div>
-			<div class="copyright">
-				&copy; Untitled. Photos <a href="https://unsplash.co">Unsplash</a>,
-				Video <a href="https://coverr.co">Coverr</a>.
-			</div>
-		</div>
-	</footer>
-
-	<!-- Scripts -->
-	<script src="resources/assets/js/jquery.min.js"></script>
-	<script src="resources/assets/js/browser.min.js"></script>
-	<script src="resources/assets/js/breakpoints.min.js"></script>
-	<script src="resources/assets/js/util.js"></script>
-	<script src="resources/assets/js/main.js"></script>
-
+	
+	
+<jsp:include page="footer.jsp"></jsp:include>
 
 </body>
+
+
+
+
 <script>
 	var topStar = JSON.parse('${topStar}');
 	var topReserve = JSON.parse('${topReserve}');
@@ -435,20 +527,27 @@
 		timer = setTimeout(showSlides, 6000);
 	}
 
+	
+	
+	
 	loadReview = JSON.parse('${review}');
 	function init2() {
 		let review = document.getElementById("rv_content");
 		let add_review = document.createElement("div");
 		add_review.textContent = loadReview[0].rvText;
+		add_review.style.width ="260px";
+		add_review.style.margin ="210px 0 5px 30px";
+		
 		review.appendChild(add_review);
 
 		let star = document.getElementById("rv_star");
 		star.textContent = loadReview[0].rvStar;
+		
 
 		let img = document.getElementById("rv_img");
 		let add_img = document.createElement("img");
-		add_img.src = "resources/images/" + loadReview[0].rvImg;
-		add_img.style.width = "125px";
+		add_img.src = "resources/images/rvimg/" + loadReview[0].rvImg;
+		add_img.style.width = "340px";
 		add_img.style.height = "187px";
 		img.appendChild(add_img);
 		img.addEventListener('click', function() {
@@ -456,59 +555,82 @@
 		});
 		img.style.cursor = "pointer";
 
+		
+		let span = document.getElementById("span");
+		span.textContent = "("+loadReview[0].rvStar+"/5"+")";
+		
 	}
 
 	function init3() {
 		let review = document.getElementById("rv_content2");
 		let add_review = document.createElement("div");
 		add_review.textContent = loadReview[1].rvText;
+		add_review.style.width ="260px";
+		add_review.style.margin ="210px 0 5px 30px";
+		
 		review.appendChild(add_review);
 
 		let star = document.getElementById("rv_star2");
 		star.textContent = loadReview[1].rvStar;
+		
 
 		let img = document.getElementById("rv_img2");
 		let add_img = document.createElement("img");
-		add_img.src = "resources/images/" + loadReview[1].rvImg;
-		add_img.style.width = "125px";
+		add_img.src = "resources/images/rvimg/" + loadReview[1].rvImg;
+		add_img.style.width = "340px";
 		add_img.style.height = "187px";
 		img.appendChild(add_img);
 		img.addEventListener('click', function() {
 			reviewToSpace(loadReview[1].spCode);
 		});
 		img.style.cursor = "pointer";
-	}
 
+		
+ 		let span = document.getElementById("span2");
+		span.textContent = "("+loadReview[1].rvStar+"/5"+")";
+		
+	}
+	
 	function init4() {
 		let review = document.getElementById("rv_content3");
 		let add_review = document.createElement("div");
 		add_review.textContent = loadReview[2].rvText;
+		add_review.style.width ="260px";
+		add_review.style.margin ="210px 0 5px 30px";
+		
 		review.appendChild(add_review);
 
 		let star = document.getElementById("rv_star3");
 		star.textContent = loadReview[2].rvStar;
-
-		// 별점 호출 함수(이 함수는 없어도 아래 함수 있으면 작동함)
+		
 		$.fn.generateStars = function() {
 			return this.each(function(i, e) {
 				$(e).html($('<span/>').width($(e).text() * 16));
 			});
 		};
+		
+		'${rv_star}'
 		// 숫자 평점을 별로 변환하도록 호출하는 함수
 		$('.star-prototype').generateStars();
-
+		
 		let img = document.getElementById("rv_img3");
 		let add_img = document.createElement("img");
-		add_img.src = "resources/images/" + loadReview[2].rvImg;
-		add_img.style.width = "125px";
+		add_img.src = "resources/images/rvimg/" + loadReview[2].rvImg;
+		add_img.style.width = "340px";
 		add_img.style.height = "187px";
 		img.appendChild(add_img);
 		img.addEventListener('click', function() {
 			reviewToSpace(loadReview[2].spCode);
 		});
 		img.style.cursor = "pointer";
-	}
 
+		
+		let span = document.getElementById("span3");
+		span.textContent = "("+loadReview[2].rvStar+"/5"+")";
+		
+	}
+	
+	
 	// 카테고리 클릭 시 검색결과 페이지로 이동
 	function searchCate0() {
 		let ctCode = document.getElementsByName("cate")[0].value;
@@ -572,6 +694,23 @@
 		document.body.appendChild(form);
 		form.submit();
 	}
+	
+	  $(".hover").mouseleave(
+			    function () {
+			      $(this).removeClass("hover");
+			    }
+			  );
+	  
+	  
+	  
+	 
 </script>
+
+<!-- Scripts -->
+	<script src="resources/assets/js/jquery.min.js"></script>
+	<script src="resources/assets/js/browser.min.js"></script>
+	<script src="resources/assets/js/breakpoints.min.js"></script>
+	<script src="resources/assets/js/util.js"></script>
+	<script src="resources/assets/js/main.js"></script>
 
 </html>
