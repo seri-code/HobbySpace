@@ -9,6 +9,15 @@
 
 @-ms-viewport {
   width: device-width; }
+  
+@font-face {
+    font-family: 'paybooc-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body {
   -ms-overflow-style: scrollbar; }
 
@@ -16,11 +25,11 @@ body {
 figure.snip1141 {
   font-family: 'Raleway', Arial, sans-serif;
   position: relative;
-  overflow: hidden;
+/*   overflow: hidden; */
   width: 100%;
-  background: #000000;
-  color: #ffffff;
+  color: #000000;
   text-align: left;
+ 
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
 
@@ -41,11 +50,16 @@ figure.snip1141 .circle {
   position: relative;
   height: 55px;
   width: 55px;
+  margin: 40px -80px -100px 140px;
   top: 0%;
-  left: 0%;
+  left:20%;
+  bottom:10%;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 50%;
   text-align: center;
+  background-position: bottom;
+  justify-content: right;
+  align-items:right;
 }
 
 figure.snip1141 .circle:before,
@@ -79,8 +93,8 @@ figure.snip1141 .circle:after {
 
 figure.snip1141 figcaption {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 30px;
+  left: 30px;
   display: block;
   width: 100%;
   overflow: hidden;
@@ -122,6 +136,7 @@ figure.snip1141 a {
   top: 0;
   bottom: 0;
   position: absolute;
+  margin: 80px 0 0 20px;
   z-index: 1;
   width:100%;
 }
@@ -174,8 +189,9 @@ span.star-prototype, span.star-prototype > * {
 }
  
 span.star-prototype > * {
-    background-position: 0 0;
-    max-width:80px; 
+	background-position: 0 0;
+/*     background-position: 0 0; */
+    max-width:120px; 
 }
 
 figure.snip1200 {
@@ -1220,6 +1236,7 @@ table.alt tbody tr td {
 
 .testimonials .content {
   background: #ffffff;
+  width:
   box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.025); }
   .testimonials .content .credit strong {
     color: #ce1b28; }
@@ -2128,7 +2145,7 @@ img {vertical-align: middle;}
   background-color: rgba(0,0,8, 0.7); /* Black w/opacity/see-through */
   color: white;
   font-weight: bold;
-  font-family: 'Jeju Gothic', serif;
+  font-family: 'paybooc-Bold';
   border: 3px solid #f1f1f1;
   position: absolute;
   top: 50%;

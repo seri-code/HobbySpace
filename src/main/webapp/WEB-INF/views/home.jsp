@@ -228,28 +228,34 @@
 			</header>
 			<div class="testimonials">
 				<section>
-				<figure class="snip1141">
-				<figcaption> 
-					<div class="content" >
-					
+				<figure class="snip1141" onClick="reviewToSpace(loadReview[1].spCode)" style="cursor: pointer;">
+						<div class="image" id="rv_img"></div>
+					<div class="content">
+							
 						<blockquote>
 							
 							
 							<div class="circle"><i class="ion-ios-plus-empty"> </i></div>
-							
-						</blockquote>
-						 <div id="rv_content" style="cursor: pointer;"></div>
-						<div class="author">
+							 </blockquote>
 						
-							<div class="image" id="rv_img"></div>
+<!-- 						 <div id="rv_content" style="cursor: pointer;"></div> -->
+						
+						<div class="author">
+						  
+							
 <!-- 							-->
 							
 							<p class="credit">
-								<h2>Paris York</h2> - <strong id="p"><span id="rv_star"
-									class="star-prototype"></span></strong> <span></span>
+								<h2>Click</h2> - <strong id="p"><span id="rv_star"
+									class="star-prototype"></span></strong> <span id="span"></span>
+									
 							</p>
+							
+							<figcaption style="height:450px;">
+								
+							<a style="float:left;"></a>
+							 <div id="rv_content" style="cursor: pointer;"></div>
 							</figcaption>
-							<a onClick="reviewToSpace(loadReview[1].spCode)" ></a>
 							
 						</div>
 					</div>
@@ -501,15 +507,19 @@
 		let review = document.getElementById("rv_content");
 		let add_review = document.createElement("div");
 		add_review.textContent = loadReview[0].rvText;
+		add_review.style.width ="260px";
+		add_review.style.margin ="200px 0 5px 30px";
+		
 		review.appendChild(add_review);
 
 		let star = document.getElementById("rv_star");
 		star.textContent = loadReview[0].rvStar;
+		
 
 		let img = document.getElementById("rv_img");
 		let add_img = document.createElement("img");
 		add_img.src = "resources/images/" + loadReview[0].rvImg;
-		add_img.style.width = "125px";
+		add_img.style.width = "350px";
 		add_img.style.height = "187px";
 		img.appendChild(add_img);
 		img.addEventListener('click', function() {
@@ -517,6 +527,7 @@
 		});
 		img.style.cursor = "pointer";
 
+		
 	}
 
 	function init3() {
@@ -555,6 +566,18 @@
 				$(e).html($('<span/>').width($(e).text() * 16));
 			});
 		};
+		
+			let span = document.getElementById("span");
+			span.textContent = "("+loadReview[0].rvStar+"/5"+")";
+			
+			let span = document.getElementById("span1");
+			span.textContent = "("+loadReview[1].rvStar+"/5"+")";
+			
+			let span = document.getElementById("span2");
+			span.textContent = "("+loadReview[2].rvStar+"/5"+")";
+				
+		
+		'${rv_star}'
 		// 숫자 평점을 별로 변환하도록 호출하는 함수
 		$('.star-prototype').generateStars();
 
