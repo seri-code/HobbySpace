@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 구현체 -->
+<mapper namespace="com.comp.hobbyspace.mapper.SpaceMapper">
+   <!-- resultType를 Bean에 맞게 잡아준다면 알아서 그 추상메서드에 맞게 잘 들어가 준다.-->   
+   
+   <!-- QUERY에 포함된 문자 중 <> & || 등 이 있다면 XML 파싱을 하지 않도록 -->
+   <!-- [CDATA[ 안에 있는 것들은 전부 문자처리를 해주어 버리겠다. ]] -->
+<select id="spaceInfo" resultType="com.comp.hobbyspace.beans.SpaceBean"> 
+   <![CDATA[
+	SELECT SP_NAME AS spName,
+	SP_COMMENT AS spComment,
+	SP_LONG AS spLong,
+	SP_TOPIMG AS spImg,
+	SP_LOCATION AS spLocation,
+	SP_PRICE AS spPrice,
+	SP_MOBILE AS spMobile
+	FROM SP where SP_CODE = #{spCode}
+      ]]>
+</select>
+<select id="selSpCategory" resultType="com.comp.hobbyspace.beans.SpaceBean">
+		<!-- id=매서드 이름과 동일해야한다 resultType 은 리턴과 같다 -->
+		<!-- QUERY에 포함된 문자중 < > & || 등이 있다면 XML 파싱을 하지 않도록 하는 역활 : <![CDATA[]] -->
+	<![CDATA[
+	SELECT CT_CODE AS ctCode, CT_CATE AS ctCate FROM ct where ct_code < 99
+	]]>
+	</select>
+</mapper>

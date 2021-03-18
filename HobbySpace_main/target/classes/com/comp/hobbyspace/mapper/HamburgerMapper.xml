@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 3.0규격을 참고해라 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=패키지명과 인터페이스 명과 같아야한다 -->
+<mapper namespace="com.comp.hobbyspace.mapper.HamburgerMapper">
+	<!-- id=매서드 이름과 동일해야한다 -->
+	<!-- 예약리스트 -->
+	<select id="loadGReserveList" resultType="com.comp.hobbyspace.beans.HamburgerBean">
+	<![CDATA[
+    select rd_code as rdcode,RD_RSREQDATE AS rsreqdate,RD_ROspCode AS rospCode,RD_RONUM AS ronum ,sp_location AS location,SP_TOPIMG AS sptopimg,rd_status AS rdstatus 
+        from sp INNER JOIN rd on sp.sp_code = rd.RD_ROspCode
+            where RD_RSUSID = #{userId}
+	]]>
+	</select>
+	<!-- 후기관리 -->
+	<select id="loadGReviewList" resultType="com.comp.hobbyspace.beans.HamburgerBean">
+	<![CDATA[
+select RV_DATE AS rvdate,RV_RDCODE AS rdcode,RV_ROspCode AS rospCode,RV_RONUM AS rvronum,RV_CONTENT AS rvcontent,RV_STAR AS rvstar,RV_COMMENT AS rvcomment from(
+select rownum rn ,RV_DATE,RV_RDCODE,RV_ROspCode,RV_RONUM,RV_CONTENT,RV_STAR,RV_COMMENT from rv where RV_USID = #{userId, jdbcType=VARCHAR})
+where rownum <= 3
+	]]>
+	</select>
+	<!-- 찜한공간 -->
+	<select id="loadZzimList" resultType="com.comp.hobbyspace.beans.HamburgerBean">
+	<![CDATA[
+select ZZ_spCode as zzspCode,sp_location as location,SP_TOPIMG as sptopimg from(
+select  rownum rn, ZZ_spCode,sp.sp_location,sp.SP_TOPIMG 
+from zz INNER JOIN sp on ZZ_spCode = sp_code
+where zz.zz_usid = #{userId, jdbcType=VARCHAR})
+where rownum <= 3
+	]]>
+	</select>
+	<!-- 공간관리 -->
+	<select id="loadSpaceList" resultType="com.comp.hobbyspace.beans.HamburgerBean">
+	<![CDATA[
+select SP_CODE as spCode,SP_CTCODE as spctcode,SP_NAME as spname,SP_LOCATION as location,SP_TOPIMG as sptopimg from(
+select rownum rn, SP_CODE,SP_CTCODE,SP_NAME,SP_LOCATION,SP_TOPIMG 
+from sp where SP_HOUSID = #{userId, jdbcType=VARCHAR})
+where rownum <= 3
+	]]>
+	</select>
+</mapper>
