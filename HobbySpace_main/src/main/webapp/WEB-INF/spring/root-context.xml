@@ -40,6 +40,6 @@
       
       <!-- 매퍼 인터페이스가 위치한 패키지 -->
       <mybatis-spring:scan base-package="com.comp.hobbyspace.mapper"/>
-      
-      
+      <!-- 세션처리를 위한 빈 -->
+      <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
 </beans>

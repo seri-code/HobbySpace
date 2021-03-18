@@ -29,4 +29,6 @@
 	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="1"></beans:property>
 	</beans:bean>
+	<beans:bean id="enc" class="com.comp.hobbyspace.utils.Encryption"></beans:bean>
+	<beans:bean id="pu" class="com.comp.hobbyspace.utils.ProjectUtils"></beans:bean>
 </beans:beans>

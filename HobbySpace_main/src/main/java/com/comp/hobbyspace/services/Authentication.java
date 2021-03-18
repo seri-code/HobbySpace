@@ -7,11 +7,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import com.comp.hobbyspace.beans.AuthBean;
 import com.comp.hobbyspace.mapper.AuthMapper;
+import com.comp.hobbyspace.utils.Encryption;
+import com.comp.hobbyspace.utils.ProjectUtils;
 
 @Service
 public class Authentication {
 	@Autowired
 	private AuthMapper auMapper;
+	@Autowired
+	private Encryption enc;
+	@Autowired
+	private ProjectUtils pu;
 
 	public ModelAndView entrance(HttpServletRequest req, AuthBean ab) {
 		System.out.println("auth 엔트런스 진입");
@@ -41,6 +47,7 @@ public class Authentication {
 		try {
 			if (this.isUserId(ab)) {
 				System.out.println("사용자가 입력한 값이 PK임");
+
 				if (!this.isAccess(ab)) {
 					System.out.println("접속중 아님 확인");
 					ab.setAccessType(1);
@@ -54,8 +61,8 @@ public class Authentication {
 						mav.addObject("accessInfo", session.getAttribute("accessInfo"));
 						mav.setViewName("redirect:/");
 					}
-				}
 
+				}
 			} else if(this.isMember(ab)){
 				System.out.println("사용자가 입력한 값이 PK가 아닌 INPUT_ID임");
 				ab.setUserId(this.selectDigit(ab).getTenDigit());
@@ -79,6 +86,11 @@ public class Authentication {
 		}
 
 		return mav;
+	}
+
+	private boolean isUserpw(AuthBean ab) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	private boolean isUserId(AuthBean ab) {
@@ -132,8 +144,9 @@ public class Authentication {
 		System.out.println("여기는 조인ctl");
 		ab.setAccessType(1);
 		try {
-			if (!this.isMember(ab)) {
-				if (this.insUser(ab)) {
+			if (!this.isMember(ab)) { //아이디 검증
+				ab.setUserPw(enc.encode(ab.getUserPw())); //시큐리티설정
+				if (this.insUser(ab)) { //
 					ab.setUserId(this.selectDigit(ab).getTenDigit());
 					System.out.println(ab);
 					if (this.insAccess(ab)) {
