@@ -228,27 +228,21 @@
 			</header>
 			<div class="testimonials">
 				<section>
-				<figure class="snip1141" onClick="reviewToSpace(loadReview[1].spCode)" style="cursor: pointer;">
+				<figure class="snip1141" onClick="reviewToSpace(loadReview[0].spCode)" style="cursor: pointer;">
 						<div class="image" id="rv_img"></div>
 					<div class="content">
 							
-						<blockquote>
-							
-							
+						<blockquote>						
 							<div class="circle"><i class="ion-ios-plus-empty"> </i></div>
 							 </blockquote>
 						
 <!-- 						 <div id="rv_content" style="cursor: pointer;"></div> -->
 						
 						<div class="author">
-						  
-							
-<!-- 							-->
-							
+
 							<p class="credit">
 								<h2>Click</h2> - <strong id="p"><span id="rv_star"
-									class="star-prototype"></span></strong> <span id="span"></span>
-									
+									class="star-prototype"></span></strong> <span id="span"></span>				
 							</p>
 							
 							<figcaption style="height:450px;">
@@ -262,96 +256,100 @@
 					
 					</figure>
 				</section>
-				
+
 				
 				<section>
+				<figure class="snip1141" onClick="reviewToSpace(loadReview[1].spCode)" style="cursor: pointer;">
+						<div class="image" id="rv_img2"></div>
 					<div class="content">
+							
 						<blockquote>
-							<p>
-							<div id="rv_content2" style="cursor: pointer;"></div>
-							</p>
-						</blockquote>
+							
+							
+							<div class="circle"><i class="ion-ios-plus-empty"> </i></div>
+							 </blockquote>
+						
+						
 						<div class="author">
-							<div class="image" id="rv_img2"></div>
+
 							<p class="credit">
-								- <strong id="p"><span id="rv_star2"
-									class="star-prototype"></span></strong>
+								<h2>Click</h2> - <strong id="p"><span id="rv_star2"
+									class="star-prototype"></span></strong> <span id="span2"></span>									
 							</p>
+							
+							<figcaption style="height:450px;">
+								
+							<a style="float:left;"></a>
+							 <div id="rv_content2" style="cursor: pointer;"></div>
+							</figcaption>
+							
 						</div>
 					</div>
+					
+					</figure>
 				</section>
+				
+				
+<!-- 				<section> -->
+<!-- 					<div class="content"> -->
+<!-- 						<blockquote> -->
+<!-- 							<p> -->
+<!-- 							<div id="rv_content3" style="cursor: pointer;"></div> -->
+<!-- 							</p> -->
+<!-- 						</blockquote> -->
+<!-- 						<div class="author"> -->
+<!-- 							<div class="image" id="rv_img3"></div> -->
+<!-- 							<p class="credit"> -->
+<!-- 								- <strong id="p"><span id="rv_star3" -->
+<!-- 									class="star-prototype"></span></strong> -->
+<!-- 							</p> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</section> -->
+
 				<section>
-					<div class="content">
+				<figure class="snip1141" onClick="reviewToSpace(loadReview[2].spCode)" style="cursor: pointer;">
+						<div class="image" id="rv_img3"></div>
+					<div class="content">							
 						<blockquote>
-							<p>
-							<div id="rv_content3" style="cursor: pointer;"></div>
-							</p>
-						</blockquote>
+													
+							<div class="circle"><i class="ion-ios-plus-empty"> </i></div>
+							 </blockquote>						
+						
 						<div class="author">
-							<div class="image" id="rv_img3"></div>
+
 							<p class="credit">
-								- <strong id="p"><span id="rv_star3"
-									class="star-prototype"></span></strong>
+								<h2>Click</h2>  <strong id="p"><span id="rv_star3"
+									class="star-prototype"></span></strong> 
+									<span id="span3"></span>									
 							</p>
+							
+							<figcaption style="height:450px;">
+								
+							<a style="float:left;"></a>
+							 <div id="rv_content3" style="cursor: pointer;"></div>
+							</figcaption>						
 						</div>
 					</div>
+					</figure>
 				</section>
+				
+
 			</div>
 		</div>
 	</section>
 
 
 
-	<!-- Footer -->
-	<footer id="footer">
-		<div class="inner">
-			<div class="content">
-				<section>
-					<h3>Accumsan montes viverra</h3>
-					<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing
-						gravida odio porttitor sem non mi integer non faucibus ornare mi
-						ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien
-						lorem accumsan varius montes viverra nibh in adipiscing. Lorem
-						ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum.
-						Blandit adipiscing eu felis iaculis volutpat ac adipiscing sed
-						feugiat eu faucibus. Integer ac sed amet praesent. Nunc lacinia
-						ante nunc ac gravida.</p>
-				</section>
-				<section>
-					<h4>Sem turpis amet semper</h4>
-					<ul class="alt">
-						<li><a href="#">Dolor pulvinar sed etiam.</a></li>
-						<li><a href="#">Etiam vel lorem sed amet.</a></li>
-						<li><a href="#">Felis enim feugiat viverra.</a></li>
-						<li><a href="#">Dolor pulvinar magna etiam.</a></li>
-					</ul>
-				</section>
-				<section>
-					<h4>Magna sed ipsum</h4>
-					<ul class="plain">
-						<li><a href="#"><i class="icon fa-twitter">&nbsp;</i>Twitter</a></li>
-						<li><a href="#"><i class="icon fa-facebook">&nbsp;</i>Facebook</a></li>
-						<li><a href="#"><i class="icon fa-instagram">&nbsp;</i>Instagram</a></li>
-						<li><a href="#"><i class="icon fa-github">&nbsp;</i>Github</a></li>
-					</ul>
-				</section>
-			</div>
-			<div class="copyright">
-				&copy; Untitled. Photos <a href="https://unsplash.co">Unsplash</a>,
-				Video <a href="https://coverr.co">Coverr</a>.
-			</div>
-		</div>
-	</footer>
-
-	<!-- Scripts -->
-	<script src="resources/assets/js/jquery.min.js"></script>
-	<script src="resources/assets/js/browser.min.js"></script>
-	<script src="resources/assets/js/breakpoints.min.js"></script>
-	<script src="resources/assets/js/util.js"></script>
-	<script src="resources/assets/js/main.js"></script>
-
+	
+	
+<jsp:include page="footer.jsp"></jsp:include>
 
 </body>
+
+
+
+
 <script>
 	var topStar = JSON.parse('${topStar}');
 	var topReserve = JSON.parse('${topReserve}');
@@ -502,6 +500,9 @@
 		timer = setTimeout(showSlides, 6000);
 	}
 
+	
+	
+	
 	loadReview = JSON.parse('${review}');
 	function init2() {
 		let review = document.getElementById("rv_content");
@@ -518,8 +519,8 @@
 
 		let img = document.getElementById("rv_img");
 		let add_img = document.createElement("img");
-		add_img.src = "resources/images/" + loadReview[0].rvImg;
-		add_img.style.width = "350px";
+		add_img.src = "resources/images/rvimg/" + loadReview[0].rvImg;
+		add_img.style.width = "340px";
 		add_img.style.height = "187px";
 		img.appendChild(add_img);
 		img.addEventListener('click', function() {
@@ -528,71 +529,81 @@
 		img.style.cursor = "pointer";
 
 		
+		let span = document.getElementById("span");
+		span.textContent = "("+loadReview[0].rvStar+"/5"+")";
+		
 	}
 
 	function init3() {
 		let review = document.getElementById("rv_content2");
 		let add_review = document.createElement("div");
 		add_review.textContent = loadReview[1].rvText;
+		add_review.style.width ="260px";
+		add_review.style.margin ="200px 0 5px 30px";
+		
 		review.appendChild(add_review);
 
 		let star = document.getElementById("rv_star2");
 		star.textContent = loadReview[1].rvStar;
+		
 
 		let img = document.getElementById("rv_img2");
 		let add_img = document.createElement("img");
-		add_img.src = "resources/images/" + loadReview[1].rvImg;
-		add_img.style.width = "125px";
+		add_img.src = "resources/images/rvimg/" + loadReview[1].rvImg;
+		add_img.style.width = "340px";
 		add_img.style.height = "187px";
 		img.appendChild(add_img);
 		img.addEventListener('click', function() {
 			reviewToSpace(loadReview[1].spCode);
 		});
 		img.style.cursor = "pointer";
-	}
 
+		
+ 		let span = document.getElementById("span2");
+		span.textContent = "("+loadReview[1].rvStar+"/5"+")";
+		
+	}
+	
 	function init4() {
 		let review = document.getElementById("rv_content3");
 		let add_review = document.createElement("div");
 		add_review.textContent = loadReview[2].rvText;
+		add_review.style.width ="260px";
+		add_review.style.margin ="200px 0 5px 30px";
+		
 		review.appendChild(add_review);
 
 		let star = document.getElementById("rv_star3");
 		star.textContent = loadReview[2].rvStar;
-
-		// 별점 호출 함수(이 함수는 없어도 아래 함수 있으면 작동함)
+		
 		$.fn.generateStars = function() {
 			return this.each(function(i, e) {
 				$(e).html($('<span/>').width($(e).text() * 16));
 			});
 		};
 		
-			let span = document.getElementById("span");
-			span.textContent = "("+loadReview[0].rvStar+"/5"+")";
-			
-			let span = document.getElementById("span1");
-			span.textContent = "("+loadReview[1].rvStar+"/5"+")";
-			
-			let span = document.getElementById("span2");
-			span.textContent = "("+loadReview[2].rvStar+"/5"+")";
-				
-		
 		'${rv_star}'
 		// 숫자 평점을 별로 변환하도록 호출하는 함수
 		$('.star-prototype').generateStars();
-
+		
 		let img = document.getElementById("rv_img3");
 		let add_img = document.createElement("img");
-		add_img.src = "resources/images/" + loadReview[2].rvImg;
-		add_img.style.width = "125px";
+		add_img.src = "resources/images/rvimg/" + loadReview[2].rvImg;
+		add_img.style.width = "340px";
 		add_img.style.height = "187px";
 		img.appendChild(add_img);
 		img.addEventListener('click', function() {
 			reviewToSpace(loadReview[2].spCode);
 		});
 		img.style.cursor = "pointer";
-	}
 
+		
+		let span = document.getElementById("span3");
+		span.textContent = "("+loadReview[2].rvStar+"/5"+")";
+		
+	}
+	
+	
 	// 카테고리 클릭 시 검색결과 페이지로 이동
 	function searchCate0() {
 		let ctCode = document.getElementsByName("cate")[0].value;
@@ -667,5 +678,12 @@
 	  
 	 
 </script>
+
+<!-- Scripts -->
+	<script src="resources/assets/js/jquery.min.js"></script>
+	<script src="resources/assets/js/browser.min.js"></script>
+	<script src="resources/assets/js/breakpoints.min.js"></script>
+	<script src="resources/assets/js/util.js"></script>
+	<script src="resources/assets/js/main.js"></script>
 
 </html>
