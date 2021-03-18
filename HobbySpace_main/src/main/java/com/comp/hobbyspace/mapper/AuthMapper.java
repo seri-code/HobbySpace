@@ -10,5 +10,5 @@ public interface AuthMapper {
 	int insUser(AuthBean ab);
 	AuthBean selectDigit(AuthBean ab);
 	int isUserId(AuthBean ab);
-	String isUserpw(AuthBean ab);
+	AuthBean isUserpw(AuthBean ab);
 }

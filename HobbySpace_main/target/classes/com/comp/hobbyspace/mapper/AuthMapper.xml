@@ -8,7 +8,7 @@
 	SELECT count(*) FROM US where US_ID = #{userId}
 	</select>
 	
-	<select id="isUserpw" resultType="String">
+	<select id="isUserpw" resultType="com.comp.hobbyspace.beans.AuthBean">
 	SELECT us_pw FROM US where US_INPUT_ID = #{userId}
 	</select>
 	

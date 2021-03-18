@@ -66,22 +66,32 @@ public class Authentication {
 				}
 			} else if(this.isMember(ab)){
 				System.out.println("사용자가 입력한 값이 PK가 아닌 INPUT_ID임");
+				ab.setUs_pw(this.isUserpw(ab).getUs_pw());
 				ab.setUserId(this.selectDigit(ab).getTenDigit());
-				System.out.println(this.isUserpw(ab));
-				if (!this.isAccess(ab)) {
-					System.out.println("접속중 아님 확인");
-					ab.setAccessType(1);
-					if (this.insAccess(ab)) {
-						System.out.println("접속기록 insert");
-						HttpSession session = req.getSession();
-						session.setAttribute("accessInfo", ab.getUserId());
-						session.setAttribute("nickname", this.getUserNickname(ab).getUserNickname());
-						mav.addObject("nickname", session.getAttribute("nickname"));
-						mav.addObject("accessInfo", session.getAttribute("accessInfo"));
-						mav.setViewName("redirect:/");
+				if(enc.matches(ab.getUserPw(), ab.getUs_pw())) {//패스워드 확인
+					System.out.println("패스워드 확인");
+					if (!this.isAccess(ab)) {
+						System.out.println("접속중 아님 확인");
+						ab.setAccessType(1);
+						if (this.insAccess(ab)) {
+							System.out.println("접속기록 insert");
+							System.out.println(ab.getUserId());
+							
+							pu.setAttribute("usId", ab.getUserId());
+							System.out.println("세션값: " + pu.getAttribute("usId"));
+							
+//							HttpSession session = req.getSession();
+//							session.setAttribute("accessInfo", ab.getUserId());
+//							session.setAttribute("nickname", this.getUserNickname(ab).getUserNickname());
+//							mav.addObject("nickname", session.getAttribute("nickname"));
+//							mav.addObject("accessInfo", pu.getAttribute("accessInfo"));
+							mav.addObject("accessInfo", pu.getAttribute("usId"));
+							mav.setViewName("redirect:/");
+						}
 					}
 				}
 			}
+				
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,7 +100,7 @@ public class Authentication {
 		return mav;
 	}
 
-	private String isUserpw(AuthBean ab) {
+	private AuthBean isUserpw(AuthBean ab) {
 		return auMapper.isUserpw(ab);
 	}
 

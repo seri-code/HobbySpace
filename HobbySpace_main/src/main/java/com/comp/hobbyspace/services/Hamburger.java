@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.comp.hobbyspace.beans.HamburgerBean;
 
 import com.comp.hobbyspace.mapper.HamburgerMapper;
+import com.comp.hobbyspace.utils.ProjectUtils;
 import com.google.gson.Gson;
 @Service
 public class Hamburger {
@@ -20,6 +21,8 @@ public class Hamburger {
 	private HamburgerMapper mapper;
 	@Autowired
 	private Gson gson;
+	@Autowired
+	private ProjectUtils pu;
 	
 	public ModelAndView entrance(HttpServletRequest req, HamburgerBean hb) {
 		ModelAndView mav = null;
@@ -58,10 +61,16 @@ public class Hamburger {
 	private ModelAndView toReserveListCtl(HttpServletRequest req, HamburgerBean hb) {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = req.getSession();
-		//System.out.println(session.getAttribute("accessInfo").toString());
+		try {
+			System.out.println(pu.getAttribute("usId"));
+		} catch (Exception e) {
+			System.out.println("안됨");
+			e.printStackTrace();
+		}
 		if(session.getAttribute("accessInfo") == null) {
 			mav.setViewName("logInForm");
 		}else {
+			hb.setUserId(session.getAttribute("accessInfo").toString());
 			hb.setUserId(session.getAttribute("accessInfo").toString());
 			System.out.println("회원코드: "+hb.getUserId());
 			ArrayList<HamburgerBean> list = this.loadGReserveList(hb);
