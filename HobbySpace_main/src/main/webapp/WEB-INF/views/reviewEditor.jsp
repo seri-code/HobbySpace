@@ -148,6 +148,7 @@ $("#uploadBtn").on("click", function(e) {
 		dataType: 'json',
 		success: function(result) {
 			console.log(result);
+			alert(result.rvimg);
 			rvimg = result.rvimg;
 			//showUploadeFile(result);
 			//$(".uploadDiv").html(cloneObj.html());
@@ -194,7 +195,7 @@ function send() {
 	var inRvImg = document.createElement("input");
 	inRvImg.type = "hidden";
 	inRvImg.name = "rvImg";
-	inRvImg.value = "이미지";
+	inRvImg.value = rvimg;
 	form.appendChild(inRvImg);
 	//리뷰별점
 	var inRvStar = document.createElement("input");

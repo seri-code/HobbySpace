@@ -44,10 +44,11 @@ public class Authentication {
 		System.out.println("여기는 로그인ctl");
 		ModelAndView mav = new ModelAndView();
 		System.out.println(ab.getUserId());
+		System.out.println(ab.getUserPw());
 		try {
 			if (this.isUserId(ab)) {
 				System.out.println("사용자가 입력한 값이 PK임");
-
+				System.out.println(this.isUserpw(ab));
 				if (!this.isAccess(ab)) {
 					System.out.println("접속중 아님 확인");
 					ab.setAccessType(1);
@@ -61,11 +62,12 @@ public class Authentication {
 						mav.addObject("accessInfo", session.getAttribute("accessInfo"));
 						mav.setViewName("redirect:/");
 					}
-
+				
 				}
 			} else if(this.isMember(ab)){
 				System.out.println("사용자가 입력한 값이 PK가 아닌 INPUT_ID임");
 				ab.setUserId(this.selectDigit(ab).getTenDigit());
+				System.out.println(this.isUserpw(ab));
 				if (!this.isAccess(ab)) {
 					System.out.println("접속중 아님 확인");
 					ab.setAccessType(1);
@@ -88,9 +90,8 @@ public class Authentication {
 		return mav;
 	}
 
-	private boolean isUserpw(AuthBean ab) {
-		// TODO Auto-generated method stub
-		return false;
+	private String isUserpw(AuthBean ab) {
+		return auMapper.isUserpw(ab);
 	}
 
 	private boolean isUserId(AuthBean ab) {
