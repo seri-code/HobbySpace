@@ -150,47 +150,66 @@
 		mobile.appendChild(add_mobile);
 	}
 	function logInForm() {
-		var form = document.createElement("form");
-		form.action = "LogInForm?sCode=" + 1;
-		form.method = "post";
-		document.body.appendChild(form);
-		form.submit();
+		if(sessionStorage.getItem('nickname')==''){
+			var form = document.createElement("form");
+			form.action = "LogInForm?sCode=1";
+			form.method = "post";
+			document.body.appendChild(form);
+			form.submit();
+		} else{
+			var form = document.createElement("form");
+			form.action = "manageProfile?sCode=toManageProfile&userId="+'${accessInfo}';
+			form.method = "post";
+			document.body.appendChild(form);
+			form.submit();
+		}
 	}
 	function ToReserveList() {
 		var form = document.createElement("form");
-		form.action = "ToReserveList?sCode=" + 2;
+		form.action = "ToReserveList?sCode=2&userId=" + '${accessInfo}';
 		form.method = "post";
+
 		document.body.appendChild(form);
+
 		form.submit();
 	}
 	function ToReviewList() {
 		var form = document.createElement("form");
-		form.action = "ToReviewList?sCode=" + 3;
+		form.action = "ToReviewList?sCode=3&userId=" + '${accessInfo}';
 		form.method = "post";
+
 		document.body.appendChild(form);
+
 		form.submit();
 	}
 	function ToZzimList() {
 		var form = document.createElement("form");
-		form.action = "ToZzimList?sCode=" + 4;
+		form.action = "ToZzimList?sCode=4&userId=" + '${accessInfo}';
 		form.method = "post";
+
 		document.body.appendChild(form);
+
 		form.submit();
 	}
 	function ToManageSpace() {
 		var form = document.createElement("form");
-		form.action = "ToManageSpace?sCode=" + 5;
+		form.action = "ToManageSpace?sCode=5&userId=" + '${accessInfo}';
 		form.method = "post";
+
 		document.body.appendChild(form);
+
 		form.submit();
 	}
 	function LogOut() {
 		var form = document.createElement("form");
 		form.action = "LogOut?sCode=LogOut";
 		form.method = "post";
+
 		document.body.appendChild(form);
+
 		form.submit();
 	}
+
 	   function room(){
 		      let request = new XMLHttpRequest();
 		      request.onreadystatechange = function(){
@@ -395,6 +414,12 @@
 		form.submit();
 	}
 </script>
+<!-- Scripts -->
+<script src="resources/assets/js/jquery.min.js"></script>
+<script src="resources/assets/js/browser.min.js"></script>
+<script src="resources/assets/js/breakpoints.min.js"></script>
+<script src="resources/assets/js/util.js"></script>
+<script src="resources/assets/js/main.js"></script>
 
 
 </html>
