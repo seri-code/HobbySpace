@@ -269,7 +269,6 @@
 		document.body.appendChild(form);	
 		form.submit();	
 	}	
-	
 	 function room(){
 	      let request = new XMLHttpRequest();
 	      request.onreadystatechange = function(){
@@ -494,27 +493,27 @@ function finalall(selectdata, people, value) {
 	document.body.appendChild(form);
 	form.submit();
 }
-	
-	
-function zzim() {
-	alert('찜 리스트에 추가되었습니다.');
-	var form = document.createElement("form");
-	form.action = "Zzim?sCode=Zzim&spCode=" + spCode + "&userId="
-			+ '${userId}';
-	form.method = "post";
-	document.body.appendChild(form);
-	form.submit();
-}
-
-function deleteZzim() {
-	alert('찜 리스트에서 삭제되었습니다.');
-	var form = document.createElement("form");
-	form.action = "DeleteZzim?sCode=DeleteZzim&spCode=" + spCode + "&userId="
-		+ '${userId}';
-	form.method = "post";
-	document.body.appendChild(form);
-	form.submit();
-}
+	function zzim() {	
+		
+		alert('찜 리스트에 추가되었습니다.');	
+		var form = document.createElement("form");	
+		form.action = "Zzim?sCode=Zzim&spCode=" + spCode + "&userId="	
+				+ '${userId}';	
+		form.method = "post";	
+		document.body.appendChild(form);	
+		form.submit();	
+	}	
+		
+	function deleteZzim() {	
+		alert('찜 리스트에서 삭제되었습니다.');	
+		var form = document.createElement("form");	
+		form.action = "DeleteZzim?sCode=DeleteZzim&spCode=" + spCode + "&userId="	
+			+ '${userId}';	
+		form.method = "post";	
+		document.body.appendChild(form);	
+		form.submit();	
+	}	
+		
 		
 </script>	
 </html>

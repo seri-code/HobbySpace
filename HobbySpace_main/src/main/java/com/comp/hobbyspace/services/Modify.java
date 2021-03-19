@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.comp.hobbyspace.beans.ModifyBean;
 import com.comp.hobbyspace.mapper.ModifyMapper;
+import com.comp.hobbyspace.utils.ProjectUtils;
 import com.google.gson.Gson;
 
 @Service
@@ -18,6 +19,9 @@ public class Modify {
 	private ModifyMapper mapper;
 	@Autowired
 	Gson gson;
+	@Autowired
+	private ProjectUtils pu;
+	
 	public ModelAndView entrance(HttpServletRequest req, ModifyBean mb) {
 		ModelAndView mav = null;
 		switch (mb.getSCode()) {
@@ -60,6 +64,12 @@ public class Modify {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = req.getSession();
 		//mb.setUs_Id(session.getAttribute("accessInfo").toString());
+		try {
+			mb.setUs_Id(pu.getAttribute("usId").toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(gson.toJson(selUsid(mb)));
 		mav.addObject("UsInfo",gson.toJson(selUsid(mb))); //유저정보 셀렉트
 		mav.setViewName("manageProfile");
