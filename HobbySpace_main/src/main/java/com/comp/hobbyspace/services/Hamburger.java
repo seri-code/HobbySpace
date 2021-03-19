@@ -94,6 +94,7 @@ public class Hamburger {
 		ModelAndView mav = new ModelAndView();
 		try {
 			if(pu.getAttribute("usId") == null) {
+				hb.setUserId(pu.getAttribute("usId").toString());
 				mav.setViewName("logInForm");
 			}else {
 				ArrayList<HamburgerBean> list = this.loadGReviewList(hb);
