@@ -10,6 +10,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,6 +20,7 @@ import com.comp.hobbyspace.beans.AttachFileDTO;
 import com.comp.hobbyspace.beans.HamburgerBean;
 import com.comp.hobbyspace.beans.ReviewBean;
 import com.comp.hobbyspace.mapper.ReviewMapper;
+import com.comp.hobbyspace.utils.ProjectUtils;
 import com.google.gson.Gson;
 
 import net.coobird.thumbnailator.Thumbnailator;
@@ -27,30 +31,34 @@ public class Review {
 	private ReviewMapper rvMapper;
 	@Autowired
 	private Gson gson;
-
+	@Autowired
+	private ProjectUtils pu;
+	@Autowired
+	private PlatformTransactionManager tran;
+	
 	public ModelAndView entrance(HttpServletRequest req, ReviewBean rb) {
 		System.out.println("리뷰 엔트런스 진입");
 		ModelAndView mav = null;
 		switch (rb.getSCode()) {
 		case "ToNewReview": //리뷰이동
-			mav = this.toNewReviewCtl(req, rb);
+			mav = this.toNewReviewCtl(rb);
 			break;
 		case "NewReview":
-			mav = this.newReviewCtl(req, rb);
+			mav = this.newReviewCtl(rb);
 			break;
 		case "ToEditReview":
-			mav = this.toEditReviewCtl(req, rb);
+			mav = this.toEditReviewCtl(rb);
 			break;
 		case "EditReview":
-			mav = this.editReviewCtl(req, rb);
+			mav = this.editReviewCtl(rb);
 		case "DeleteReview":
-			mav = this.deleteReviewCtl(req, rb);
+			mav = this.deleteReviewCtl(rb);
 
 		}
 		return mav;
 	}
 
-	// 이미 처리 엔트랑스
+	// 이미지 처리 엔트랑스
 	public ModelAndView entrance(MultipartFile[] uploadFile, ReviewBean rb) {
 		ModelAndView mav = null;
 		return mav = this.ReviewImg(uploadFile, rb);
@@ -60,7 +68,7 @@ public class Review {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(rb.getRdCode());
 		// 서버pc 이미지저장 장소
-		String uploadFolder = "C:\\Users\\Sigoto471\\git\\HobbySpace\\HobbySpace_M\\src\\main\\webapp\\resources\\images\\rvimg\\";
+		String uploadFolder = "C:\\Users\\vltjd\\git\\HobbySpace\\HobbySpace_main\\src\\main\\webapp\\resources\\images\\rvimg\\";
 
 		
 		String uuid = UUID.randomUUID().toString().replace("-", "").substring(0, 10);
@@ -94,7 +102,7 @@ public class Review {
 		return mav;
 	}
 	// 신규후기작성으로 이동
-	private ModelAndView toNewReviewCtl(HttpServletRequest req, ReviewBean rb) {
+	private ModelAndView toNewReviewCtl(ReviewBean rb) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("reserve",gson.toJson(rb));
 		System.out.println(gson.toJson(rb));
@@ -104,32 +112,32 @@ public class Review {
 	}
 
 	// 신규후기 작성
-	private ModelAndView newReviewCtl(HttpServletRequest req, ReviewBean rb) {
+	private ModelAndView newReviewCtl(ReviewBean rb) {
 		ModelAndView mav = new ModelAndView();
-		HttpSession session = req.getSession();
-		rb.setUsId(session.getAttribute("accessInfo").toString());
+		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
+		try {
+			rb.setUsId(pu.getAttribute("usId").toString());
+			this.insReview(rb); //인서트 실행
+			tran.commit(status);
+		} catch (Exception e) {
+			tran.rollback(status);
+			e.printStackTrace();
+		}
 
 
-		// 인서트 실행
-		this.insReview(rb);
-		// 셀렉트
-		ArrayList<ReviewBean> list = this.selectResDetCode(rb);
-		String jsonData1 = gson.toJson(list);
-		mav.addObject("ReviewList",jsonData1);
-		
-		mav.setViewName("reviewList");
+
+		mav.addObject("sCode","3");
+		mav.setViewName("redirect:/ToReviewList");
 		return mav;
 	}
-	//셀릭트 리뷰
-	private ArrayList<ReviewBean> selectResDetCode(ReviewBean rb) {
-		return rvMapper.selectResDetCode(rb);
-	}
+	
+	//인서트 리뷰
 	private void insReview(ReviewBean rb) {
 		rvMapper.insReview(rb);
 	}
 
 	// 후기 수정으로 이동
-	private ModelAndView toEditReviewCtl(HttpServletRequest req, ReviewBean rb) {
+	private ModelAndView toEditReviewCtl(ReviewBean rb) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("review", this.selectReview(rb));
 		mav.setViewName("reviewEditor");
@@ -141,7 +149,7 @@ public class Review {
 	}
 
 	// 후기 수정
-	private ModelAndView editReviewCtl(HttpServletRequest req, ReviewBean rb) {
+	private ModelAndView editReviewCtl(ReviewBean rb) {
 		ModelAndView mav = new ModelAndView();
 		this.editReview(rb);
 		mav.setViewName("reviewList");
@@ -153,7 +161,7 @@ public class Review {
 	}
 
 	// 후기 삭제
-	private ModelAndView deleteReviewCtl(HttpServletRequest req, ReviewBean rb) {
+	private ModelAndView deleteReviewCtl(ReviewBean rb) {
 		ModelAndView mav = new ModelAndView();
 		this.deleteReview(rb);
 		return mav;

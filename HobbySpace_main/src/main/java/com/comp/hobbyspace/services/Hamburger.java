@@ -100,6 +100,7 @@ public class Hamburger {
 				hb.setUserId(pu.getAttribute("usId").toString());
 				ArrayList<HamburgerBean> list = this.loadGReviewList(hb);
 				String jsonData1 = gson.toJson(list);
+				System.out.println(jsonData1);
 				mav.addObject("ReviewList",jsonData1);
 				mav.setViewName("reviewList");
 			}

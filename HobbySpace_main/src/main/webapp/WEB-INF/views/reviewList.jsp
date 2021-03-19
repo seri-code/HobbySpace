@@ -81,31 +81,34 @@ div {
 	function init() {
 		
 		let review = JSON.parse('${ReviewList}');
-		alert(review[0].rvImg);
+		
 		let Sdiv = document.getElementById("Sdiv");
-
+		
 		for (i = 0; i < review.length; i++) {
 			let section = document.getElementById("wrapper");
 			let section1 = document.createElement("section");
+			
+			//리뷰 이미지가 없으면 띄어줄 이미지가 있어야함(리뷰 입력할때 이미지를 안 넣는경우)
 			let img = document.createElement("img");
 			img.width = "300";
 			img.height = "300";
-			img.src = "/resources/images/" + review[i].rvImg;
-			let header = document.createElement("header");
-			header.textContent = "코멘트 : " + review[i].rvcontent;
-			let div2 = document.createElement("div");
-			let div3 = document.createElement("div");
-			div3.textContent = "별점 : " + review[i].rvstar;
+			img.src = "/resources/images/rvimg/" + review[i].rvImg;
+			
+			let content = document.createElement("header");
+			content.textContent = "코멘트 : " + review[i].rvcontent;
+			
+			let rvstar = document.createElement("div");
+			rvstar.textContent = "별점 : " + review[i].rvstar;
 
-			div2.appendChild(div3);
-			header.appendChild(div2);
-
-			img.appendChild(header);
+			section1.appendChild(rvstar);
 			section1.appendChild(img);
+			section1.appendChild(content);
 			Sdiv.appendChild(section1);
 
 		}
 	}
+	
+	
 	function logInForm() {
 		if (sessionStorage.getItem('nickname') == '') {
 			var form = document.createElement("form");
