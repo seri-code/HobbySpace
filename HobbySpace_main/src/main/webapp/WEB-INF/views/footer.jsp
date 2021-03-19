@@ -108,7 +108,7 @@ appearance: none;
 						</section>
 					</div>
 					<div class="copyright">
-						&copy; Untitled. Photos <a href="https://unsplash.co">Unsplash</a>, Video <a href="https://coverr.co">Coverr</a>.
+						&copy; Untitled. Photos <a href="/">home</a>, Video <a href="/">Coverr</a>.
 					</div>
 				</div>
 			</footer>

@@ -49,13 +49,14 @@
 						style="cursor: pointer">로그아웃</div></a></li>
 		</ul>
 	</nav>
-	<h2 style="padding-top:90px;padding-left:30px; color: lightsalmon; position:relative; border: 4px solid; width: 32rem; height: 10rem">"${keyword }"의 검색결과입니다.</h2>
+	<h2 style="padding-top:90px;padding-left:30px; color: lightsalmon; position:relative; border: 4px solid; width: 40rem; height: 10rem">"${keyword }"의 검색결과입니다.</h2>
 	<div class="image" id="sp_topimg"></div>
 		<div class="inner">
 			<div class="highlights" id="scDiv"></div>
 			
 		</div>
 </body>
+<jsp:include page="footer.jsp"></jsp:include>
 <script>
 	function initUser() {
 		let loginInfo = document.getElementsByName("user")[0];
