@@ -86,9 +86,7 @@ div {
 	</section>
 </body>
 <script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-  crossorigin="anonymous"></script>
+  src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="crossorigin="anonymous"></script>
 <script>
 
 function init() {
@@ -105,44 +103,57 @@ function init() {
 		let section1 = document.createElement("section");
 		let div1 = document.createElement("div");
 		div1.className = "content";
-		//예약상세코드
-		let getDrdcode = reserv1[i].rdcode;
+
 	
 		let header = document.createElement("header");
 		let footer = document.createElement("footer");
 		let div2 = document.createElement("div");
+		div2.style.backgroundColor ='#ecdbc7';
+		div2.style.fontColor ='#000000';
+		div2.style.position="relative";
+		div2.style.width="17.3rem";
+		div2.id="status"+i;
 		if(reserv1[i].rdstatus=="W"){
-		div2.textContent = "승인대기";
+		div2.textContent = "예약상태: "+"승인대기";
 		}
 		if(reserv1[i].rdstatus=="N"){
-		div2.textContent = "승인거절";
+		div2.textContent = "예약상태: "+"승인거절";
 	    }
 		if(reserv1[i].rdstatus=="P"){
-		div2.textContent = "승인완료";
+		div2.textContent = "예약상태: "+"승인완료";
 		}
 		if(reserv1[i].rdstatus=="D"){
-		div2.textContent = "승인취소";
+		div2.textContent = "예약상태: "+"예약취소";
 		}
 		if(reserv1[i].rdstatus=="F"){
-		div2.textContent = "승인완료";
+		div2.textContent ="예약상태: "+ "이용완료";
 		}
+		//공간코드rospcode
+		let rospcode =reserv1[i].rdrospCode;
+		//예약코드
+		let rdcode = reserv1[i].rdcode;
+		//유저가 선택한날짜
+		let frdusedateTest = reserv1[i].frdusedate;
+		//유저가선택한 방 
+		let ronum = reserv1[i].rdronum;
 		let div4 = document.createElement("input");
 		div4.type = "button";
-		div4.value = "취소";
-		div4.addEventListener("click",function(){reservDetail(getDrdcode,sptopimg13)});
+		div4.value = "예약취소하기";
+		div4.addEventListener("click",function(){Cancel(rospcode,rdcode,frdusedateTest,ronum)});
 		div4.style.backgroundColor ='#ecdbc7';
 		div4.style.fontColor ='#000000';
 		div4.style.position="relative";
 		div4.style.width="6rem";
 		
-		rdrospcode = reserv1[i].rdrospcode;
+		
 		div2.className = "image";
 		let img = document.createElement("img");
 		img.width = "300";
 		img.height = "300";
 		img.src = "/resources/images/" + reserv1[i].sptopimg;
 		let sptopimg13 = reserv1[i].sptopimg;
-	
+		//예약상세코드
+		let getDrdcode = reserv1[i].rdcode;
 		if(reserv1[i].rdstatus == "W" || reserv1[i].rdstatus == "P" ){
 			let div3 = document.createElement("input");
 			div3.type = "button";
@@ -167,9 +178,38 @@ function init() {
 		section1.appendChild(div1);
 		Sdiv.appendChild(section1);
 		div1.appendChild(footer);
+
+		
 	}
 }
-
+function Cancel(rospcode,rdcode,frdusedateTest,ronum){
+	//날짜타임변환
+	alert(frdusedateTest);
+	alert(rospcode);
+	alert(rdcode);
+	alert(ronum);
+	let frdusedateTest1 = frdusedateTest.substring(0,10);
+	let frdusedate = frdusedateTest1.replace(/-/g,'');
+	let request = new XMLHttpRequest();
+	request.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			let jsonData = decodeURIComponent(request.response);
+			let reserv3 = JSON.parse(jsonData);
+			for (i = 0; i < reserv3.length; i++) {
+				let div6 = document.getElementById("status"+i);
+				if(reserv3[i].rdstatus == "N"){
+					div6.textContent = "예약취소";
+					
+				}
+// 				div6.textContent = "예약상태 : " + reserv3[i].frdstatus;
+				alert("예약이취소되었습니다 새로고침을 눌러 확인해주세요!");
+			}
+		}
+	};
+	request.open("post", "Cancel", true);
+	request.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+	request.send("sCode=10" + "&rdcode=" + rdcode + "&rospcode=" + rospcode + "&frdusedate=" + frdusedate + "&ronum=" + ronum);
+}
 function reserv() {
 	//요소를 지움 즉 에이작스 init을 지운다
 	$("#Sdiv").empty();
@@ -222,7 +262,22 @@ function reserv() {
 				div5.textContent = "사용날짜 : " + reserv1[i].frdusedate;
 				let div6 = document.createElement("div");
 				div6.id = "status"+i;
-				div6.textContent = "예약상태 : " + reserv1[i].frdstatus;
+// 				div6.textContent = "예약상태 : " + reserv1[i].frdstatus;
+				if(reserv1[i].frdstatus=="W"){
+					div6.textContent = "예약상태 : " + "승인대기";
+					}
+					if(reserv1[i].frdstatus=="N"){
+					div6.textContent = "예약상태 : " + "승인거절";
+				    }
+					if(reserv1[i].frdstatus=="P"){
+					div6.textContent = "예약상태 : " + "승인완료";
+					}
+					if(reserv1[i].frdstatus=="D"){
+					div6.textContent ="예약상태 : " +  "예약취소";
+					}
+					if(reserv1[i].frdstatus=="F"){
+					div6.textContent ="예약상태 : " +  "이용완료";
+					}
 				let img = document.createElement("img");
 				img.width = "300";
 				img.height = "300";
@@ -250,7 +305,6 @@ function reserv() {
 	// 		form.submit();
 }
 function OKStatus(rdcode) {
-	alert(rdcode);
 	let request = new XMLHttpRequest();
 	request.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -258,8 +312,11 @@ function OKStatus(rdcode) {
 			let reserv2 = JSON.parse(jsonData);
 			
 			for (i = 0; i < reserv2.length; i++) {
-				let div6 = document.getElementById("status"+i)
-				div6.textContent = "예약상태 : " + reserv2[i].frdstatus;
+				let div6 = document.getElementById("status"+i);
+				if(reserv2[i].rdstatus == "P"){
+					div6.textContent = "승인완료";
+				}
+// 				div6.textContent = "예약상태 : " + reserv2[i].frdstatus;
 			}
 		}
 	};
@@ -269,15 +326,17 @@ function OKStatus(rdcode) {
 	request.send("sCode=8" + "&rdcode=" + rdcode);
 }
 function NOStatus(rdcode) {
-	alert(rdcode);
 	let request = new XMLHttpRequest();
 	request.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			let jsonData = decodeURIComponent(request.response);
 			let reserv3 = JSON.parse(jsonData);
 			for (i = 0; i < reserv3.length; i++) {
-				let div7 = document.getElementById("status"+i)
-				div7.textContent = "예약상태 : " + reserv3[i].frdstatus;
+				let div7 = document.getElementById("status"+i);
+				if(reserv3[i].rdstatus == "N"){
+					div7.textContent = "승인거절";
+				}
+// 				div7.textContent = "예약상태 : " + reserv3[i].frdstatus;
 			}
 		}
 	};
@@ -295,60 +354,6 @@ function reservDetail(getDrdcode, sptopimg13) {
 	document.body.appendChild(form);
 	form.submit();
 }
-
-
-
-
-
-
-
-
-// 	function toHost() {
-// 		var form = document.createElement("form");
-// 		form.action = "ToHostReserveList?sCode=" + 7;
-// 		form.method = "post";
-// 		document.body.appendChild(form);
-// 		form.submit();
-// 	}
-
-// 	function init() {
-// 		let reserv = JSON.parse('${reserveList}');
-
-// 		let Sdiv = document.getElementById("Sdiv");
-
-// 		for (i = 0; i < reserv.length; i++) {
-// 			let section = document.getElementById("wrapper");
-// 			let section1 = document.createElement("section");
-// 			let div1 = document.createElement("div");
-// 			div1.className = "content";
-// 			let header = document.createElement("header");
-// 			let div2 = document.createElement("div");
-// 			if (reserv[0].status = 'P') {
-// 				div2.textContent = "승인완료";
-// 			} else if (reserv[0].status = 'W') {
-// 				div2.textContent = "승인대기";
-// 			} else if (reserv[0].status = 'N') {
-// 				div2.textContent = "승인거절";
-// 			} else if (reserv[0].status = 'D') {
-// 				div2.textContent = "예약취소";
-// 			} else {
-// 				div2.textContent = "이용완료";
-// 			}
-// 			div2.className = "image";
-// 			let img = document.createElement("img");
-// 			img.width = "300";
-// 			img.height = "300";
-// 			img.src = "/resources/images/" + reserv[i].topimg;
-
-// 			div2.appendChild(img);
-// 			header.appendChild(div2);
-// 			div1.appendChild(header);
-// 			section1.appendChild(div1);
-// 			Sdiv.appendChild(section1);
-// 		}
-// 	}
-	
-	
 	function logInForm() {
 		if(sessionStorage.getItem('nickname')==''){
 			var form = document.createElement("form");

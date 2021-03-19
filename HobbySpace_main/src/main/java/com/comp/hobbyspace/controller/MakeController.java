@@ -77,6 +77,12 @@ public class MakeController {
 
 	@RequestMapping(value = "/Temp", method = RequestMethod.POST)
 	public ModelAndView Temp(HttpServletRequest req, @ModelAttribute ReserveBean rb) {
+
+		return res.entrance(req, rb);
+	}
+	@RequestMapping(value = "/reservTempTest", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView TempTest(HttpServletRequest req, @ModelAttribute ReserveBean rb) {
+
 		return res.entrance(req, rb);
 	}
 
@@ -118,10 +124,12 @@ public class MakeController {
 		ModelAndView mav = res.entrance(req, rb);
 		return URLEncoder.encode(mav.getModel().get("ToHostReserveList1").toString(),"UTF-8");
 	}
-
+	//예약취소
 	@RequestMapping(value = "/Cancel", method = RequestMethod.POST)
-	public ModelAndView Cancel(HttpServletRequest req, @ModelAttribute ReserveBean rb) {
-		return res.entrance(req, rb);
+	@ResponseBody
+	public String Cancel(HttpServletRequest req, @ModelAttribute ReserveBean rb)throws UnsupportedEncodingException {
+		ModelAndView mav = res.entrance(req, rb);
+		return URLEncoder.encode(mav.getModel().get("ToHostReserveList3").toString(),"UTF-8");
 	}
 
 	@RequestMapping(value = "/ViewStatus", method = RequestMethod.POST)

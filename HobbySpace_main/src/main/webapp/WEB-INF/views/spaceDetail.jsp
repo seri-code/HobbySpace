@@ -339,33 +339,77 @@
 				"application/x-www-form-urlencoded;charset=UTF-8");
 		request.send("sCode=" + 3 + "&ronum=" + value + "&spCode=" + spCode);
 	}
-	function dated(now) {
-		if(now.value1){
-			return date2(jsonData1);
-		}
-		//방번호 가져옴 
+	var i=0;
+	i++;
+	function date2(jsonData1) {
+		//방번호 가져옴
 		var list = document.getElementById("select1");
 		var value = list.options[list.selectedIndex].value;
-		//인원수 가져옴 
-		let people = document.getElementsByName("people")[0];
-		people = people.value;
-		let d = new Date(now);
-		let selectdate = d.toLocaleDateString('zh-Hans-CN', {
-			year : 'numeric',
-			month : '2-digit',
-			day : '2-digit',
-		});
-		let selectdata = selectdate.split("/");
-		let Sdiv1 = document.getElementById("res");
-		let div = document.createElement("input");
-		div.type = "button";
-		div.value = "예약하러가기";
-		Sdiv1.appendChild(div);
+		let request = new XMLHttpRequest();
+		request.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				let jsonData2 = decodeURIComponent(request.response);
+				let finald = JSON.parse(jsonData1);
+				let falsed = JSON.parse(jsonData2);
+				var arryf = new Array();
+				for (i = 0; i < falsed.length; i++) {
+					arryf[i] = falsed[i].cdate;
+				}
+				let startD = $("#today").text(new Date().toLocaleDateString());
+				$('.calendar').pignoseCalendar({
+					theme : 'dark', // light, dark, blue
+					minDate : startD,
+					maxDate : finald[0].finald,
+					disabledDates : arryf,
+					lang : 'ko',
+					toggle : true,
+					select : function(date, context) {
+						var now = date[0];
+						dated(now)
+					}
+				});
+			}
+		}
+		request.open("post", "falsed", true);
+		request.setRequestHeader("Content-Type",
+				"application/x-www-form-urlencoded;charset=UTF-8");
+		request.send("sCode=" + 3 + "&ronum=" + value + "&spCode=" + spCode);
+	}
+	var i = 0;
+	function dated(now) {
+		i++;
+		if(i==1){
+			//방번호 가져옴 
+			var list = document.getElementById("select1");
+			var value = list.options[list.selectedIndex].value;
+			//인원수 가져옴 
+			let people = document.getElementsByName("people")[0];
+			people = people.value;
+			let d = new Date(now);
+			let selectdate = d.toLocaleDateString('zh-Hans-CN', {
+				year : 'numeric',
+				month : '2-digit',
+				day : '2-digit',
+			});
+			let selectdata = selectdate.split("/");
+			let Sdiv1 = document.getElementById("res");
+			let div = document.createElement("input");
+			div.type = "button";
+			div.id = "reserv";
+			div.value = "예약하러가기";
+			Sdiv1.appendChild(div);
 		
-		div.addEventListener("click", function() {
-			finalall(selectdata, people, value);
-		});
-		
+			let div2 = document.getElementById("reserv");
+			while (div2.lastchild) {
+				div2.removeChild(div2.lastchild);	
+			}
+			div.addEventListener("click", function() {
+				finalall(selectdata, people, value);
+			});
+			i=1;
+		}else{
+			return date1();
+		}
 	}
 	function finalall(selectdata, people, value) {
 		let form = document.createElement("form");

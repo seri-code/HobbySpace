@@ -14,7 +14,7 @@ public interface ReserveMapper {
 	int delTemp1(ReserveBean rb);
 	int delTemp2(ReserveBean rb);
 	ArrayList<ReserveBean> loadReserveDetail(ReserveBean rb);
-	ArrayList<ReserveBean> cancelReserve(ReserveBean rb);
+	
 	ArrayList<ReserveBean> viewStatus(ReserveBean rb);
 	ArrayList<ReserveBean> hostSign(ReserveBean rb);
 	ArrayList<ReserveBean> room(ReserveBean rb);
@@ -30,4 +30,6 @@ public interface ReserveMapper {
 	int OKStatus(ReserveBean rb);
 	int NOStatus(ReserveBean rb);
 	int noDate(ReserveBean rb);
+	int cancelReserve(ReserveBean rb);
+	int CancelStatus(ReserveBean rb);
 }

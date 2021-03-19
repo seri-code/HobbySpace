@@ -6,7 +6,6 @@ import lombok.Data;
 public class HamburgerBean {	
 	private String sCode;
 	private String rsreqdate;
-	private String rospCode;
 	private String ronum;
 	private String location;
 	private String rdstatus;
@@ -21,4 +20,9 @@ public class HamburgerBean {
 	private String rvstar;
 	private String rvcomment;
 	private String userId;
+	private String frdusedate;
+	private String rospcode;
+	private String rdronum;
+	private String rdrospCode; 
+
 }

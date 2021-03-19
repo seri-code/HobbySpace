@@ -8,8 +8,8 @@
 	<!-- 예약리스트 -->
 	<select id="loadGReserveList" resultType="com.comp.hobbyspace.beans.HamburgerBean">
 	<![CDATA[
-    select rd_code as rdcode,RD_RSREQDATE AS rsreqdate,RD_ROspCode AS rospCode,RD_RONUM AS ronum ,sp_location AS location,SP_TOPIMG AS sptopimg,rd_status AS rdstatus 
-        from sp INNER JOIN rd on sp.sp_code = rd.RD_ROspCode
+select rd.rd_usedate as frdusedate ,rd_code as rdcode,RD_RSREQDATE AS rdrsreqdate,RD_ROSPCODE AS rdrospcode,RD_RONUM AS rdronum ,sp_location AS splocation,SP_TOPIMG AS sptopimg,rd_status AS rdstatus 
+        from sp INNER JOIN rd on sp.sp_code = rd.RD_ROSPCODE
             where RD_RSUSID = #{userId}
 	]]>
 	</select>

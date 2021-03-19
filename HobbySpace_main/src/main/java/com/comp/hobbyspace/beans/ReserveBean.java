@@ -19,7 +19,7 @@ public class ReserveBean {
 	private String teusedate;
 	private String tepeople;
 	private String sptopimg;
-	
+	private String rospcode;
 	private String checkboxInfo; 
 	
 	private String[] rstedates; //임시예약신청일 배열

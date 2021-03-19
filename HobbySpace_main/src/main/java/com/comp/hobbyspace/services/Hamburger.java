@@ -63,9 +63,11 @@ public class Hamburger {
 			mav.setViewName("logInForm");
 		}else {
 			hb.setUserId(session.getAttribute("accessInfo").toString());
-			System.out.println("회원코드: "+hb.getUserId());
+			System.out.println(hb.getUserId());
 			ArrayList<HamburgerBean> list = this.loadGReserveList(hb);
+			System.out.println(list.get(0).getRdcode());
 			String jsonData1 = gson.toJson(list);
+			System.out.println("햄버거 예약리스트:" + jsonData1);
 			mav.addObject("loadReserve",jsonData1);
 			mav.setViewName("reserveList");
 		}

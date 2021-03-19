@@ -13,6 +13,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.comp.hobbyspace.beans.HamburgerBean;
 import com.comp.hobbyspace.beans.ReserveBean;
 import com.comp.hobbyspace.mapper.ReserveMapper;
 import com.google.gson.Gson;
@@ -56,10 +58,15 @@ public class Reserve {
 		case "9":
 			mav = NOStatusCtl(req, rb);
 			break;
-		default:
+		case "10":
+			mav = cancelReserveCtl(req, rb);
 			break;
+		case "11":
+			mav = tempTestCtl(req, rb);
+			break;
+		default:
 		}
-
+		
 		return mav;
 
 	}
@@ -113,6 +120,8 @@ public class Reserve {
 		String jsonData3 = gson.toJson(list2);
 		mav.addObject("falsed", jsonData3);
 		System.out.println(jsonData3);
+		
+		
 		return mav;
 	}
 
@@ -127,18 +136,36 @@ public class Reserve {
 		System.out.println(rb.getSpCode());
 		HttpSession session = req.getSession();
 		rb.setUserId(session.getAttribute("accessInfo").toString());
-		try {
-			this.insTemp(rb);
-		} catch (Exception e) {
 		
-		}
+		this.insTemp(rb);
+
+		mav.setViewName("redirect:reservTempTest?sCode="+11);
+//		System.out.println("temp 입력 성공");
+//		ArrayList<ReserveBean> list3 = this.loadTemp(rb);
+//		String jsonData3 = gson.toJson(list3);
+//		mav.addObject("loadTemp", jsonData3);
+//		
+//		System.out.println(jsonData3);
+//		mav.setViewName("reservTemp");
+		
+		return mav;
+
+	}
+	// 임시예약새로고침방지
+	private ModelAndView tempTestCtl(HttpServletRequest req, ReserveBean rb) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(rb.getSpCode());
+		HttpSession session = req.getSession();
+		rb.setUserId(session.getAttribute("accessInfo").toString());
+
 		System.out.println("temp 입력 성공");
 		ArrayList<ReserveBean> list3 = this.loadTemp(rb);
 		String jsonData3 = gson.toJson(list3);
 		mav.addObject("loadTemp", jsonData3);
-
+		
 		System.out.println(jsonData3);
 		mav.setViewName("reservTemp");
+		
 		return mav;
 //		// temp insert
 //		if (this.insTemp(rb)) {
@@ -304,8 +331,7 @@ public class Reserve {
 			System.out.println(jsonData1);
 		} else {
 
-		}
-		;
+		};
 
 		return mav;
 	}
@@ -346,39 +372,38 @@ public class Reserve {
 	}
 
 	// 예약 취소 Ctl
-	private ModelAndView cancelReserveCtl(ReserveBean rb) {
+	private ModelAndView cancelReserveCtl(HttpServletRequest req, ReserveBean rb) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("");
+		HttpSession session = req.getSession();
+		rb.setUserId(session.getAttribute("accessInfo").toString());
+
+		System.out.println("ctl진입");
+		
+		System.out.println(rb.getRdcode());
+		System.out.println(rb.getRospcode());
+		System.out.println(rb.getFrdusedate());
+		System.out.println(rb.getRonum());
+		if(this.cancelReserve(rb)) {
+			System.out.println("불가날짜 딜리트");
+			if(this.CancelStatus(rb)) {
+				System.out.println("승인거절");
+				ArrayList<ReserveBean> list3 = this.ToHostReserveList(rb);
+				String jsonData2 = gson.toJson(list3);
+				mav.addObject("ToHostReserveList3", jsonData2);
+				System.out.println(jsonData2);
+				
+			}
+		}	
 		return mav;
 	}
-
-	// 예약 취소
-	private ArrayList<ReserveBean> cancelReserve(ReserveBean rb) {
-		return rsMapper.cancelReserve(rb);
+	// 불가날짜 딜리트
+		private boolean cancelReserve(ReserveBean rb) {
+			return convertToBoolean(rsMapper.cancelReserve(rb));
+		}
+	// 승인거절
+	private boolean CancelStatus(ReserveBean rb) {
+		return convertToBoolean(rsMapper.CancelStatus(rb));
 	}
-
-	// 예약 상태별 조회 Ctl
-	private ModelAndView viewStatusCtl(ReserveBean rb) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("");
-		return mav;
-	}
-
-	// 예약 상태별 조회
-	private ArrayList<ReserveBean> viewStatus(ReserveBean rb) {
-		return rsMapper.viewStatus(rb);
-	}
-
-	// 호스트가 예약을 승인 또는 거절Ctl
-	private ModelAndView changeStatusCtl(ReserveBean rb) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("");
-		return mav;
-	}
-
-	// 호스트가 예약을 승인 또는 거절
-	private ArrayList<ReserveBean> hostSign(ReserveBean rb) {
-		return rsMapper.hostSign(rb);
-	}
+		
 
 }

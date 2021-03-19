@@ -72,7 +72,7 @@ DELETE FROM te WHERE TE_ROspCode =#{rsterospCode} AND TE_RONUM=#{rsteronum} AND 
 	<!-- 예약로드 -->
 	<select id="loadReserve" resultType="com.comp.hobbyspace.beans.ReserveBean">
 	<![CDATA[
-select rd_code as rdcode,RD_RSREQDATE AS rdrsreqdate,RD_ROSPCODE AS rdrospcode,RD_RONUM AS rdronum ,sp_location AS splocation,SP_TOPIMG AS sptopimg,rd_status AS rdstatus 
+select rd.rd_usedate as frdusedate ,rd_code as rdcode,RD_RSREQDATE AS rdrsreqdate,RD_ROSPCODE AS rdrospcode,RD_RONUM AS rdronum ,sp_location AS splocation,SP_TOPIMG AS sptopimg,rd_status AS rdstatus 
         from sp INNER JOIN rd on sp.sp_code = rd.RD_ROSPCODE
             where RD_RSUSID = #{userId}
 ]]>
@@ -105,4 +105,14 @@ UPDATE rd SET rd_status = 'N' where rd_code = #{rdcode}
 ]]>
 	</insert>
 	
+	<insert id="cancelReserve">
+	<![CDATA[
+DELETE FROM ca WHERE CA_ROSPCODE =#{rospcode} and CA_RONUM =#{ronum} AND CA_TYPE = 'C' AND CA_DATE = #{frdusedate}
+]]>
+	</insert>
+		<insert id="CancelStatus">
+	<![CDATA[
+UPDATE rd SET rd_status = 'D' where rd_code = #{rdcode}
+]]>
+	</insert>
 </mapper>
