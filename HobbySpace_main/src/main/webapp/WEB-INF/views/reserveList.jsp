@@ -103,7 +103,10 @@ function init() {
 		let section1 = document.createElement("section");
 		let div1 = document.createElement("div");
 		div1.className = "content";
-
+		div1.style.borderBottom = "5px solid #ecdbc7";
+		div1.style.borderTop = "5px solid #ecdbc7";
+		div1.style.borderRight = "5px solid #ecdbc7";
+		div1.style.borderLeft = "5px solid #ecdbc7";
 	
 		let header = document.createElement("header");
 		let footer = document.createElement("footer");
@@ -113,6 +116,9 @@ function init() {
 		div2.style.position="relative";
 		div2.style.width="17.3rem";
 		div2.id="status"+i;
+		div2.style.justifyContent="center";
+		div2.style.alignItems="center";
+		div2.style.right="2%";
 		if(reserv1[i].rdstatus=="W"){
 		div2.textContent = "예약상태: "+"승인대기";
 		}
@@ -136,14 +142,15 @@ function init() {
 		let frdusedateTest = reserv1[i].frdusedate;
 		//유저가선택한 방 
 		let ronum = reserv1[i].rdronum;
+		
 		let div4 = document.createElement("input");
 		div4.type = "button";
-		div4.value = "예약취소하기";
+		div4.value = "예약취소";
 		div4.addEventListener("click",function(){Cancel(rospcode,rdcode,frdusedateTest,ronum)});
 		div4.style.backgroundColor ='#ecdbc7';
 		div4.style.fontColor ='#000000';
 		div4.style.position="relative";
-		div4.style.width="6rem";
+		div4.style.width="8.18rem";
 		
 		
 		div2.className = "image";
@@ -154,7 +161,7 @@ function init() {
 		let sptopimg13 = reserv1[i].sptopimg;
 		//예약상세코드
 		let getDrdcode = reserv1[i].rdcode;
-		if(reserv1[i].rdstatus == "W" || reserv1[i].rdstatus == "P" ){
+// 		if(reserv1[i].rdstatus == "W" || reserv1[i].rdstatus == "P" || reserv1[i].rdstatus == "F" ){
 			let div3 = document.createElement("input");
 			div3.type = "button";
 			div3.value = "상세보기";
@@ -163,17 +170,17 @@ function init() {
 			div3.style.backgroundColor ='#ecdbc7';
 			div3.style.fontColor ='#000000';
 			div3.style.position="relative";
-			div3.style.width="6rem";
+			div3.style.width="8.18rem";
 			div3.addEventListener("click", function() {
 				reservDetail(getDrdcode, sptopimg13)
-				alert(getDrdcode);
+
 			});	
-			header.appendChild(div3);
-		}
+			footer.appendChild(div3);
+// 		}
 		footer.appendChild(div4);
 		div2.appendChild(img);
 		header.appendChild(div2);
-		// 			div2.appendChild(div3);
+		//div2.appendChild(div3);
 		div1.appendChild(header);
 		section1.appendChild(div1);
 		Sdiv.appendChild(section1);
@@ -230,11 +237,15 @@ function reserv() {
 				let section12 = document.createElement("wrapper");
 				let section = document.getElementById("wrapper");
 				let section1 = document.createElement("section");
+				let footer = document.createElement("footer");
 				let div1 = document.createElement("div");
 				div1.className = "content";
-				
+				div1.style.borderBottom = "5px solid #ecdbc7";
+				div1.style.borderTop = "5px solid #ecdbc7";
+				div1.style.borderRight = "5px solid #ecdbc7";
+				div1.style.borderLeft = "5px solid #ecdbc7";
 				let rdcode = reserv1[i].rdcode;
-				alert(rdcode);
+
 				let div3 = document.createElement("input");
 				div3.type = "button";
 				div3.value = "승인";
@@ -258,10 +269,26 @@ function reserv() {
 				let header = document.createElement("header");
 				let div2 = document.createElement("div");
 				div2.className = "image";
+				frdusedate1 = reserv1[i].frdusedate;
+				frdusedate2 = frdusedate1.substring(0,10);
 				let div5 = document.createElement("div");
-				div5.textContent = "사용날짜 : " + reserv1[i].frdusedate;
+				div5.textContent = "사용날짜 : " + frdusedate2;
+				div5.style.backgroundColor ='#ecdbc7';
+				div5.style.fontColor ='#000000';
+				div5.style.position="relative";
+				div5.style.width="17.6rem";
+				div5.style.justifyContent="center";
+				div5.style.alignItems="center";
+				div5.style.right="2%";
 				let div6 = document.createElement("div");
 				div6.id = "status"+i;
+// 				div6.style.backgroundColor ='#ecdbc7';
+// 				div6.style.fontColor ='#000000';
+// 				div6.style.position="relative";
+// 				div6.style.width="17.6rem";
+// 				div6.style.justifyContent="center";
+// 				div6.style.alignItems="center";
+// 				div6.style.right="2%";
 // 				div6.textContent = "예약상태 : " + reserv1[i].frdstatus;
 				if(reserv1[i].frdstatus=="W"){
 					div6.textContent = "예약상태 : " + "승인대기";
@@ -282,12 +309,13 @@ function reserv() {
 				img.width = "300";
 				img.height = "300";
 				img.src = "/resources/images/" + reserv1[i].sptopimg;
+				
 				div5.appendChild(div6);
 				header.appendChild(div5);
 				div2.appendChild(img);
 				header.appendChild(div2);
-				section1.appendChild(div4);
-				section1.appendChild(div3);
+				header.appendChild(div4);
+				header.appendChild(div3);
 				div1.appendChild(header);
 				section1.appendChild(div1);
 				Sdiv.appendChild(section1);
@@ -298,11 +326,6 @@ function reserv() {
 	request.setRequestHeader("Content-Type",
 			"application/x-www-form-urlencoded;charset=UTF-8");
 	request.send("sCode=" + 7);
-	// 		var form = document.createElement("form");
-	// 		form.action = "ToHostReserveList?sCode=" + 7;
-	// 		form.method = "post";
-	// 		document.body.appendChild(form);
-	// 		form.submit();
 }
 function OKStatus(rdcode) {
 	let request = new XMLHttpRequest();

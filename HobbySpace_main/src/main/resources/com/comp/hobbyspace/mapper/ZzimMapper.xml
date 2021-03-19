@@ -21,4 +21,5 @@
       DELETE FROM ZZ WHERE ZZ_USID = #{userId} AND ZZ_spCode = #{spCode}
       ]]>
    </delete>
+
 </mapper>

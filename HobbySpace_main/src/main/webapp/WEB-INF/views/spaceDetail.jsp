@@ -339,8 +339,6 @@
 				"application/x-www-form-urlencoded;charset=UTF-8");
 		request.send("sCode=" + 3 + "&ronum=" + value + "&spCode=" + spCode);
 	}
-	var i=0;
-	i++;
 	function date2(jsonData1) {
 		//방번호 가져옴
 		var list = document.getElementById("select1");
@@ -375,10 +373,7 @@
 				"application/x-www-form-urlencoded;charset=UTF-8");
 		request.send("sCode=" + 3 + "&ronum=" + value + "&spCode=" + spCode);
 	}
-	var i = 0;
 	function dated(now) {
-		i++;
-		if(i==1){
 			//방번호 가져옴 
 			var list = document.getElementById("select1");
 			var value = list.options[list.selectedIndex].value;
@@ -406,10 +401,6 @@
 			div.addEventListener("click", function() {
 				finalall(selectdata, people, value);
 			});
-			i=1;
-		}else{
-			return date1();
-		}
 	}
 	function finalall(selectdata, people, value) {
 		let form = document.createElement("form");
