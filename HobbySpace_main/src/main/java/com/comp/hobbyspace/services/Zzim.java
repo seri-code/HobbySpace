@@ -1,11 +1,15 @@
 package com.comp.hobbyspace.services;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.comp.hobbyspace.beans.ReserveBean;
 import com.comp.hobbyspace.beans.ZzimBean;
 import com.comp.hobbyspace.mapper.ZzimMapper;
 
@@ -40,10 +44,11 @@ public class Zzim {
 		}else {
 			zb.setUserId(session.getAttribute("accessInfo").toString());
 			// 찜 추가
+			
 			this.zzim(zb);
+			
 			mav.setViewName("redirect: /ToZzimList?sCode=4&userId=" + zb.getUserId());
 		}
-
 		return mav;
 	}
 
@@ -72,5 +77,4 @@ public class Zzim {
 	private int deleteZzim(ZzimBean zb) {
 		return zzMapper.deleteZzim(zb);
 	}
-
 }

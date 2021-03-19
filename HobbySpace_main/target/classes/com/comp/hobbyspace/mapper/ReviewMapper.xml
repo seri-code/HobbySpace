@@ -8,4 +8,13 @@
 	VALUES(SYSDATE,#{usId},#{rdCode},#{rdRoom},#{rdSpCode},#{rvtext},#{rvstar},#{rvImg})	
 	]]>
 	</insert>
+	
+	   
+    <!-- 셀릭트  -->
+    	<select id="falsed"
+		resultType="com.comp.hobbyspace.beans.ReserveBean">
+	<![CDATA[
+select rv_star as rvstar,rv_img as rvimg, rv_content from rv where rv_usid=#{usId}
+]]>
+	</select>
 </mapper>

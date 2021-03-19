@@ -91,8 +91,6 @@ public class Review {
 		} // end for
 		return mav;
 	}
-
-
 	// 신규후기작성으로 이동
 	private ModelAndView toNewReviewCtl(HttpServletRequest req, ReviewBean rb) {
 		ModelAndView mav = new ModelAndView();
@@ -101,11 +99,9 @@ public class Review {
 		mav.setViewName("reviewEditor");
 		return mav;
 	}
-
 	private ReviewBean selectResDetCode(ReviewBean rb) {
 		return rvMapper.selectResDetCode(rb);
 	}
-
 	// 신규후기 작성
 	private ModelAndView newReviewCtl(HttpServletRequest req, ReviewBean rb) {
 		ModelAndView mav = new ModelAndView();

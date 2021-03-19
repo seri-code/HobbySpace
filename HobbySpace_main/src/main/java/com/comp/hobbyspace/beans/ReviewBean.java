@@ -12,5 +12,6 @@ public class ReviewBean {
 	private String rvImg; //이미지이름
 	private int rvstar; //리뷰별점
 	private String rvtext; //리뷰내용
-	
+//	rvstar
+//	rvimg
 }
