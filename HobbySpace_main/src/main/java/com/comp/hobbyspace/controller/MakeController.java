@@ -1,6 +1,7 @@
 package com.comp.hobbyspace.controller;
 
 import com.comp.hobbyspace.services.Reserve;
+import com.comp.hobbyspace.utils.ProjectUtils;
 import com.comp.hobbyspace.services.Hamburger;
 import com.comp.hobbyspace.beans.HamburgerBean;
 import com.comp.hobbyspace.beans.ReserveBean;
@@ -24,7 +25,9 @@ public class MakeController {
 	Reserve res;
 	@Autowired
 	Hamburger ham;
-
+	@Autowired
+	private ProjectUtils pu;
+	
 	ModelAndView mav = null; 
 
 	// 햄버거

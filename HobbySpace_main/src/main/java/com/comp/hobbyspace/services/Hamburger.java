@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.comp.hobbyspace.beans.HamburgerBean;
 
 import com.comp.hobbyspace.mapper.HamburgerMapper;
+import com.comp.hobbyspace.utils.ProjectUtils;
 import com.google.gson.Gson;
 @Service
 public class Hamburger {
@@ -20,6 +21,8 @@ public class Hamburger {
 	private HamburgerMapper mapper;
 	@Autowired
 	private Gson gson;
+	@Autowired
+	private ProjectUtils pu;
 	
 	public ModelAndView entrance(HttpServletRequest req, HamburgerBean hb) {
 		ModelAndView mav = null;
@@ -28,16 +31,16 @@ public class Hamburger {
 			mav = logInFormCtl(hb);
 			break;
 		case "2":
-			mav = toReserveListCtl(req, hb);
+			mav = toReserveListCtl(hb);
 			break;
 		case "3":
-			mav = toReviewListCtl(req, hb);
+			mav = toReviewListCtl(hb);
 			break;
 		case "4":
-			mav = toZzimListCtl(req, hb);
+			mav = toZzimListCtl(hb);
 			break;
 		case "5":
-			mav = toManageSpaceCtl(req, hb);
+			mav = toManageSpaceCtl(hb);
 			break;
 		default:
 			break;
@@ -55,21 +58,26 @@ public class Hamburger {
 	}
 
 	// 예약 리스트 페이지로 이동 Ctl
-	private ModelAndView toReserveListCtl(HttpServletRequest req, HamburgerBean hb) {
+	private ModelAndView toReserveListCtl(HamburgerBean hb) {
 		ModelAndView mav = new ModelAndView();
-		HttpSession session = req.getSession();
+		
 		//System.out.println(session.getAttribute("accessInfo").toString());
-		if(session.getAttribute("accessInfo") == null) {
-			mav.setViewName("logInForm");
-		}else {
-			hb.setUserId(session.getAttribute("accessInfo").toString());
-			System.out.println(hb.getUserId());
-			ArrayList<HamburgerBean> list = this.loadGReserveList(hb);
-			System.out.println(list.get(0).getRdcode());
-			String jsonData1 = gson.toJson(list);
-			System.out.println("햄버거 예약리스트:" + jsonData1);
-			mav.addObject("loadReserve",jsonData1);
-			mav.setViewName("reserveList");
+		try {
+			if(pu.getAttribute("usId") == null) {
+				mav.setViewName("logInForm");
+			}else {
+				hb.setUserId(pu.getAttribute("usId").toString());
+				System.out.println(hb.getUserId());
+				ArrayList<HamburgerBean> list = this.loadGReserveList(hb);
+				System.out.println(list.get(0).getRdcode());
+				String jsonData1 = gson.toJson(list);
+				System.out.println("햄버거 예약리스트:" + jsonData1);
+				mav.addObject("loadReserve",jsonData1);
+				mav.setViewName("reserveList");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return mav;
@@ -82,17 +90,20 @@ public class Hamburger {
 	}
 
 	// 후기관리 페이지로 이동 Ctl
-	private ModelAndView toReviewListCtl(HttpServletRequest req,HamburgerBean hb) {
+	private ModelAndView toReviewListCtl(HamburgerBean hb) {
 		ModelAndView mav = new ModelAndView();
-		HttpSession session = req.getSession();
-		System.out.println(session);
-		if(session.getAttribute("accessInfo") == null) {
-			mav.setViewName("logInForm");
-		}else {
-			ArrayList<HamburgerBean> list = this.loadGReviewList(hb);
-			String jsonData1 = gson.toJson(list);
-			mav.addObject("ReviewList",jsonData1);
-			mav.setViewName("reviewList");
+		try {
+			if(pu.getAttribute("usId") == null) {
+				mav.setViewName("logInForm");
+			}else {
+				ArrayList<HamburgerBean> list = this.loadGReviewList(hb);
+				String jsonData1 = gson.toJson(list);
+				mav.addObject("ReviewList",jsonData1);
+				mav.setViewName("reviewList");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return mav;
@@ -104,17 +115,20 @@ public class Hamburger {
 	}
 
 	// 찜 리스트 페이지로 이동 Ctl
-	private ModelAndView toZzimListCtl(HttpServletRequest req, HamburgerBean hb) {
+	private ModelAndView toZzimListCtl(HamburgerBean hb) {
 		ModelAndView mav = new ModelAndView();
-		HttpSession session = req.getSession();
-		System.out.println(session);
-		if(session.getAttribute("accessInfo") == null) {
-			mav.setViewName("logInForm");
-		}else {
-			ArrayList<HamburgerBean> list = this.loadZzimList(hb);
-			String jsonData1 = gson.toJson(list);
-			mav.addObject("ZzimList",jsonData1);
-			mav.setViewName("zzimList");
+		try {
+			if(pu.getAttribute("usId") == null) {
+				mav.setViewName("logInForm");
+			}else {
+				ArrayList<HamburgerBean> list = this.loadZzimList(hb);
+				String jsonData1 = gson.toJson(list);
+				mav.addObject("ZzimList",jsonData1);
+				mav.setViewName("zzimList");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return mav;
@@ -126,17 +140,20 @@ public class Hamburger {
 	}
 
 	// 공간 관리 페이지로 이동 Ctl
-	private ModelAndView toManageSpaceCtl(HttpServletRequest req, HamburgerBean hb) {
+	private ModelAndView toManageSpaceCtl(HamburgerBean hb) {
 		ModelAndView mav = new ModelAndView();
-		HttpSession session = req.getSession();
-		System.out.println(session);
-		if(session.getAttribute("accessInfo") == null) {
-			mav.setViewName("logInForm");
-		}else {
-			ArrayList<HamburgerBean> list = this.loadSpaceList(hb);
-			String jsonData1 = gson.toJson(list);
-			mav.addObject("ManageSpace",jsonData1);
-			mav.setViewName("manageSpace");
+		try {
+			if(pu.getAttribute("usId") == null) {
+				mav.setViewName("logInForm");
+			}else {
+				ArrayList<HamburgerBean> list = this.loadSpaceList(hb);
+				String jsonData1 = gson.toJson(list);
+				mav.addObject("ManageSpace",jsonData1);
+				mav.setViewName("manageSpace");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return mav;

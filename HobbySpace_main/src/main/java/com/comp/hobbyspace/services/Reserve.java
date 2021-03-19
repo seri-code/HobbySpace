@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.comp.hobbyspace.beans.HamburgerBean;
 import com.comp.hobbyspace.beans.ReserveBean;
 import com.comp.hobbyspace.mapper.ReserveMapper;
+import com.comp.hobbyspace.utils.ProjectUtils;
 import com.google.gson.Gson;
 
 @Service
@@ -27,7 +28,9 @@ public class Reserve {
 	private Gson gson;
 	@Autowired
 	private PlatformTransactionManager tran;
-
+	@Autowired
+	private ProjectUtils pu;
+	
 	public ModelAndView entrance(HttpServletRequest req, ReserveBean rb) {
 		ModelAndView mav = null;
 		switch (rb.getSCode()) {
@@ -41,28 +44,28 @@ public class Reserve {
 			mav = falsedCtl(rb);
 			break;
 		case "4":
-			mav = tempCtl(req, rb);
+			mav = tempCtl(rb);
 			break;
 		case "5":
-			mav = reserveCtl(req, rb);
+			mav = reserveCtl(rb);
 			break;
 		case "6":
 			mav = reservDetailCtl(rb);
 			break;
 		case "7":
-			mav = ToHostReserveListCtl(req, rb);
+			mav = ToHostReserveListCtl(rb);
 			break;
 		case "8":
-			mav = OKStatusCtl(req, rb);
+			mav = OKStatusCtl(rb);
 			break;
 		case "9":
-			mav = NOStatusCtl(req, rb);
+			mav = NOStatusCtl(rb);
 			break;
 		case "10":
 			mav = cancelReserveCtl(req, rb);
 			break;
 		case "11":
-			mav = tempTestCtl(req, rb);
+			mav = tempTestCtl(rb);
 			break;
 		default:
 		}
@@ -131,15 +134,22 @@ public class Reserve {
 	}
 
 	// 임시예약Ctl
-	private ModelAndView tempCtl(HttpServletRequest req, ReserveBean rb) {
+	private ModelAndView tempCtl(ReserveBean rb) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(rb.getSpCode());
-		HttpSession session = req.getSession();
-		rb.setUserId(session.getAttribute("accessInfo").toString());
+		
+
+		try {
+			rb.setUserId(pu.getAttribute("usId").toString());
+			mav.setViewName("redirect:reservTempTest?sCode="+11);
+		} catch (Exception e) {
+			mav.setViewName("logInForm");
+			e.printStackTrace();
+		}
 		
 		this.insTemp(rb);
 
-		mav.setViewName("redirect:reservTempTest?sCode="+11);
+		
 //		System.out.println("temp 입력 성공");
 //		ArrayList<ReserveBean> list3 = this.loadTemp(rb);
 //		String jsonData3 = gson.toJson(list3);
@@ -152,19 +162,24 @@ public class Reserve {
 
 	}
 	// 임시예약새로고침방지
-	private ModelAndView tempTestCtl(HttpServletRequest req, ReserveBean rb) {
+	private ModelAndView tempTestCtl(ReserveBean rb) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(rb.getSpCode());
-		HttpSession session = req.getSession();
-		rb.setUserId(session.getAttribute("accessInfo").toString());
+		try {
+			rb.setUserId(pu.getAttribute("usId").toString());
+			System.out.println("temp 입력 성공");
+			ArrayList<ReserveBean> list3 = this.loadTemp(rb);
+			String jsonData3 = gson.toJson(list3);
+			mav.addObject("loadTemp", jsonData3);
+			
+			System.out.println(jsonData3);
+			mav.setViewName("reservTemp");
+		} catch (Exception e) {
+			mav.setViewName("logInForm");
+			e.printStackTrace();
+		}
 
-		System.out.println("temp 입력 성공");
-		ArrayList<ReserveBean> list3 = this.loadTemp(rb);
-		String jsonData3 = gson.toJson(list3);
-		mav.addObject("loadTemp", jsonData3);
 		
-		System.out.println(jsonData3);
-		mav.setViewName("reservTemp");
 		
 		return mav;
 //		// temp insert
@@ -184,54 +199,55 @@ public class Reserve {
 	}
 
 	// 예약 신청 Ctl
-	private ModelAndView reserveCtl(HttpServletRequest req, ReserveBean rb) {
+	private ModelAndView reserveCtl(ReserveBean rb) {
 		TransactionStatus status = tran.getTransaction(new DefaultTransactionDefinition());
 		ModelAndView mav = new ModelAndView();
-		HttpSession session = req.getSession();
-		rb.setUserId(session.getAttribute("accessInfo").toString());
-		System.out.println(rb.getUserId());
 		try {
+			rb.setUserId(pu.getAttribute("usId").toString());
+			System.out.println(rb.getUserId());
+			
 			// 예약 insert
-			SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-			Date date = new Date();
-			String time = format.format(date);
-			rb.setRsdate(time);
-			this.newReserve(rb);
+						SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+						Date date = new Date();
+						String time = format.format(date);
+						rb.setRsdate(time);
+						this.newReserve(rb);
 
-			System.out.println("랭스길이: " + rb.getRsterospCodes().length);
-			for (int i = 0; i < rb.getRsterospCodes().length; i++) {
-				// jsp에 스플릿 안먹어서 이걸로 대체하여 날짜 넣음
-				String s[] = rb.getRstedates()[i].split(" ");
-				String ss[] = s[0].split("-");
-				String sss[] = s[1].split(":");
-				String ssss = ss[0] + ss[1] + ss[2] + sss[0] + sss[1] + sss[2];
-				rb.setRstedate(ssss);
-				// rb.setRstedate(rb.getRstedates()[i]); //임시예약신청일
-				rb.setRsphone(rb.getRsphones()[i]);
-				rb.setRsemail(rb.getRsemails()[i]);
-				rb.setRsterospCode(rb.getRsterospCodes()[i]);
-				rb.setRsteronum(rb.getRsteronums()[i]);
-				rb.setRsusedate(rb.getRsusedates()[i]);
-				rb.setRstepeople(rb.getRstepeoples()[i]);
-				// 이메일 전화번호 업데이트
-				if (this.updateTemp(rb)) {
-					System.out.println("temp update 성공");
-					System.out.println(rb.getRsterospCodes()[i]);
-					// 예약 상세 insert
-					if (this.newDetail(rb)) {
-						System.out.println("예약상세 insert 성공");
-						if (this.noDate(rb)) {
-							System.out.println("불가날짜 인설트 성공");
-						}
-					}
-				} else {
-				}
-			} // for
-			tran.commit(status);
+						System.out.println("랭스길이: " + rb.getRsterospCodes().length);
+						for (int i = 0; i < rb.getRsterospCodes().length; i++) {
+							// jsp에 스플릿 안먹어서 이걸로 대체하여 날짜 넣음
+							String s[] = rb.getRstedates()[i].split(" ");
+							String ss[] = s[0].split("-");
+							String sss[] = s[1].split(":");
+							String ssss = ss[0] + ss[1] + ss[2] + sss[0] + sss[1] + sss[2];
+							rb.setRstedate(ssss);
+							// rb.setRstedate(rb.getRstedates()[i]); //임시예약신청일
+							rb.setRsphone(rb.getRsphones()[i]);
+							rb.setRsemail(rb.getRsemails()[i]);
+							rb.setRsterospCode(rb.getRsterospCodes()[i]);
+							rb.setRsteronum(rb.getRsteronums()[i]);
+							rb.setRsusedate(rb.getRsusedates()[i]);
+							rb.setRstepeople(rb.getRstepeoples()[i]);
+							// 이메일 전화번호 업데이트
+							if (this.updateTemp(rb)) {
+								System.out.println("temp update 성공");
+								System.out.println(rb.getRsterospCodes()[i]);
+								// 예약 상세 insert
+								if (this.newDetail(rb)) {
+									System.out.println("예약상세 insert 성공");
+									if (this.noDate(rb)) {
+										System.out.println("불가날짜 인설트 성공");
+									}
+								}
+							} else {
+							}
+						} // for
+						tran.commit(status);
 		} catch (Exception e) {
 			e.printStackTrace();
 			tran.rollback(status);
 		}
+
 		//임시예약삭제
 		for (int i = 0; i < rb.getRsterospCodes().length; i++) {
 			rb.setRsterospCode(rb.getRsterospCodes()[i]);
@@ -292,22 +308,26 @@ public class Reserve {
 		return rsMapper.ReserveDetail(rb);
 	}
 	// 승인완료ctl
-	private ModelAndView OKStatusCtl(HttpServletRequest req, ReserveBean rb) {
+	private ModelAndView OKStatusCtl(ReserveBean rb) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(rb.getRdcode());
-		HttpSession session = req.getSession();
-		rb.setUserId(session.getAttribute("accessInfo").toString());
-		if (this.OKStatus(rb)) {
-			System.out.println(rb.getRdcode());
-			System.out.println(this.OKStatus(rb));
-			ArrayList<ReserveBean> list1 = this.ToHostReserveList(rb);
-			String jsonData1 = gson.toJson(list1);
-			mav.addObject("ToHostReserveList1", jsonData1);
-			System.out.println(jsonData1);
-		} else {
+		try {
+			rb.setUserId(pu.getAttribute("usId").toString());
+			if (this.OKStatus(rb)) {
+				System.out.println(rb.getRdcode());
+				System.out.println(this.OKStatus(rb));
+				ArrayList<ReserveBean> list1 = this.ToHostReserveList(rb);
+				String jsonData1 = gson.toJson(list1);
+				mav.addObject("ToHostReserveList1", jsonData1);
+				System.out.println(jsonData1);
+			} else {
 
+			};
+		} catch (Exception e) {
+			mav.setViewName("logInForm");
+			e.printStackTrace();
 		}
-		;
+		
 
 		return mav;
 	}
@@ -318,20 +338,25 @@ public class Reserve {
 	}
 
 	// 승인거절ctl
-	private ModelAndView NOStatusCtl(HttpServletRequest req, ReserveBean rb) {
+	private ModelAndView NOStatusCtl(ReserveBean rb) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(rb.getRdcode());
-		HttpSession session = req.getSession();
-		rb.setUserId(session.getAttribute("accessInfo").toString());
-		if (this.NOStatus(rb)) {
-			System.out.println(this.NOStatus(rb));
-			ArrayList<ReserveBean> list2 = this.ToHostReserveList(rb);
-			String jsonData1 = gson.toJson(list2);
-			mav.addObject("ToHostReserveList2", jsonData1);
-			System.out.println(jsonData1);
-		} else {
+		try {
+			rb.setUserId(pu.getAttribute("usId").toString());
+			if (this.NOStatus(rb)) {
+				System.out.println(this.NOStatus(rb));
+				ArrayList<ReserveBean> list2 = this.ToHostReserveList(rb);
+				String jsonData1 = gson.toJson(list2);
+				mav.addObject("ToHostReserveList2", jsonData1);
+				System.out.println(jsonData1);
+			} else {
 
-		};
+			};
+		} catch (Exception e) {
+			mav.setViewName("logInForm");
+			e.printStackTrace();
+		}
+		
 
 		return mav;
 	}
@@ -342,17 +367,22 @@ public class Reserve {
 	}
 
 	// 호스트 빌려준공간
-	private ModelAndView ToHostReserveListCtl(HttpServletRequest req, ReserveBean rb) {
+	private ModelAndView ToHostReserveListCtl(ReserveBean rb) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("호스트 빌려준공간 진입");
-		HttpSession session = req.getSession();
-		rb.setUserId(session.getAttribute("accessInfo").toString());
-		ArrayList<ReserveBean> list = this.ToHostReserveList(rb);
-		String jsonData1 = gson.toJson(list);
-		mav.addObject("ToHostReserveList", jsonData1);
-		System.out.println(jsonData1);
+		try {
+			rb.setUserId(pu.getAttribute("usId").toString());
+			ArrayList<ReserveBean> list = this.ToHostReserveList(rb);
+			String jsonData1 = gson.toJson(list);
+			mav.addObject("ToHostReserveList", jsonData1);
+			System.out.println(jsonData1);
 
-		mav.setViewName("reqreserveList");
+			mav.setViewName("reqreserveList");
+		} catch (Exception e) {
+			mav.setViewName("logInForm");
+			e.printStackTrace();
+		}
+		
 		return mav;
 	}
 
@@ -374,26 +404,25 @@ public class Reserve {
 	// 예약 취소 Ctl
 	private ModelAndView cancelReserveCtl(HttpServletRequest req, ReserveBean rb) {
 		ModelAndView mav = new ModelAndView();
-		HttpSession session = req.getSession();
-		rb.setUserId(session.getAttribute("accessInfo").toString());
+		try {
+			rb.setUserId(pu.getAttribute("usId").toString());
+			if(this.cancelReserve(rb)) {
+				System.out.println("불가날짜 딜리트");
+				if(this.CancelStatus(rb)) {
+					System.out.println("승인거절");
+					ArrayList<ReserveBean> list3 = this.ToHostReserveList(rb);
+					String jsonData2 = gson.toJson(list3);
+					mav.addObject("ToHostReserveList3", jsonData2);
+					System.out.println(jsonData2);
+					
+				}
+			}	
+		} catch (Exception e) {
+			mav.setViewName("logInForm");
+			e.printStackTrace();
+		}
 
-		System.out.println("ctl진입");
 		
-		System.out.println(rb.getRdcode());
-		System.out.println(rb.getRospcode());
-		System.out.println(rb.getFrdusedate());
-		System.out.println(rb.getRonum());
-		if(this.cancelReserve(rb)) {
-			System.out.println("불가날짜 딜리트");
-			if(this.CancelStatus(rb)) {
-				System.out.println("승인거절");
-				ArrayList<ReserveBean> list3 = this.ToHostReserveList(rb);
-				String jsonData2 = gson.toJson(list3);
-				mav.addObject("ToHostReserveList3", jsonData2);
-				System.out.println(jsonData2);
-				
-			}
-		}	
 		return mav;
 	}
 	// 불가날짜 딜리트

@@ -20,11 +20,11 @@ public class Authentication {
 	private ProjectUtils pu;
 
 	public ModelAndView entrance(HttpServletRequest req, AuthBean ab) {
-		System.out.println("auth 엔트런스 진입");
 		ModelAndView mav = null;
 		switch (ab.getSCode()) {
 		case "LogIn":
 			mav = this.logInCtl(req, ab);
+			System.out.println(mav.getModel().get("nickname"));
 			break;
 		case "LogOut":
 			mav = this.logOutCtl(req, ab);
@@ -68,9 +68,10 @@ public class Authentication {
 				System.out.println("사용자가 입력한 값이 PK가 아닌 INPUT_ID임");
 				ab.setUs_pw(this.isUserpw(ab).getUs_pw());
 				ab.setUserId(this.selectDigit(ab).getTenDigit());
+				ab.setUserNickname(this.getUserNickname(ab).getUserNickname());
 				if (enc.matches(ab.getUserPw(), ab.getUs_pw())) {// 패스워드 확인
 					System.out.println("패스워드 확인");
-					if (!this.isAccess(ab)) {
+					//if (!this.isAccess(ab)) {
 						System.out.println("접속중 아님 확인");
 						ab.setAccessType(1);
 						if (this.insAccess(ab)) {
@@ -78,16 +79,15 @@ public class Authentication {
 							pu.setAttribute("usId", ab.getUserId());
 							pu.setAttribute("usName", ab.getUserNickname());
 							System.out.println("세션값: "+pu.getAttribute("usId"));
-							mav.addObject("nickname", pu.getAttribute("usName"));
-							mav.addObject("accessInfo", pu.getAttribute("usId"));
+							System.out.println("닉네임: "+pu.getAttribute("usName"));
 							//http세션처리
-//							HttpSession session = req.getSession();
-//							session.setAttribute("accessInfo", ab.getUserId());
-//							session.setAttribute("nickname", this.getUserNickname(ab).getUserNickname());
-//							mav.addObject("nickname", session.getAttribute("nickname"));
-//							mav.addObject("accessInfo", session.getAttribute("accessInfo"));
+							HttpSession session = req.getSession();
+							session.setAttribute("accessInfo", ab.getUserId());
+							session.setAttribute("nickname", this.getUserNickname(ab).getUserNickname());
+							mav.addObject("nickname", session.getAttribute("nickname"));
+							mav.addObject("accessInfo", session.getAttribute("accessInfo"));
 							mav.setViewName("redirect:/");
-						}
+						//}
 					}
 				}
 
@@ -119,24 +119,33 @@ public class Authentication {
 		ModelAndView mav = new ModelAndView();
 		ab.setAccessType(-1);
 		HttpSession session = req.getSession();
-		// 세션에 로그인정보 있는지 확인
-		if (session.getAttribute("accessInfo") != null) {
-			System.out.println(session.getAttribute("accessInfo").toString());
-			// AuthBean의 userId를 세션의 로그인 정보로 설정
-			ab.setUserId(session.getAttribute("accessInfo").toString());
-			// 현재 접속중 확인
-			if (this.isAccess(ab)) {
-				System.out.println("현재 접속중 확인");
-				// 로그아웃 기록 insert
-				if (this.insAccess(ab)) {
-					System.out.println("로그아웃 기록 insert");
-					// 기존 세션 무효화
-					session.invalidate();
-					// 새로운 세션 발급
-					req.getSession(true);
-					mav.setViewName("redirect:/");
+		
+		try {
+			if (pu.getAttribute("usId") != null) { // 세션에 로그인정보 있는지 확인
+				System.out.println(pu.getAttribute("usId").toString());
+				// AuthBean의 userId를 세션의 로그인 정보로 설정
+				ab.setUserId(pu.getAttribute("usId").toString());
+				// 현재 접속중 확인
+				//if (this.isAccess(ab)) {
+					System.out.println("현재 접속중 확인");
+					// 로그아웃 기록 insert
+					if (this.insAccess(ab)) {
+						System.out.println("로그아웃 기록 insert");
+						// 기존 세션 무효화
+						pu.removeAttribute("usId");
+						pu.removeAttribute("usName");
+						session.invalidate();
+						// 새로운 세션 발급
+						//req.getSession(true);
+						mav.addObject("nickname", pu.getAttribute("usName"));
+						mav.addObject("accessInfo", pu.getAttribute("usId"));
+						mav.setViewName("redirect:/");
+					//}
 				}
 			}
+		} catch (Exception e) {
+			System.out.println("로그아웃 실패");
+			e.printStackTrace();
 		}
 
 		return mav;

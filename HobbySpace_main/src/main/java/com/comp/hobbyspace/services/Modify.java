@@ -59,7 +59,7 @@ public class Modify {
 	private ModelAndView manageProfile(HttpServletRequest req, ModifyBean mb) {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = req.getSession();
-		mb.setUs_Id(session.getAttribute("accessInfo").toString());
+		//mb.setUs_Id(session.getAttribute("accessInfo").toString());
 		System.out.println(gson.toJson(selUsid(mb)));
 		mav.addObject("UsInfo",gson.toJson(selUsid(mb))); //유저정보 셀렉트
 		mav.setViewName("manageProfile");
