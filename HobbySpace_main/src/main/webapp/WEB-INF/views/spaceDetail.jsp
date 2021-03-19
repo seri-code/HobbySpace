@@ -144,160 +144,13 @@
 	var loadSpaceDetail = JSON.parse('${spaceInfo}');	
 	var spCode = ${spCode};	
 		
-<<<<<<< HEAD
-		//방번호들고옴
-		var list = document.getElementById("select1");
-		var value = list.options[list.selectedIndex].value;
-		//인원수 들고옴
-		//var people = document.getElementsByName("people")[0];
-		// 		alert(mre.value);
-		let request = new XMLHttpRequest();
-		request.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				let jsonData1 = decodeURIComponent(request.response);
-				let finald = JSON.parse(jsonData1);
-				//let day = finald.split(" ");
-				let Sdiv1 = document.getElementById("date1");
-				while (Sdiv1.firstChild) {
-					Sdiv1.removeChild(Sdiv.firstChild);
-				}
-				let div3 = document.createElement("input");
-				div3.type = "button";
-				div3.value = "날짜를선택해주세여▼";
-				div3.addEventListener("click", function() {
-					date2(jsonData1)
-				});
-				Sdiv1.appendChild(div3);
-			}
-		}
-		request.open("post", "finald", true);
-		request.setRequestHeader("Content-Type",
-				"application/x-www-form-urlencoded;charset=UTF-8");
-		request.send("sCode=" + 2 + "&spCode=" + spCode);
-	}
-	function date2(jsonData1) {
-		//방번호 가져옴
-		var list = document.getElementById("select1");
-		var value = list.options[list.selectedIndex].value;
-		let request = new XMLHttpRequest();
-		request.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				let jsonData2 = decodeURIComponent(request.response);
-				let finald = JSON.parse(jsonData1);
-				let falsed = JSON.parse(jsonData2);
-				var arryf = new Array();
-				for (i = 0; i < falsed.length; i++) {
-					arryf[i] = falsed[i].cdate;
-				}
-				let startD = $("#today").text(new Date().toLocaleDateString());
-				$('.calendar').pignoseCalendar({
-					theme : 'dark', // light, dark, blue
-					minDate : startD,
-					maxDate : finald[0].finald,
-					disabledDates : arryf,
-					lang : 'ko',
-					toggle : true,
-					select : function(date, context) {
-						var now = date[0];
-						dated(now)
-					}
-				});
-			}
-		}
-		request.open("post", "falsed", true);
-		request.setRequestHeader("Content-Type",
-				"application/x-www-form-urlencoded;charset=UTF-8");
-		request.send("sCode=" + 3 + "&ronum=" + value + "&spCode=" + spCode);
-	}
-	function date2(jsonData1) {
-		//방번호 가져옴
-		var list = document.getElementById("select1");
-		var value = list.options[list.selectedIndex].value;
-		let request = new XMLHttpRequest();
-		request.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				let jsonData2 = decodeURIComponent(request.response);
-				let finald = JSON.parse(jsonData1);
-				let falsed = JSON.parse(jsonData2);
-				var arryf = new Array();
-				for (i = 0; i < falsed.length; i++) {
-					arryf[i] = falsed[i].cdate;
-				}
-				let startD = $("#today").text(new Date().toLocaleDateString());
-				$('.calendar').pignoseCalendar({
-					theme : 'dark', // light, dark, blue
-					minDate : startD,
-					maxDate : finald[0].finald,
-					disabledDates : arryf,
-					lang : 'ko',
-					toggle : true,
-					select : function(date, context) {
-						var now = date[0];
-						dated(now)
-					}
-				});
-			}
-		}
-		request.open("post", "falsed", true);
-		request.setRequestHeader("Content-Type",
-				"application/x-www-form-urlencoded;charset=UTF-8");
-		request.send("sCode=" + 3 + "&ronum=" + value + "&spCode=" + spCode);
-	}
-	function dated(now) {
-			//방번호 가져옴 
-			var list = document.getElementById("select1");
-			var value = list.options[list.selectedIndex].value;
-			//인원수 가져옴 
-			let people = document.getElementsByName("people")[0];
-			people = people.value;
-			let d = new Date(now);
-			let selectdate = d.toLocaleDateString('zh-Hans-CN', {
-				year : 'numeric',
-				month : '2-digit',
-				day : '2-digit',
-			});
-			let selectdata = selectdate.split("/");
-			let Sdiv1 = document.getElementById("res");
-			let div = document.createElement("input");
-			div.type = "button";
-			div.id = "reserv";
-			div.value = "예약하러가기";
-			Sdiv1.appendChild(div);
-=======
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스	
 	var options = { //지도를 생성할 때 필요한 기본 옵션	
 		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.	
 		level: 3 //지도의 레벨(확대, 축소 정도)	
 	};	
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴	
->>>>>>> refs/remotes/origin/main
 		
-<<<<<<< HEAD
-			let div2 = document.getElementById("reserv");
-			while (div2.lastchild) {
-				div2.removeChild(div2.lastchild);	
-			}
-			div.addEventListener("click", function() {
-				finalall(selectdata, people, value);
-			});
-	}
-	function finalall(selectdata, people, value) {
-		let form = document.createElement("form");
-		form.action = "Temp?sCode=" + 4 + "&selectdata=" + selectdata
-				+ "&people=" + people + "&value=" + value + "&spCode=" + spCode;
-		form.method = "post";
-		document.body.appendChild(form);
-		form.submit();
-	}
-	function zzim() {
-		alert('찜 리스트에 추가되었습니다.');
-		var form = document.createElement("form");
-		form.action = "Zzim?sCode=Zzim&spCode=" + spCode + "&userId="
-				+ '${userId}';
-		form.method = "post";
-		document.body.appendChild(form);
-		form.submit();
-=======
 		
 	function init() {	
 		let loginInfo = document.getElementsByName("user")[0];	
@@ -466,7 +319,6 @@ function date(jsonData) {
 	let Sdiv = document.getElementById("date");
 	while (Sdiv.firstChild) {
 		Sdiv.removeChild(Sdiv.firstChild);
->>>>>>> refs/remotes/origin/main
 	}
 	
 	let obj1 = document.createElement("div");
@@ -599,10 +451,7 @@ function date2(jsonData1) {
 			"application/x-www-form-urlencoded;charset=UTF-8");
 	request.send("sCode=" + 3 + "&ronum=" + value + "&spCode=" + spCode);
 }
-
 function dated(now) {
-
-
 		//방번호 가져옴 
 		var list = document.getElementById("select1");
 		var value = list.options[list.selectedIndex].value;
@@ -630,7 +479,6 @@ function dated(now) {
 		div.addEventListener("click", function() {
 			finalall(selectdata, people, value);
 		});
-
 	
 }
 function finalall(selectdata, people, value) {

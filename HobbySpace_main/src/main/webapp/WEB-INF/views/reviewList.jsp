@@ -29,8 +29,6 @@ div {
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
 </head>
-
-</style>
 <body class="is-preload" onLoad="init()">
 
 
@@ -81,16 +79,18 @@ div {
 </body>
 <script>
 	function init() {
+		
 		let review = JSON.parse('${ReviewList}');
-
+		alert(review[0].rvImg);
 		let Sdiv = document.getElementById("Sdiv");
 
 		for (i = 0; i < review.length; i++) {
 			let section = document.getElementById("wrapper");
 			let section1 = document.createElement("section");
-			let div1 = document.createElement("div");
-			div1.textContent = "방번호 : " + review[i].rvronum;
-			div1.className = "content";
+			let img = document.createElement("img");
+			img.width = "300";
+			img.height = "300";
+			img.src = "/resources/images/" + review[i].rvImg;
 			let header = document.createElement("header");
 			header.textContent = "코멘트 : " + review[i].rvcontent;
 			let div2 = document.createElement("div");
@@ -101,32 +101,11 @@ div {
 			header.appendChild(div2);
 
 			div1.appendChild(header);
-			section1.appendChild(div1);
+			section1.appendChild(img);
 			Sdiv.appendChild(section1);
 
 		}
 	}
-	function init() {
-		for (i = 0; i < 3; i++) {
-
-			let img = document.getElementsByName("sp_topimg");
-			img[0].src = "resources/images/" + topStar.spImg;
-			img[1].src = "resources/images/" + topReserve.spImg;
-			img[2].src = "resources/images/" + topZzim.spImg;
-		}
-
-		let loginInfo = document.getElementsByName("user")[0];
-		let logOut = document.getElementsByName("logOut")[0];
-		sessionStorage.setItem('nickname', '${nickname}');
-		sessionStorage.setItem('accessInfo', '${accessInfo}');
-		if (sessionStorage.getItem('nickname') == '') {
-			loginInfo.textContent = "로그인";
-			logOut.style.visibility = 'hidden';
-		} else {
-			loginInfo.textContent = '${nickname}' + "님";
-		}
-	}
-
 	function logInForm() {
 		if (sessionStorage.getItem('nickname') == '') {
 			var form = document.createElement("form");

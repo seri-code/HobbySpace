@@ -2,6 +2,7 @@ package com.comp.hobbyspace.services;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.comp.hobbyspace.beans.AttachFileDTO;
+import com.comp.hobbyspace.beans.HamburgerBean;
 import com.comp.hobbyspace.beans.ReviewBean;
 import com.comp.hobbyspace.mapper.ReviewMapper;
 import com.google.gson.Gson;
@@ -96,12 +98,11 @@ public class Review {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("reserve",gson.toJson(rb));
 		System.out.println(gson.toJson(rb));
+		
 		mav.setViewName("reviewEditor");
 		return mav;
 	}
-	private ReviewBean selectResDetCode(ReviewBean rb) {
-		return rvMapper.selectResDetCode(rb);
-	}
+
 	// 신규후기 작성
 	private ModelAndView newReviewCtl(HttpServletRequest req, ReviewBean rb) {
 		ModelAndView mav = new ModelAndView();
@@ -111,10 +112,17 @@ public class Review {
 
 		// 인서트 실행
 		this.insReview(rb);
+		ArrayList<ReviewBean> list = this.selectResDetCode(rb);
+		String jsonData1 = gson.toJson(list);
+		mav.addObject("ReviewList",jsonData1);
+		
 		mav.setViewName("reviewList");
 		return mav;
 	}
-
+	//셀릭트 리뷰
+	private ArrayList<ReviewBean> selectResDetCode(ReviewBean rb) {
+		return rvMapper.selectResDetCode(rb);
+	}
 	private void insReview(ReviewBean rb) {
 		rvMapper.insReview(rb);
 	}
