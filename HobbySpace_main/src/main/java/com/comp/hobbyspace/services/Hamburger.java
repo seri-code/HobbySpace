@@ -96,8 +96,9 @@ public class Hamburger {
 			if(pu.getAttribute("usId") == null) {	
 				mav.setViewName("logInForm");
 			}else {
-				ArrayList<HamburgerBean> list = this.loadGReviewList(hb);
+				System.out.println("후기관리 진입?");
 				hb.setUserId(pu.getAttribute("usId").toString());
+				ArrayList<HamburgerBean> list = this.loadGReviewList(hb);
 				String jsonData1 = gson.toJson(list);
 				mav.addObject("ReviewList",jsonData1);
 				mav.setViewName("reviewList");
