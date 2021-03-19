@@ -62,25 +62,32 @@ public class Authentication {
 						mav.addObject("accessInfo", session.getAttribute("accessInfo"));
 						mav.setViewName("redirect:/");
 					}
-				
+
 				}
-			} else if(this.isMember(ab)){
+			} else if (this.isMember(ab)) {
 				System.out.println("사용자가 입력한 값이 PK가 아닌 INPUT_ID임");
+				ab.setUs_pw(this.isUserpw(ab).getUs_pw());
 				ab.setUserId(this.selectDigit(ab).getTenDigit());
-				System.out.println(this.isUserpw(ab));
-				if (!this.isAccess(ab)) {
-					System.out.println("접속중 아님 확인");
-					ab.setAccessType(1);
-					if (this.insAccess(ab)) {
-						System.out.println("접속기록 insert");
-						HttpSession session = req.getSession();
-						session.setAttribute("accessInfo", ab.getUserId());
-						session.setAttribute("nickname", this.getUserNickname(ab).getUserNickname());
-						mav.addObject("nickname", session.getAttribute("nickname"));
-						mav.addObject("accessInfo", session.getAttribute("accessInfo"));
-						mav.setViewName("redirect:/");
+				if (enc.matches(ab.getUserPw(), ab.getUs_pw())) {// 패스워드 확인
+					System.out.println("패스워드 확인");
+					if (!this.isAccess(ab)) {
+						System.out.println("접속중 아님 확인");
+						ab.setAccessType(1);
+						if (this.insAccess(ab)) {
+							System.out.println("접속기록 insert");
+							pu.setAttribute("usId", ab.getUserId());
+							System.out.println("세션값: "+pu.getAttribute("usId"));
+							//http세션처리
+//							HttpSession session = req.getSession();
+//							session.setAttribute("accessInfo", ab.getUserId());
+//							session.setAttribute("nickname", this.getUserNickname(ab).getUserNickname());
+//							mav.addObject("nickname", session.getAttribute("nickname"));
+//							mav.addObject("accessInfo", session.getAttribute("accessInfo"));
+							mav.setViewName("redirect:/");
+						}
 					}
 				}
+
 			}
 
 		} catch (Exception e) {
@@ -90,7 +97,7 @@ public class Authentication {
 		return mav;
 	}
 
-	private String isUserpw(AuthBean ab) {
+	private AuthBean isUserpw(AuthBean ab) {
 		return auMapper.isUserpw(ab);
 	}
 
@@ -145,8 +152,8 @@ public class Authentication {
 		System.out.println("여기는 조인ctl");
 		ab.setAccessType(1);
 		try {
-			if (!this.isMember(ab)) { //아이디 검증
-				ab.setUserPw(enc.encode(ab.getUserPw())); //시큐리티설정
+			if (!this.isMember(ab)) { // 아이디 검증
+				ab.setUserPw(enc.encode(ab.getUserPw())); // 시큐리티설정
 				if (this.insUser(ab)) { //
 					ab.setUserId(this.selectDigit(ab).getTenDigit());
 					System.out.println(ab);
