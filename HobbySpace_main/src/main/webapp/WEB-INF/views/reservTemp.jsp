@@ -171,13 +171,7 @@ div {
 		if (count == 0) {
 			alert("하나 이상의 방을 체크해주세요.");
 		} else {
-			alert(rstedates);
-			alert(rsterospCodes);
-			alert(rsteronums);
-			alert(rsusedates);
-			alert(rstepeoples);
-			alert(rsphones);
-			alert(rsemails);
+
 			
 			let form = document.createElement("form");
 			form.action = "Reserve";

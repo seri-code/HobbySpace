@@ -84,10 +84,6 @@
 	   let rdronum = reserv1[0].frdronum;
 	   let frdrocode = reserv1[0].frdrospcode;
 	   
-	   alert(rdcode);
-	   alert(rdronum);
-	   alert(frdrocode);
-	   
 	   let form = document.createElement("form");
 	   form.action = "ToNewReview?rdCode="+rdcode+"&rdRoom="+rdronum+"&rdSpCode="+frdrocode;
 	   form.method = "post";
