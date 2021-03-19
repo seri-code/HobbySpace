@@ -4,8 +4,10 @@ import com.comp.hobbyspace.beans.MainBean;
 import com.comp.hobbyspace.beans.ZzimBean;
 import com.comp.hobbyspace.services.Main;
 import com.comp.hobbyspace.services.Zzim;
+import com.comp.hobbyspace.utils.ProjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +25,9 @@ public class MainController {
 	Main main;
 	@Autowired
 	Zzim zzim;
-
+	
 	ModelAndView mav = null;
-
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView Main(@ModelAttribute MainBean mb) {
 		return main.entrance(mb);
