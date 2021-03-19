@@ -93,9 +93,11 @@ public class Hamburger {
 	private ModelAndView toReviewListCtl(HamburgerBean hb) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			if(pu.getAttribute("usId") == null) {
+			if(pu.getAttribute("usId") == null) {	
 				mav.setViewName("logInForm");
 			}else {
+				System.out.println("후기관리 진입?");
+				hb.setUserId(pu.getAttribute("usId").toString());
 				ArrayList<HamburgerBean> list = this.loadGReviewList(hb);
 				String jsonData1 = gson.toJson(list);
 				mav.addObject("ReviewList",jsonData1);

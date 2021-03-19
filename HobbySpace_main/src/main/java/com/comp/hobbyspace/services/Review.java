@@ -112,6 +112,7 @@ public class Review {
 
 		// 인서트 실행
 		this.insReview(rb);
+		// 셀렉트
 		ArrayList<ReviewBean> list = this.selectResDetCode(rb);
 		String jsonData1 = gson.toJson(list);
 		mav.addObject("ReviewList",jsonData1);
