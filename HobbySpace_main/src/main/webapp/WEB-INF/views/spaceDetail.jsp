@@ -8,7 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95f3ade2f6c73e95d12d2e3bf84274b7"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95f3ade2f6c73e95d12d2e3bf84274b7&libraries=services"></script>
 <link rel="stylesheet" href="${path}/resources/assets/css/pignose.calendar.min.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <!-- datepicker 한국어로 -->
@@ -95,15 +95,49 @@
 	var loadSpaceDetail = JSON.parse('${spaceInfo}');
 	var spCode = ${spCode};
 	
-	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-	var options = { //지도를 생성할 때 필요한 기본 옵션
-		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-		level: 3 //지도의 레벨(확대, 축소 정도)
-	};
+	//카카오지도
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
 
-	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-	
-	
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch(loadSpaceDetail.spLocation, function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+    	var addyy =result[0].y
+    	var addyx =result[0].x
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        
+		alert(addyy);
+		alert(addyx);
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+        	content:'<div style="padding:5px;">'+loadSpaceDetail.spName+'<br><a href="https://map.kakao.com/link/to/오시는 길,'+result[0].y+','+result[0].x+'" style="color:blue" target="_blank">오시는 길</a></div>'
+
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+
+	//로드
 	function init() {
 		let loginInfo = document.getElementsByName("user")[0];
 		let logOut = document.getElementsByName("logOut")[0];
