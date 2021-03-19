@@ -6,13 +6,11 @@
 <!DOCTYPE HTML>
 <html>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<link rel="stylesheet"
-	href="${path}/resources/assets/css/pignose.calendar.min.css">
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95f3ade2f6c73e95d12d2e3bf84274b7"></script>
+<link rel="stylesheet" href="${path}/resources/assets/css/pignose.calendar.min.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <!-- datepicker 한국어로 -->
 
 <head>
@@ -82,6 +80,7 @@
 				<div id="sp_location"></div>
 				<div id="sp_price"></div>
 				<div id="sp_moblie"></div>
+				<div id="map" style="width:500px;height:400px;"></div>
 			</header>
 		</div>
 	</div>
@@ -95,6 +94,16 @@
 <script type="text/javascript">
 	var loadSpaceDetail = JSON.parse('${spaceInfo}');
 	var spCode = ${spCode};
+	
+	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+		level: 3 //지도의 레벨(확대, 축소 정도)
+	};
+
+	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	
+	
 	function init() {
 		let loginInfo = document.getElementsByName("user")[0];
 		let logOut = document.getElementsByName("logOut")[0];

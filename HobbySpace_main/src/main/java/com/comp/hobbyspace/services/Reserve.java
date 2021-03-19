@@ -62,7 +62,7 @@ public class Reserve {
 			mav = NOStatusCtl(rb);
 			break;
 		case "10":
-			mav = cancelReserveCtl(req, rb);
+			mav = cancelReserveCtl(rb);
 			break;
 		case "11":
 			mav = tempTestCtl(rb);
@@ -142,12 +142,13 @@ public class Reserve {
 		try {
 			rb.setUserId(pu.getAttribute("usId").toString());
 			mav.setViewName("redirect:reservTempTest?sCode="+11);
+			this.insTemp(rb);
 		} catch (Exception e) {
 			mav.setViewName("logInForm");
 			e.printStackTrace();
 		}
 		
-		this.insTemp(rb);
+		
 
 		
 //		System.out.println("temp 입력 성공");
@@ -402,7 +403,7 @@ public class Reserve {
 	}
 
 	// 예약 취소 Ctl
-	private ModelAndView cancelReserveCtl(HttpServletRequest req, ReserveBean rb) {
+	private ModelAndView cancelReserveCtl(ReserveBean rb) {
 		ModelAndView mav = new ModelAndView();
 		try {
 			rb.setUserId(pu.getAttribute("usId").toString());
