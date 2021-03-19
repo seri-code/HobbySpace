@@ -76,7 +76,10 @@ public class Authentication {
 						if (this.insAccess(ab)) {
 							System.out.println("접속기록 insert");
 							pu.setAttribute("usId", ab.getUserId());
+							pu.setAttribute("usName", ab.getUserNickname());
 							System.out.println("세션값: "+pu.getAttribute("usId"));
+							mav.addObject("nickname", pu.getAttribute("usName"));
+							mav.addObject("accessInfo", pu.getAttribute("usId"));
 							//http세션처리
 //							HttpSession session = req.getSession();
 //							session.setAttribute("accessInfo", ab.getUserId());
