@@ -82,7 +82,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
-	<link rel="stylesheet" href="resources/assets/css/main.css">
+	<link rel="stylesheet" href="resources/assets/css/header.css">
 	<link rel="icon" type="image/x-icon" sizes="16x16" href="resources/images/favicon.ico">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
@@ -93,19 +93,20 @@
 
 
 	<!-- Header -->
-	<header id="header">
+	<header id="header" style="height: 7.25rem; line-height: 7.25rem; background-color: cornsilk;">
 
 		<a href="/">
-			<img src="resources/images/logo-removebg-preview.jpg" alt="logo Image" width="190" height="220">
+			<img src="resources/images/logo-removebg-preview.jpg" alt="logo Image" width="190" height="220" style="position: relative; top: -1rem;">
 
 		</a>
 
 		<div class="search" style="position:absolute; top:14px; right:18%;">
-			<input type="text" name="keyword" placeholder="검색어를 입력해주세요." onkeypress="if(event.keyCode == 13 ){search();}" />
-			<button onClick="search()" style="position:absolute; top:0%; right:-24%">검색</button>
+			<input type="text" name="keyword" placeholder="검색어를 입력해주세요." onkeypress="if(event.keyCode == 13 ){search();}" style="position: relative; top: 17px;
+			width: 25rem; background-color: floralwhite;" />
+			<button onClick="search()" style="position:absolute; top:30%; right:0%; background-color:gold;" >검색</button>
 		</div>
 		
-		<input id="indate" name="seDate" type="date">
+		<input id="indate" name="seDate" type="date" style="font-weight: 600; width: 10rem;">
 		
 		<select id="sectlect" name="ctCode">
 			<option selected value="">카테고리</option>
@@ -142,9 +143,9 @@
 
 		<div id="option">
 			<div class="option__label"><label for="opt"></label></div>
-			<input type="text" name="maxPeople" class="opt" value="0" placeholder="인원수" style="position: absolute; top: 14px; width: auto; height: 48px;" />
-			<input type="button" value="+" class="opt" onClick="change(1)" style="position: relative; top: -7px; left: 128px;" />
-			<input type="button" value="-" class="opt" onClick="change(-1)" style="position: relative; top: -7px; left: 129px;" />
+			<input type="text" name="maxPeople" class="opt" value="0" placeholder="인원수" style="position: absolute; top: 40px; width: auto; height: 48px;" />
+			<input type="button" value="+" class="opt" onClick="change(1)" style="position: relative; top: -10px; left: 128px;" />
+			<input type="button" value="-" class="opt" onClick="change(-1)" style="position: relative; top: -10px; left: 129px;" />
 		</div>
 
 		<nav>
