@@ -25,6 +25,6 @@ public class HamburgerBean {
 	private String rdronum;
 	private String rdrospCode; 
 	private String rvImg;
-
+	private String spname;
 
 }

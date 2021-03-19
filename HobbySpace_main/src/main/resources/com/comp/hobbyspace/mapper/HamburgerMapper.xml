@@ -22,10 +22,9 @@ select rv_star as rvstar,rv_img as rvImg, rv_content as rvcontent from rv where 
 	<!-- 찜한공간 -->
 	<select id="loadZzimList" resultType="com.comp.hobbyspace.beans.HamburgerBean">
 	<![CDATA[
-select ZZ_spCode as zzspCode,sp_location as location,SP_TOPIMG as sptopimg from(
-select  rownum rn, ZZ_spCode,sp.sp_location,sp.SP_TOPIMG 
+select sp_name as spname,ZZ_spCode as zzspCode,sp_location as "location",SP_TOPIMG as sptopimg 
 from zz INNER JOIN sp on ZZ_spCode = sp_code
-where zz.zz_usid = #{userId, jdbcType=VARCHAR})
+where zz.zz_usid = #{userId}
 	]]>
 	</select>
 	<!-- 공간관리 -->

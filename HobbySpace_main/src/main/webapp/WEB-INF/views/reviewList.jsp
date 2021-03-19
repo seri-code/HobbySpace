@@ -100,7 +100,7 @@ div {
 			div2.appendChild(div3);
 			header.appendChild(div2);
 
-			div1.appendChild(header);
+			img.appendChild(header);
 			section1.appendChild(img);
 			Sdiv.appendChild(section1);
 
