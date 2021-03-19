@@ -16,9 +16,7 @@ select rd.rd_usedate as frdusedate ,rd_code as rdcode,RD_RSREQDATE AS rdrsreqdat
 	<!-- 후기관리 -->
 	<select id="loadGReviewList" resultType="com.comp.hobbyspace.beans.HamburgerBean">
 	<![CDATA[
-select RV_DATE AS rvdate,RV_RDCODE AS rdcode,RV_ROspCode AS rospCode,RV_RONUM AS rvronum,RV_CONTENT AS rvcontent,RV_STAR AS rvstar,RV_COMMENT AS rvcomment from(
-select rownum rn ,RV_DATE,RV_RDCODE,RV_ROspCode,RV_RONUM,RV_CONTENT,RV_STAR,RV_COMMENT from rv where RV_USID = #{userId, jdbcType=VARCHAR})
-where rownum <= 3
+select rv_star as rvstar,rv_img as rvImg, rv_content as rvcontent from rv where rv_usid=#{usId}
 	]]>
 	</select>
 	<!-- 찜한공간 -->
@@ -28,7 +26,6 @@ select ZZ_spCode as zzspCode,sp_location as location,SP_TOPIMG as sptopimg from(
 select  rownum rn, ZZ_spCode,sp.sp_location,sp.SP_TOPIMG 
 from zz INNER JOIN sp on ZZ_spCode = sp_code
 where zz.zz_usid = #{userId, jdbcType=VARCHAR})
-where rownum <= 3
 	]]>
 	</select>
 	<!-- 공간관리 -->
@@ -37,7 +34,6 @@ where rownum <= 3
 select SP_CODE as spCode,SP_CTCODE as spctcode,SP_NAME as spname,SP_LOCATION as location,SP_TOPIMG as sptopimg from(
 select rownum rn, SP_CODE,SP_CTCODE,SP_NAME,SP_LOCATION,SP_TOPIMG 
 from sp where SP_HOUSID = #{userId, jdbcType=VARCHAR})
-where rownum <= 3
 	]]>
 	</select>
 </mapper>
