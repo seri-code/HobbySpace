@@ -124,6 +124,7 @@ public class Hamburger {
 			if(pu.getAttribute("usId") == null) {
 				mav.setViewName("logInForm");
 			}else {
+				hb.setUserId(pu.getAttribute("usId").toString());
 				ArrayList<HamburgerBean> list = this.loadZzimList(hb);
 				String jsonData1 = gson.toJson(list);
 				mav.addObject("ZzimList",jsonData1);
@@ -149,6 +150,7 @@ public class Hamburger {
 			if(pu.getAttribute("usId") == null) {
 				mav.setViewName("logInForm");
 			}else {
+				hb.setUserId(pu.getAttribute("usId").toString());
 				ArrayList<HamburgerBean> list = this.loadSpaceList(hb);
 				String jsonData1 = gson.toJson(list);
 				mav.addObject("ManageSpace",jsonData1);

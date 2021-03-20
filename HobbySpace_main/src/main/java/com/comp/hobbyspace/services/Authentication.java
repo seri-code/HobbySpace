@@ -131,6 +131,8 @@ public class Authentication {
 					// 로그아웃 기록 insert
 					if (this.insAccess(ab)) {
 						System.out.println("로그아웃 기록 insert");
+						//임시예약테이블 삭제
+						delTemp(ab);
 						// 기존 세션 무효화
 						pu.removeAttribute("usId");
 						pu.removeAttribute("usName");
@@ -149,6 +151,11 @@ public class Authentication {
 		}
 
 		return mav;
+	}
+
+	private boolean delTemp(AuthBean ab) {
+		return this.convertToBoolean(auMapper.delTemp(ab));
+		
 	}
 
 	// 회원가입으로 이동(logInForm.jsp에서 회원가입 버튼 클릭)
@@ -191,7 +198,7 @@ public class Authentication {
 	}
 
 	private boolean convertToBoolean(int value) {
-		return value == 1 ? true : false;
+		return value > 0 ? true : false;
 
 	}
 

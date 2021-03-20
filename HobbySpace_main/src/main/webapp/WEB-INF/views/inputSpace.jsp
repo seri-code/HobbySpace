@@ -20,14 +20,8 @@
 	<div>공간명*</div>
 	<div class="input"><input type="text" id="space_name" name="sp_name" required="" minlength="1" maxlength="20"></div>
 
-	<div>카테고리*</div>
-	<ul class="check_list space">
-		<li><input type="radio" name="space" id="cate1" value="01"><label id="spct0" for="cate1" class="ellip"></label></li>
-		<li><input type="radio" name="space" id="cate2" value="02"><label id="spct1" for="cate2" class="ellip"></label></li>
-		<li><input type="radio" name="space" id="cate3" value="03"><label id="spct2" for="cate3" class="ellip"></label></li>
-		<li><input type="radio" name="space" id="cate4" value="04"><label id="spct3" for="cate4" class="ellip"></label></li>
-		<li><input type="radio" name="space" id="cate6" value="05"><label id="spct4" for="cate6" class="ellip"></label></li>
-	</ul>
+	<div id="divct">카테고리*</div>
+
 
 	<div>공간한줄소개*</div>
 	<div>
@@ -123,8 +117,17 @@
 <script type="text/javascript">
 	function init() {
 		var spCategory = JSON.parse('${spCategory}');
-		for(i=0; i<spCategory.length; i++){
-			document.getElementById('spct' + i).textContent = spCategory[i].ctCate;
+		for (i = 1; i <= spCategory.length; i++) {
+			if (i < 10) {
+				$('#divct').append(
+					'<div><input type="radio" name="space" id="cate' + i + '" value="' + 0 + i + '"><label id="spct' + i + '" for="cate' + i + '" class="ellip"></label></div>'
+				);
+			} else {
+				$('#divct').append(
+					'<div><input type="radio" name="space" id="cate' + i + '" value="' + i + '"><label id="spct' + i + '" for="cate' + i + '" class="ellip"></label></div>'
+				);
+			}
+			document.getElementById('spct' + i).textContent = spCategory[i - 1].ctCate;
 		}
 	}
 	//공간 방 설정
@@ -377,7 +380,7 @@
 			romms[i] = $("input[name=sp_room]").eq(i).val();
 	        //alert(romms[i]);
 		}
-		alert(romms);
+
 		
 		var peopel = $("input[name=sp_peopel]").length;
 		//배열 생성
@@ -387,7 +390,7 @@
 			peopels[i] = $("input[name=sp_peopel]").eq(i).val();
 	        //alert(romms[i]);
 		}
-		alert(peopels);
+
 		var form = document.createElement("form");
 		form.action = "toDate";
 		form.method = "post";

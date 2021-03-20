@@ -104,8 +104,8 @@ div {
 		    rev.style.marginRight="2%";
 		    rev.style.marginBottom="3%";
 			
+			let rvCode = review[i].rdcode;
 
-			
 			let section = document.getElementById("wrapper");
 			
 			//let section1 = document.createElement("section");
@@ -119,17 +119,13 @@ div {
 			img.src = "/resources/images/rvimg/" + review[i].rvImg;
 			img.style.marginLeft="11%";
 			
-			
 			let content = document.createElement("header");
 			content.textContent = "코멘트 : " + review[i].rvcontent;
 			content.style.marginLeft="35%";
 	
-			
 			let rvstar = document.createElement("div");
 			rvstar.textContent = "별점 : " + review[i].rvstar;
 			rvstar.style.marginLeft="40%";
-			
-			
 			
 			//Button
 			let footer = document.createElement("footer");
@@ -143,7 +139,7 @@ div {
 			div2.style.position="relative";
 			div2.style.left="25%";
 			div2.addEventListener("click", function() {
-				reservDetail(getDrdcode, sptopimg13)
+				reservEditor(rvCode) //리뷰수정
 
 			});	
 			
@@ -157,25 +153,53 @@ div {
 			div3.style.position="relative";
 			div3.style.left="30%";
 			div3.addEventListener("click", function() {
-				reservDetail(getDrdcode, sptopimg13)
+				reservDelete(rvCode) //리뷰삭제
 
 			});	
 			footer.appendChild(div2);
 			footer.appendChild(div3);
-
-
 			
 			rev.appendChild(rvstar);
 			rev.appendChild(img);
 			rev.appendChild(content);
 			rev.appendChild(footer);
 			Sdiv.appendChild(rev);
-			
-		
-			
-		
 
 		}
+	}
+	
+	function reservEditor(rvCode) { //리뷰수정
+		alert(rvCode);
+		var form = document.createElement("form");
+		form.action = "ToEditReview";
+		form.method = "post";
+		
+		//예약코드
+		let inRdCode = document.createElement("input");
+		inRdCode.type = "hidden";
+		inRdCode.name = "rdCode";
+		inRdCode.value = rvCode;
+		form.appendChild(inRdCode);
+		
+		document.body.appendChild(form);
+		form.submit();
+	}
+	
+	function reservDelete(rvCode) { //리뷰삭제
+		alert(rvCode);
+		var form = document.createElement("form");
+		form.action = "DeleteReview";
+		form.method = "post";
+		
+		//예약코드
+		let inRdCode = document.createElement("input");
+		inRdCode.type = "hidden";
+		inRdCode.name = "rdCode";
+		inRdCode.value = rvCode;
+		form.appendChild(inRdCode);
+		
+		document.body.appendChild(form);
+		form.submit();
 	}
 	
 	

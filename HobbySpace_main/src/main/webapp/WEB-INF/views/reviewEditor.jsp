@@ -22,7 +22,7 @@
 		}
 </style>
 </head>
-<body class="is-preload">
+<body class="is-preload" onload="init()">
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<!-- Header -->
 	<header id="header">
@@ -61,10 +61,11 @@
 				<td><div class="inner">이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)</div>
 					<div class="btn_box">
 						<label class="btn" for="snimg">
-						<input type="file" class="_fileRel" name="sp_img"
-						id="spimg" accept="image/*"
-						placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)" />
+						<input type="file" class="_fileRel" name="sp_img" id="spimg" accept="image/*" placeholder="이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)" />
 						<button id='uploadBtn'>업로드</button>
+						<div class ="uploadResult">
+						<ul id = "ulChildren"></ul>
+						</div>
 						</label>
 					</div>
 				</td>
@@ -106,7 +107,23 @@
 	<br>
 </body>
 <script>
-var reserve = JSON.parse('${reserve}');
+var reserve;
+
+function init(){
+	reserve = JSON.parse('${reserve}');
+	if(reserve.rvstar > 0){
+		//let img = document.getElementById('ulChildren');
+		//let jemsu = document.getElementById('ulChildren');
+		let test = document.getElementById('space_text');
+		test.value = reserve.rvtext;
+		alert(reserve.rdCode);
+	}else{
+		reserve = JSON.parse('${reserve}');
+		alert(reserve.rdCode);
+	}
+}
+
+//var reserve = JSON.parse('${reserve}');
 var regex = new RegExp("(.*?)\.(jpg|png|jpeg)$", "i");
 var maxSize = 5242880; //5mb
 function checkExtension(fileName, fileSize) {
@@ -123,9 +140,9 @@ function checkExtension(fileName, fileSize) {
 var rvimg;
 //이미지
 $("#uploadBtn").on("click", function(e) {
-	//var ele = document.getElementById('ulChildren');
-	//var eleCount = ele.childElementCount;
-	//if(eleCount == 0){
+	var ele = document.getElementById('ulChildren');
+	var eleCount = ele.childElementCount;
+	if(eleCount == 0){
 	var formData = new FormData();
 	var inputFile = $("input[name='sp_img']");
 	var files = inputFile[0].files;
@@ -148,16 +165,31 @@ $("#uploadBtn").on("click", function(e) {
 		dataType: 'json',
 		success: function(result) {
 			console.log(result);
-			alert(result.rvimg);
+			alert("이미지가 업로드 되었습니다");
 			rvimg = result.rvimg;
-			//showUploadeFile(result);
+			showUploadeFile(result);
 			//$(".uploadDiv").html(cloneObj.html());
 		}
 	}); //$.ajax
-	//}else{
-		//alert("이미지는 1개만 올리실수 있습니다")
-	//}
+	}else{
+		alert("이미지는 1개만 올리실수 있습니다")
+	}
 });
+
+
+
+var uploadResult = $(".uploadResult ul");
+function showUploadeFile(uploadResultArr){
+	var ulChildren = $("#ulChildren");	
+	$(uploadResultArr).each(function(i,obj){
+		let img = document.createElement("img");
+		img.width = "300";
+		img.height = "300";
+		img.src = "/resources/images/rvimg/" +  obj.rvimg;
+		img.style.marginLeft="11%";
+		ulChildren.append(img);
+	});
+}
 
 
 $('.starRev span').click(function(){
@@ -167,9 +199,6 @@ $('.starRev span').click(function(){
 });
 
 function send() {
-	alert($('.on').length);
-	alert(document.getElementById("space_text").value);
-	alert(rvimg);
 	var form = document.createElement("form");
 	form.action = "NewReview";
 	form.method = "post";

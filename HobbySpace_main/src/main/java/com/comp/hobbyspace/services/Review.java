@@ -132,14 +132,22 @@ public class Review {
 	}
 	
 	//인서트 리뷰
-	private void insReview(ReviewBean rb) {
-		rvMapper.insReview(rb);
+	private boolean insReview(ReviewBean rb) {
+		return convertToBoolean(rvMapper.insReview(rb));
 	}
 
 	// 후기 수정으로 이동
 	private ModelAndView toEditReviewCtl(ReviewBean rb) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("review", this.selectReview(rb));
+		try {
+			rb.setUsId(pu.getAttribute("usId").toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		mav.addObject("reserve", gson.toJson(this.selectReview(rb)));
+		String s = gson.toJson(this.selectReview(rb));
+		System.out.println(s);
 		mav.setViewName("reviewEditor");
 		return mav;
 	}
@@ -151,23 +159,43 @@ public class Review {
 	// 후기 수정
 	private ModelAndView editReviewCtl(ReviewBean rb) {
 		ModelAndView mav = new ModelAndView();
+		try {
+			rb.setUsId(pu.getAttribute("usId").toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.editReview(rb);
-		mav.setViewName("reviewList");
+		mav.addObject("sCode","3");
+		mav.setViewName("redirect:/ToReviewList");
 		return mav;
 	}
 
-	private void editReview(ReviewBean rb) {
-		rvMapper.editReview(rb);
+	private boolean editReview(ReviewBean rb) {
+		return convertToBoolean(rvMapper.editReview(rb));
 	}
 
 	// 후기 삭제
 	private ModelAndView deleteReviewCtl(ReviewBean rb) {
 		ModelAndView mav = new ModelAndView();
-		this.deleteReview(rb);
+		try {
+			rb.setUsId(pu.getAttribute("usId").toString());
+			this.deleteReview(rb);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mav.addObject("sCode","3");
+		mav.setViewName("redirect:/ToReviewList");
 		return mav;
 	}
 
-	private void deleteReview(ReviewBean rb) {
-		rvMapper.deleteReview(rb);
+	private boolean deleteReview(ReviewBean rb) {
+		return convertToBoolean(rvMapper.deleteReview(rb));
+	}
+	
+	private boolean convertToBoolean(int value) {
+		return value > 0 ? true : false;
+
 	}
 }

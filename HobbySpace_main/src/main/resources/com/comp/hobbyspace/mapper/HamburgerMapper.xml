@@ -16,7 +16,7 @@ select rd.rd_usedate as frdusedate ,rd_code as rdcode,RD_RSREQDATE AS rdrsreqdat
 	<!-- 후기관리 -->
 	<select id="loadGReviewList" resultType="com.comp.hobbyspace.beans.HamburgerBean">
 	<![CDATA[
-select rv_date as rvdate, rv_rospcode as spCode, rv_ronum as rvronum, rv_star as rvstar,rv_img as rvImg, rv_content as rvcontent from rv where rv_usid=#{userId}
+select rv_rdcode as rdcode, rv_date as rvdate, rv_rospcode as spCode, rv_ronum as rvronum, rv_star as rvstar,rv_img as rvImg, rv_content as rvcontent from rv where rv_usid=#{userId}
 	]]>
 	</select>
 	<!-- 찜한공간 -->

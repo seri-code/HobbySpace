@@ -12,6 +12,12 @@
 	SELECT us_pw FROM US where US_INPUT_ID = #{userId}
 	</select>
 	
+	<delete id="delTemp">
+		<![CDATA[
+	DELETE FROM te WHERE te_usid = #{userId}
+	]]>
+	</delete>
+	
 	<select id="isMember" resultType="int">
 	SELECT count(*) FROM US where US_INPUT_ID = #{userId}
 	</select>

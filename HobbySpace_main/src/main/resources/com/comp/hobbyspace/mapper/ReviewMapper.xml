@@ -11,9 +11,24 @@
 	
 	   
     <!-- 셀릭트  -->
-    	<select id="selectResDetCode" resultType="com.comp.hobbyspace.beans.ReviewBean">
+    <select id="selectResDetCode" resultType="com.comp.hobbyspace.beans.ReviewBean">
 	<![CDATA[
-select rv_star as rvstar,rv_img as rvImg, rv_content as rvcontent from rv where rv_usid=#{usId}
-]]>
+	select rv_star as rvstar,rv_img as rvImg, rv_content as rvtext from rv where rv_usid=#{usId}
+	]]>
+	</select>
+	
+	<delete id="deleteReview">
+		<![CDATA[
+	DELETE FROM rv WHERE rv_rdcode = #{rdCode} and rv_usid = #{usId}
+	]]>
+	</delete>
+	
+	
+	<select id="selectReview" resultType="com.comp.hobbyspace.beans.ReviewBean">
+	<![CDATA[
+	select rv_rdcode as rdCode, rv_rospcode as rdSpCode, rv_ronum as rdRoom,rv_star as rvstar,rv_img as rvImg, rv_content as rvtext 
+	from rv 
+	where rv_rdcode = #{rdCode} and rv_usid = #{usId}
+	]]>
 	</select>
 </mapper>

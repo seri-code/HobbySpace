@@ -63,25 +63,27 @@ public class ExpController {
 	@RequestMapping(value = "/NewReview", method = RequestMethod.POST)
 	public ModelAndView newReview(HttpServletRequest req, @ModelAttribute ReviewBean rb) {
 		rb.setSCode("NewReview");
-		System.out.println("진입");
-		System.out.println(rb.getRvImg());
-		System.out.println(rb.getRvstar());
-		System.out.println(rb.getRvtext());
 		return rv.entrance(req, rb);
 	}
 
-	@RequestMapping(value = "/ToEditReview", method = RequestMethod.POST)
+	@RequestMapping(value = "/ToEditReview", method = RequestMethod.POST) //리뷰수정페이지 이동
 	public ModelAndView toEditReview(HttpServletRequest req, @ModelAttribute ReviewBean rb) {
+		rb.setSCode("ToEditReview");
+		System.out.println("리뷰이동진입");
 		return rv.entrance(req, rb);
 	}
 
-	@RequestMapping(value = "/EditReview", method = RequestMethod.POST)
+	@RequestMapping(value = "/EditReview", method = RequestMethod.POST) //리뷰 수정
 	public ModelAndView editReview(HttpServletRequest req, @ModelAttribute ReviewBean rb) {
+		rb.setSCode("EditReview");
+		System.out.println("리뷰수정진입");
 		return rv.entrance(req, rb);
 	}
 
-	@RequestMapping(value = "/DeleteReview", method = RequestMethod.POST)
+	@RequestMapping(value = "/DeleteReview", method = RequestMethod.POST) //리뷰삭제
 	public ModelAndView deleteReview(HttpServletRequest req, @ModelAttribute ReviewBean rb) {
+		rb.setSCode("DeleteReview");
+		System.out.println("리뷰삭제진입");
 		return rv.entrance(req, rb);
 	}
 }
