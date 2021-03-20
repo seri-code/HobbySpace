@@ -13,7 +13,7 @@
 }
 
 div {
-	display: inline-block;
+	display: inline;
 }
 </style>
 <head>
@@ -73,9 +73,14 @@ div {
 
 	<section class="wrapper" id="wrapper">
 		<div class="inner">
-			<div class="highlights" id=Sdiv></div>
+			<h2 style="color:#FF5E00; font-family: 'paybooc-Bold';">후기 관리</h2>
+			<div class="highlights" id=Sdiv style="width:1448px; align-items:left;"></div>
+			
 		</div>
-	</section>
+	
+	
+		</section>			  	
+	
 </body>
 <script>
 	function init() {
@@ -83,27 +88,92 @@ div {
 		let review = JSON.parse('${ReviewList}');
 		
 		let Sdiv = document.getElementById("Sdiv");
+	
+		
+	
 		
 		for (i = 0; i < review.length; i++) {
+			
+			let rev = document.createElement("section");
+			rev.style.borderBottom = "5px solid #ecdbc7";
+			rev.style.borderTop = "5px solid #ecdbc7";
+			rev.style.borderRight = "5px solid #ecdbc7";
+			rev.style.borderLeft = "5px solid #ecdbc7";
+			rev.style.display="inline";
+		    rev.style.width="440px";
+		    rev.style.marginRight="2%";
+		    rev.style.marginBottom="3%";
+			
+
+			
 			let section = document.getElementById("wrapper");
-			let section1 = document.createElement("section");
+			
+			//let section1 = document.createElement("section");
+			
+			
 			
 			//리뷰 이미지가 없으면 띄어줄 이미지가 있어야함(리뷰 입력할때 이미지를 안 넣는경우)
 			let img = document.createElement("img");
 			img.width = "300";
 			img.height = "300";
 			img.src = "/resources/images/rvimg/" + review[i].rvImg;
+			img.style.marginLeft="11%";
+			
 			
 			let content = document.createElement("header");
 			content.textContent = "코멘트 : " + review[i].rvcontent;
+			content.style.marginLeft="35%";
+	
 			
 			let rvstar = document.createElement("div");
 			rvstar.textContent = "별점 : " + review[i].rvstar;
+			rvstar.style.marginLeft="40%";
+			
+			
+			
+			//Button
+			let footer = document.createElement("footer");
+			let div2 = document.createElement("input");
+			div2.type = "button";
+			div2.value = "리뷰 수정";
+			div2.textContent ="리뷰 수정하기";
+			div2.style.cursor = "pointer";
+			div2.style.backgroundColor ='#ecdbc7';
+			div2.style.fontColor ='#000000';
+			div2.style.position="relative";
+			div2.style.left="25%";
+			div2.addEventListener("click", function() {
+				reservDetail(getDrdcode, sptopimg13)
 
-			section1.appendChild(rvstar);
-			section1.appendChild(img);
-			section1.appendChild(content);
-			Sdiv.appendChild(section1);
+			});	
+			
+			let div3 = document.createElement("input");
+			div3.type = "button";
+			div3.value = "리뷰 삭제";
+			div3.textContent ="리뷰 삭제하기";
+			div3.style.cursor = "pointer";
+			div3.style.backgroundColor ='#ecdbc7';
+			div3.style.fontColor ='#000000';
+			div3.style.position="relative";
+			div3.style.left="30%";
+			div3.addEventListener("click", function() {
+				reservDetail(getDrdcode, sptopimg13)
+
+			});	
+			footer.appendChild(div2);
+			footer.appendChild(div3);
+
+
+			
+			rev.appendChild(rvstar);
+			rev.appendChild(img);
+			rev.appendChild(content);
+			rev.appendChild(footer);
+			Sdiv.appendChild(rev);
+			
+		
+			
+		
 
 		}
 	}
