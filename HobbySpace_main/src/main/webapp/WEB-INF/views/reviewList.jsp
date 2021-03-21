@@ -11,9 +11,20 @@
 	height: auto;
 	display: block;
 }
+
 div {
 	display: inline;
 }
+        .starR {
+            color: gainsboro;
+            font-size: 30px
+        }
+
+        .starR.on {
+            background-position: 0 0;
+            color: yellow;
+            font-size: 30px
+        }
 </style>
 <head>
 <title>하비스페이스</title>
@@ -26,7 +37,7 @@ div {
 <link rel="icon" type="image/x-icon" sizes="16x16"
 	href="resources/images/favicon.ico">
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
 <body class="is-preload" onLoad="init()">
 
@@ -73,11 +84,7 @@ div {
 	<section class="wrapper" id="wrapper">
 		<div class="inner">
 			<h2 style="color:#FF5E00; font-family: 'paybooc-Bold';">후기 관리</h2>
-			<div class="highlights" id=Sdiv style="width:1448px; align-items:left;">
-			<!-- <span id="rvstar" class="star-prototype"></span></div> -->
-			</div>
-			
-			
+			<div class="highlights" id=Sdiv style="width:1448px; align-items:left;"></div>
 		</div>
 	
 	
@@ -107,15 +114,11 @@ div {
 		    rev.style.marginBottom="3%";
 			
 			let rvCode = review[i].rdcode;
+
 			let section = document.getElementById("wrapper");
 			
 			//let section1 = document.createElement("section");
-
-			let rvstar = document.createElement("span");
-			rvstar.textContent = "별점 : " + review[i].rvstar;
-			rvstar.style.marginLeft="40%";
-			rvstar.id = "rvstar" + i;
-			rvstar.className = "star-prototype";
+			
 			//리뷰 이미지가 없으면 띄어줄 이미지가 있어야함(리뷰 입력할때 이미지를 안 넣는경우)
 			let img = document.createElement("img");
 			img.width = "300";
@@ -127,19 +130,37 @@ div {
 			content.textContent = "코멘트 : " + review[i].rvcontent;
 			content.style.marginLeft="35%";
 	
-			//let rvstar = document.getElementById("rvstar");
-// 			rvstar.textContent = "별점 : " + review[i].rvstar;
-// 			rvstar.style.marginLeft="40%";
+			let rvstar = document.createElement("div");
+			rvstar.textContent = "별점 : "; //+ review[i].rvstar;
+			rvstar.style.marginLeft="40%";
+			rvstar.id = "stars" + i;
 			
-			$.fn.generateStars = function() {
-				return this.each(function(i, e) {
-					$(e).html($('<span/>').width($(e).text() * 16));
-				});
-			};
+			let star1 = document.createElement("span");
+			star1.textContent = "★";
+			star1.id = "star1" + i;
+			star1.className = "starR";
+			rvstar.appendChild(star1);
+			let star2 = document.createElement("span");
+			star2.textContent = "★";
+			star2.id = "star2" + i;
+			star2.className = "starR";
+			rvstar.appendChild(star2);
+			let star3 = document.createElement("span");
+			star3.textContent = "★";
+			star3.id = "star3" + i;
+			star3.className = "starR";
+			rvstar.appendChild(star3);
+			let star4 = document.createElement("span");
+			star4.textContent = "★";
+			star4.id = "star4" + i;
+			star4.className = "starR";
+			rvstar.appendChild(star4);
+			let star5 = document.createElement("span");
+			star5.textContent = "★";
+			star5.id = "star5" + i;
+			star5.className = "starR";
+			rvstar.appendChild(star5);
 			
-			//'${rvstar}'
-			// 숫자 평점을 별로 변환하도록 호출하는 함수
-			$('#rvstar' + i).generateStars();
 			
 			//Button
 			let footer = document.createElement("footer");
@@ -154,6 +175,7 @@ div {
 			div2.style.left="25%";
 			div2.addEventListener("click", function() {
 				reservEditor(rvCode) //리뷰수정
+
 			});	
 			
 			let div3 = document.createElement("input");
@@ -167,6 +189,7 @@ div {
 			div3.style.left="30%";
 			div3.addEventListener("click", function() {
 				reservDelete(rvCode) //리뷰삭제
+
 			});	
 			footer.appendChild(div2);
 			footer.appendChild(div3);
@@ -176,8 +199,18 @@ div {
 			rev.appendChild(content);
 			rev.appendChild(footer);
 			Sdiv.appendChild(rev);
+
+		}
+		
+		for(i = 0; i < review.length; i++){
+			let rvstars = document.getElementById("stars" + i);
+			for(j=1; j<=review[i].rvstar; j++){
+				let rvstar = document.getElementById("star" + j + i );
+				rvstar.className = "starR on";
+			}
 		}
 	}
+	
 	
 	function reservEditor(rvCode) { //리뷰수정
 		alert(rvCode);
@@ -197,7 +230,6 @@ div {
 	}
 	
 	function reservDelete(rvCode) { //리뷰삭제
-		alert(rvCode);
 		var form = document.createElement("form");
 		form.action = "DeleteReview";
 		form.method = "post";
@@ -234,35 +266,45 @@ div {
 		var form = document.createElement("form");
 		form.action = "ToReserveList?sCode=2&userId=" + '${accessInfo}';
 		form.method = "post";
+
 		document.body.appendChild(form);
+
 		form.submit();
 	}
 	function ToReviewList() {
 		var form = document.createElement("form");
 		form.action = "ToReviewList?sCode=3&userId=" + '${accessInfo}';
 		form.method = "post";
+
 		document.body.appendChild(form);
+
 		form.submit();
 	}
 	function ToZzimList() {
 		var form = document.createElement("form");
 		form.action = "ToZzimList?sCode=4&userId=" + '${accessInfo}';
 		form.method = "post";
+
 		document.body.appendChild(form);
+
 		form.submit();
 	}
 	function ToManageSpace() {
 		var form = document.createElement("form");
 		form.action = "ToManageSpace?sCode=5&userId=" + '${accessInfo}';
 		form.method = "post";
+
 		document.body.appendChild(form);
+
 		form.submit();
 	}
 	function LogOut() {
 		var form = document.createElement("form");
 		form.action = "LogOut?sCode=LogOut";
 		form.method = "post";
+
 		document.body.appendChild(form);
+
 		form.submit();
 	}
 </script>
