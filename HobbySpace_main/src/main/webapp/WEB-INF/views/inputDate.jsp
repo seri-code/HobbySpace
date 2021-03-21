@@ -87,7 +87,7 @@
     <div class="calendar"></div>
     <button name='zensong' onClick="zensong()">전송</button>
 </body>
-
+<jsp:include page="footer.jsp"></jsp:include>
 
 <script type="text/javascript">
 	var nDate;

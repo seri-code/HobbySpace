@@ -16,63 +16,68 @@
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 </head>
 
-<body onload="init()">
-	<div>공간명*</div>
-	<div class="input"><input type="text" id="space_name" name="sp_name" required="" minlength="1" maxlength="20"></div>
+<body onload="init()" >
+	<div class="heading">
+	<h3 style="color:#000000; font-weight: 800; font-size: xx-large; text-align: center; border-bottom: 5px solid lightsalmon; padding-bottom:26px;">공간 정보를 입력해주세요.</h3>
 
-	<div>카테고리*</div>
+	</div>
+	<div style="font-size: x-large; font-weight: 1000;">공간명*</div>
+	<div class="input"><input type="text" id="space_name" name="sp_name" required="" minlength="1" maxlength="20" style="border:2px solid;" ></div>
+	
+
+	<div style="font-size: x-large; font-weight: 1000;">카테고리*</div>
 	<ul class="check_list space">
-		<li><input type="radio" name="space" id="cate1" value="01"><label id="spct0" for="cate1" class="ellip"></label></li>
-		<li><input type="radio" name="space" id="cate2" value="02"><label id="spct1" for="cate2" class="ellip"></label></li>
-		<li><input type="radio" name="space" id="cate3" value="03"><label id="spct2" for="cate3" class="ellip"></label></li>
-		<li><input type="radio" name="space" id="cate4" value="04"><label id="spct3" for="cate4" class="ellip"></label></li>
-		<li><input type="radio" name="space" id="cate6" value="05"><label id="spct4" for="cate6" class="ellip"></label></li>
+		<li><input type="radio" name="space" id="cate1" value="01"><label id="spct0" for="cate1" class="ellip" style="font-weight: 600; color: indigo; font-size: large;"></label></li>
+		<li><input type="radio" name="space" id="cate2" value="02"><label id="spct1" for="cate2" class="ellip" style="font-weight: 600; color: indigo; font-size: large;"></label></li>
+		<li><input type="radio" name="space" id="cate3" value="03"><label id="spct2" for="cate3" class="ellip" style="font-weight: 600; color: indigo; font-size: large;"></label></li>
+		<li><input type="radio" name="space" id="cate4" value="04"><label id="spct3" for="cate4" class="ellip" style="font-weight: 600; color: indigo; font-size: large;"></label></li>
+		<li><input type="radio" name="space" id="cate6" value="05"><label id="spct4" for="cate6" class="ellip" style="font-weight: 600; color: indigo; font-size: large;"></label></li>
 	</ul>
 
-	<div>공간한줄소개*</div>
+	<div style="font-size: x-large; font-weight: 1000;">공간한줄소개*</div>
 	<div>
-		<input type="text" id="space_intro" name="sp_intro" placeholder="공간을 소개하는 한줄 문장을 입력해주세요." minlength="1" maxlength="27" required="" value="">
+		<input type="text" id="space_intro" name="sp_intro" placeholder="공간을 소개하는 한줄 문장을 입력해주세요." minlength="1" maxlength="27" required="" value="" style="border:2px solid; position:relative; width:625px;">
 	</div>
 
-	<div>공간긴줄소개*</div>
+	<div style="font-size: x-large; font-weight: 1000;">공간긴줄소개*</div>
 	<div>
-		<textarea id="space_text" name="sp_text" placeholder="공간을 상세하게 소개해보세요. 공간의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다." minlength="20" maxlength="500" required="" style="height: 108px;"></textarea>
+		<textarea id="space_text" name="sp_text" placeholder="공간을 상세하게 소개해보세요. 공간의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다." minlength="20" maxlength="500" required="" style="height: 200px; border:2px solid; width:625px;" ></textarea>
 	</div>
 
-	<div>공간주의사항*</div>
+	<div style="font-size: x-large; font-weight: 1000;">공간주의사항*</div>
 	<div>
-		<input type="text" name="sp_caution" id="space_rsv_caution" placeholder="주의사항을 작성해주세요." maxlength="100" value="">
-		<button onclick="add_sp_caution()">추가</button>
+		<input type="text" name="sp_caution" id="space_rsv_caution" placeholder="주의사항을 작성해주세요." maxlength="100" value="" style="border:2px solid; width:625px;">
+		<button onclick="add_sp_caution()" style="border:2px solid; position:relative; font-size:medium; width: 5rem; left:20px;">추가</button>
 	</div>
 	<div id="add_caution"></div>
 
-	<div>공간주소*</div>
+	<div style="font-size: x-large; font-weight: 1000;">공간주소*</div>
 	<div class="input">
-		<input type="text" id="sample6_postcode" placeholder="우편번호"><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-		<input type="text" id="sample6_address" placeholder="주소">
+		<input type="text" id="sample6_postcode" placeholder="우편번호" style="border:2px solid; width:625px;"><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="border:2px solid;"><br>
+		<input type="text" id="sample6_address" placeholder="주소" style="width:625px">
 	</div>
 	<div>
-		<input type="text" id="sample6_detailAddress" placeholder="상세주소">
+		<input type="text" id="sample6_detailAddress" placeholder="상세주소" style="border:2px solid; width:625px;">
 	</div>
 	
-	<div>공간Room 설정*</div>
+	<div style="font-size: x-large; font-weight: 1000;">공간Room 설정*</div>
 	<div class="room">
-		<input type="text" name="sp_room" maxlength="4" placeholder="방 번호"><input type="text" name="sp_peopel" maxlength="3" placeholder="방의 최대 수용수"><input type="button" class="btnAdd" value="추가"><br>
+		<input type="text" name="sp_room" maxlength="4" placeholder="방 번호" style="border:2px solid; width:625px; position:relative; left: 20px;"><input type="text" name="sp_peopel" maxlength="3" placeholder="방의 최대 수용수" style="width:625px; position:relative; left:20px;"><input type="button" class="btnAdd" value="추가" style="border:2px solid; position:relative; font-size:medium; width: 5rem; left:20px;"><br>
 	</div>
 	
 	
-	<div>공간가격*</div>
+	<div style="font-size: x-large; font-weight: 1000;">공간가격*</div>
 	<div class="input">
-		<input type="text" name="sp_price" id="space_price" placeholder="가격을 입력해 주세요." maxlength="30" value="">
+		<input type="text" name="sp_price" id="space_price" placeholder="가격을 입력해 주세요." maxlength="30" value="" style="border:2px solid; position:relative; right:20px; width:625px;">
 	</div>
 
-		<div>공간대표이미지*</div>
+		<div style="font-size: x-large; font-weight: 1000;">공간대표이미지*</div>
 	<div class="inner inner_img">대표이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)</div>
 	<div class="btn_box">
 	
 		<div class="uploadDiv">
 			<input type="file" name="uploadFile">
-			<button id='uploadBtn'>업로드</button>
+			<button id='uploadBtn' style="border:2px solid;">업로드</button>
 		</div>
 		
 		<div class ="uploadResult">
@@ -84,13 +89,13 @@
 	
 	</div>
 
-	<div>공간이미지*</div>
+	<div style="font-size: x-large; font-weight: 1000;">공간이미지*</div>
 	<div class="inner inner_img2">이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)</div>
 	<div class="btn_box2">
 	
 		<div class="uploadDiv2">
 			<input type="file" name="uploadFile2">
-			<button id='uploadBtn2'>업로드</button>
+			<button id='uploadBtn2' style="border:2px solid;">업로드</button>
 		</div>
 		
 		<div class ="uploadResult2">
@@ -102,24 +107,24 @@
 	
 	</div>
 
-	<div>공간연락처*</div>
-	<div class="input"><input type="text" name="sp_mobile" id="space_mobile" required="" minlength="1" maxlength="20" value=""></div>
+	<div style="font-size: x-large; font-weight: 1000;">공간연락처*</div>
+	<div class="input"><input type="text" name="sp_mobile" id="space_mobile" required="" minlength="1" maxlength="20" value="" style="border:2px solid; position: relative; width:625px;"></div>
 
-	<div>공간SNS*</div>
-	<div class="input"><input type="text" name="sp_sns" id="space_url" placeholder="웹사이트 URL을 입력해주세요." value="">
-		<button onclick="add_sp_sns()">추가</button>
+	<div style="font-size: x-large; font-weight: 1000;">공간SNS*</div>
+	<div class="input"><input type="text" name="sp_sns" id="space_url" placeholder="웹사이트 URL을 입력해주세요." value="" style="border:2px solid; position: relative; width:625px;">
+		<button onclick="add_sp_sns()" style="border:2px solid; position:relative; font-size:medium; width: 5rem; left:0px;">추가</button>
 	</div>
 	<div id="add_sns"></div>
 
-	<div>공간태그*</div>
-	<div class="input"><input type="text" name="sp_tag" id="space_tag" placeholder="태그를 입력해 주세요." maxlength="30" value="">
-		<button onclick="add_sp_tag()">추가</button>
+	<div style="font-size: x-large; font-weight: 1000;">공간태그*</div>
+	<div class="input"><input type="text" name="sp_tag" id="space_tag" placeholder="태그를 입력해 주세요." maxlength="30" value="" style="border:2px solid; position: relative; width:625px;">
+		<button onclick="add_sp_tag()" style="border:2px solid; position:relative; font-size:medium; width: 5rem; left:0px;">추가</button>
 	</div>
 	<div id="add_tag"></div>
 	<br>
-	<button onclick="toDate()">다음</button>
+	<button onclick="toDate()" style="border:3px solid; position: relative; width: 5rem; height: 4rem; font-size: larger;">다음</button>
 </body>
-
+<jsp:include page="footer.jsp"></jsp:include>
 <script type="text/javascript">
 	function init() {
 		var spCategory = JSON.parse('${spCategory}');

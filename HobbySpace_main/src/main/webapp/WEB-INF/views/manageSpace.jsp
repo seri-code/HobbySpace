@@ -20,6 +20,7 @@ div.button1{
 	text-align: center;
 }
 </style>
+
 <head>
 <title>공간관리</title>
 <meta charset="utf-8" />
@@ -32,27 +33,15 @@ div.button1{
 	href="resources/images/favicon.ico">
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
+
 <body class="is-preload" onLoad="init()">
 
+<jsp:include page="header.jsp"></jsp:include>
+	
 	<!-- Header -->
-	<header id="header">
-		<a href="/"> <img
-			src="resources/images/logo-removebg-preview.jpg" alt="logo Image"
-			width="190" height="220">
-		</a>
-		<div class="search">
-			<input type="text" placeholder="검색어를 입력해주세요.">
-		</div>
-		<div class="search__container">
+	
+	
 
-			<input class="search__input" type="text" placeholder="Search">
-		</div>
-		<div class="credits__container"></div>
-		<nav>
-			<a href="#menu">Menu</a>
-		</nav>
-
-	</header>
 
 		<!-- Nav -->
 			<nav id="menu">
@@ -73,12 +62,16 @@ div.button1{
 	</section>
 	
 	<div class="button1">
-<button onClick="toInputSpace()">공간등록</button>
+<button onClick="toInputSpace()" style="position:relative; background-color: darksalmon; width:13rem; height:6rem; font-size:2rem; border: 4px solid;">공간등록</button>
 </div>
 
 </body>
-	
-</body>
+	<jsp:include page="footer.jsp"></jsp:include>
+<script src="resources/assets/js/jquery.min.js" ></script>
+<script src="resources/assets/js/browser.min.js" ></script>
+<script src="resources/assets/js/breakpoints.min.js"></script>
+<script src="resources/assets/js/util.js" ></script>
+<script src="resources/assets/js/main.js" ></script>
 <script>
 function toInputSpace(){
 	
