@@ -109,7 +109,7 @@ function toInputSpace(){
 			let img = document.createElement("img");
 			img.width = "300";
 			img.height = "300";
-			img.src = "/resources/images/" + spList[i].topimg;
+			img.src = "/resources/images/" + spList[i].sptopimg;
 			div2.textContent = spList[i].spCode;
 
 			div2.appendChild(img);
