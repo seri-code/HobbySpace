@@ -37,7 +37,6 @@ public class Review {
 	private PlatformTransactionManager tran;
 	
 	public ModelAndView entrance(HttpServletRequest req, ReviewBean rb) {
-		System.out.println("리뷰 엔트런스 진입");
 		ModelAndView mav = null;
 		switch (rb.getSCode()) {
 		case "ToNewReview": //리뷰이동
@@ -146,8 +145,6 @@ public class Review {
 		}
 		
 		mav.addObject("reserve", gson.toJson(this.selectReview(rb)));
-		String s = gson.toJson(this.selectReview(rb));
-		System.out.println(s);
 		mav.setViewName("reviewEditor");
 		return mav;
 	}
@@ -161,11 +158,15 @@ public class Review {
 		ModelAndView mav = new ModelAndView();
 		try {
 			rb.setUsId(pu.getAttribute("usId").toString());
+			System.out.println("리뷰수정진입");
+			System.out.println(rb);
+			System.out.println(this.editReview(rb));
+			System.out.println(gson.toJson(this.selectReview(rb)));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.editReview(rb);
+
 		mav.addObject("sCode","3");
 		mav.setViewName("redirect:/ToReviewList");
 		return mav;

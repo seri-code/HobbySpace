@@ -186,7 +186,6 @@ div {
 	}
 	
 	function reservDelete(rvCode) { //리뷰삭제
-		alert(rvCode);
 		var form = document.createElement("form");
 		form.action = "DeleteReview";
 		form.method = "post";

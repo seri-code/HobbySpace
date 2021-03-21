@@ -200,7 +200,12 @@ $('.starRev span').click(function(){
 
 function send() {
 	var form = document.createElement("form");
-	form.action = "NewReview";
+	if(reserve.rvstar > 0){
+		form.action = "EditReview"; //리뷰수정
+		alert("수정");
+	}else{
+		form.action = "NewReview"; //리뷰작성
+	}
 	form.method = "post";
 	//예약코드
 	var inRdCode = document.createElement("input");

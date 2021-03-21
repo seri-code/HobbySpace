@@ -76,14 +76,12 @@ public class ExpController {
 	@RequestMapping(value = "/EditReview", method = RequestMethod.POST) //리뷰 수정
 	public ModelAndView editReview(HttpServletRequest req, @ModelAttribute ReviewBean rb) {
 		rb.setSCode("EditReview");
-		System.out.println("리뷰수정진입");
 		return rv.entrance(req, rb);
 	}
 
 	@RequestMapping(value = "/DeleteReview", method = RequestMethod.POST) //리뷰삭제
 	public ModelAndView deleteReview(HttpServletRequest req, @ModelAttribute ReviewBean rb) {
 		rb.setSCode("DeleteReview");
-		System.out.println("리뷰삭제진입");
 		return rv.entrance(req, rb);
 	}
 }
