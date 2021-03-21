@@ -61,7 +61,7 @@ public class Space {
 	private ResponseEntity<List<AttachFileDTO>> addTopimg(MultipartFile[] uploadFile, String uuid) {
 		List<AttachFileDTO> list = new ArrayList<>();
 		//서버pc 이미지저장 장소
-		String uploadFolder = "C:\\Users\\Sigoto471\\git\\HobbySpace\\HobbySpace_M\\src\\main\\webapp\\resources\\images";
+		String uploadFolder = "C:\\Users\\User\\git\\HobbySpace\\HobbySpace_main\\src\\main\\webapp\\resources\\images";
 		File uploadPath = new File(uploadFolder);
 
 		if (uploadPath.exists() == false) {
