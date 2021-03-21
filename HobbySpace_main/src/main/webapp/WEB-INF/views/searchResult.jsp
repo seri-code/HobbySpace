@@ -8,6 +8,7 @@
 	height: auto;
 	display: block;
 }
+
 </style>
 <head>
 <meta charset="UTF-8">
@@ -17,12 +18,15 @@
 	content="width=device-width, initial-scale=1, user-scalable=no">
 <meta name="description" content="">
 <meta name="keywords" content="">
-<link rel="stylesheet" href="resources/assets/css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="resources/assets/css/searchResult.css">
 <link rel="icon" type="image/x-icon" sizes="16x16"
 	href="resources/images/favicon.ico">
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+
 </head>
 
 <body class="is-preload" onLoad="initUser();initResult()">
@@ -45,12 +49,14 @@
 						style="cursor: pointer">로그아웃</div></a></li>
 		</ul>
 	</nav>
-	<h2 style="padding-top:75px;padding-left:30px">"${keyword }"의 검색결과입니다.</h2>
+	<h2 style="padding-top:90px;padding-left:30px; color: lightsalmon; position:relative; border: 4px solid; width: 40rem; height: 10rem">"${keyword }"의 검색결과입니다.</h2>
 	<div class="image" id="sp_topimg"></div>
 		<div class="inner">
 			<div class="highlights" id="scDiv"></div>
+			
 		</div>
 </body>
+<jsp:include page="footer.jsp"></jsp:include>
 <script>
 	function initUser() {
 		let loginInfo = document.getElementsByName("user")[0];
@@ -76,10 +82,12 @@
 			let div1 = document.createElement("div");
 			div1.className = "content";
 			div1.textContent = result[i].spName;
+			
 
 			let div2 = document.createElement("div");
 			div2.className = "image";
-
+			
+			
 			let img = document.createElement("img");
 			img.width = "300";
 			img.height = "300";
@@ -169,4 +177,12 @@
 		form.submit();
 	}
 </script>
+
+<!-- Scripts -->
+<script src="resources/assets/js/jquery.min.js"></script>
+<script src="resources/assets/js/browser.min.js"></script>
+<script src="resources/assets/js/breakpoints.min.js"></script>
+<script src="resources/assets/js/util.js"></script>
+<script src="resources/assets/js/main.js"></script>
+
 </html>

@@ -74,7 +74,9 @@ div {
 		<div class="inner">
 			<h2 style="color:#FF5E00; font-family: 'paybooc-Bold';">후기 관리</h2>
 			<div class="highlights" id=Sdiv style="width:1448px; align-items:left;">
-			<span id="rvstar" class="star-prototype"></span></div>
+			<!-- <span id="rvstar" class="star-prototype"></span></div> -->
+			</div>
+			
 			
 		</div>
 	
@@ -108,9 +110,12 @@ div {
 			let section = document.getElementById("wrapper");
 			
 			//let section1 = document.createElement("section");
-			
-			
-			
+
+			let rvstar = document.createElement("span");
+			rvstar.textContent = "별점 : " + review[i].rvstar;
+			rvstar.style.marginLeft="40%";
+			rvstar.id = "rvstar" + i;
+			rvstar.className = "star-prototype";
 			//리뷰 이미지가 없으면 띄어줄 이미지가 있어야함(리뷰 입력할때 이미지를 안 넣는경우)
 			let img = document.createElement("img");
 			img.width = "300";
@@ -122,9 +127,9 @@ div {
 			content.textContent = "코멘트 : " + review[i].rvcontent;
 			content.style.marginLeft="35%";
 	
-			let rvstar = document.getElementById("rvstar");
-			rvstar.textContent = "별점 : " + review[i].rvstar;
-			rvstar.style.marginLeft="40%";
+			//let rvstar = document.getElementById("rvstar");
+// 			rvstar.textContent = "별점 : " + review[i].rvstar;
+// 			rvstar.style.marginLeft="40%";
 			
 			$.fn.generateStars = function() {
 				return this.each(function(i, e) {
@@ -132,9 +137,9 @@ div {
 				});
 			};
 			
-			'${rvstar}'
+			//'${rvstar}'
 			// 숫자 평점을 별로 변환하도록 호출하는 함수
-			$('.star-prototype').generateStars();
+			$('#rvstar' + i).generateStars();
 			
 			//Button
 			let footer = document.createElement("footer");
