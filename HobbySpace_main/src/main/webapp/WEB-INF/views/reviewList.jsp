@@ -11,7 +11,6 @@
 	height: auto;
 	display: block;
 }
-
 div {
 	display: inline;
 }
@@ -74,7 +73,8 @@ div {
 	<section class="wrapper" id="wrapper">
 		<div class="inner">
 			<h2 style="color:#FF5E00; font-family: 'paybooc-Bold';">후기 관리</h2>
-			<div class="highlights" id=Sdiv style="width:1448px; align-items:left;"></div>
+			<div class="highlights" id=Sdiv style="width:1448px; align-items:left;">
+			<span id="rvstar" class="star-prototype"></span></div>
 			
 		</div>
 	
@@ -105,7 +105,6 @@ div {
 		    rev.style.marginBottom="3%";
 			
 			let rvCode = review[i].rdcode;
-
 			let section = document.getElementById("wrapper");
 			
 			//let section1 = document.createElement("section");
@@ -123,9 +122,19 @@ div {
 			content.textContent = "코멘트 : " + review[i].rvcontent;
 			content.style.marginLeft="35%";
 	
-			let rvstar = document.createElement("div");
+			let rvstar = document.getElementById("rvstar");
 			rvstar.textContent = "별점 : " + review[i].rvstar;
 			rvstar.style.marginLeft="40%";
+			
+			$.fn.generateStars = function() {
+				return this.each(function(i, e) {
+					$(e).html($('<span/>').width($(e).text() * 16));
+				});
+			};
+			
+			'${rvstar}'
+			// 숫자 평점을 별로 변환하도록 호출하는 함수
+			$('.star-prototype').generateStars();
 			
 			//Button
 			let footer = document.createElement("footer");
@@ -140,7 +149,6 @@ div {
 			div2.style.left="25%";
 			div2.addEventListener("click", function() {
 				reservEditor(rvCode) //리뷰수정
-
 			});	
 			
 			let div3 = document.createElement("input");
@@ -154,7 +162,6 @@ div {
 			div3.style.left="30%";
 			div3.addEventListener("click", function() {
 				reservDelete(rvCode) //리뷰삭제
-
 			});	
 			footer.appendChild(div2);
 			footer.appendChild(div3);
@@ -164,7 +171,6 @@ div {
 			rev.appendChild(content);
 			rev.appendChild(footer);
 			Sdiv.appendChild(rev);
-
 		}
 	}
 	
@@ -223,45 +229,35 @@ div {
 		var form = document.createElement("form");
 		form.action = "ToReserveList?sCode=2&userId=" + '${accessInfo}';
 		form.method = "post";
-
 		document.body.appendChild(form);
-
 		form.submit();
 	}
 	function ToReviewList() {
 		var form = document.createElement("form");
 		form.action = "ToReviewList?sCode=3&userId=" + '${accessInfo}';
 		form.method = "post";
-
 		document.body.appendChild(form);
-
 		form.submit();
 	}
 	function ToZzimList() {
 		var form = document.createElement("form");
 		form.action = "ToZzimList?sCode=4&userId=" + '${accessInfo}';
 		form.method = "post";
-
 		document.body.appendChild(form);
-
 		form.submit();
 	}
 	function ToManageSpace() {
 		var form = document.createElement("form");
 		form.action = "ToManageSpace?sCode=5&userId=" + '${accessInfo}';
 		form.method = "post";
-
 		document.body.appendChild(form);
-
 		form.submit();
 	}
 	function LogOut() {
 		var form = document.createElement("form");
 		form.action = "LogOut?sCode=LogOut";
 		form.method = "post";
-
 		document.body.appendChild(form);
-
 		form.submit();
 	}
 </script>
