@@ -66,7 +66,7 @@
 
 		<div class="mySlides fade" > 
 		<div class="numbertext">1 / 3</div>
-			<figure class="snip1200">
+			<figure class="snip1200" onclick="spaceDetail()" style="cursor:pointer;">
 			<img id="mainImage" class="bg-image" name="sp_topimg"
 				style="width: 100%; height:50rem; cursor: pointer;" onclick="spaceDetail()" />
 			<figcaption>
@@ -93,7 +93,7 @@
 	
 		<div class="mySlides fade" > 
 		<div class="numbertext">2 / 3</div>
-		<figure class="snip1200">
+		<figure class="snip1200" onclick="spaceDetail2()" style="cursor:pointer;">
 			<img id="mainImage" class="bg-image" name="sp_topimg"
 				style="width: 100%; height:50rem; cursor: pointer;" onclick="spaceDetail2()" />
 			<figcaption>
@@ -109,7 +109,7 @@
 		
 		<div class="mySlides fade" > 
 		<div class="numbertext">3 / 3</div>
-		<figure class="snip1200">
+		<figure class="snip1200" onClick="spaceDetail3()" style="cursor:pointer;">
 			<img id="mainImage" class="bg-image" name="sp_topimg"
 				style="width: 100%; height:50rem; cursor: pointer;" onclick="spaceDetail3()" />
 			<figcaption>

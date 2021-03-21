@@ -67,11 +67,7 @@ div.button1{
 
 </body>
 	<jsp:include page="footer.jsp"></jsp:include>
-<script src="resources/assets/js/jquery.min.js" ></script>
-<script src="resources/assets/js/browser.min.js" ></script>
-<script src="resources/assets/js/breakpoints.min.js"></script>
-<script src="resources/assets/js/util.js" ></script>
-<script src="resources/assets/js/main.js" ></script>
+
 <script>
 function toInputSpace(){
 	
@@ -184,9 +180,9 @@ function toInputSpace(){
 </script>
 
 <!-- Scripts -->
-<script src="resources/assets/js/jquery.min.js" defer></script>
-<script src="resources/assets/js/browser.min.js" defer></script>
-<script src="resources/assets/js/breakpoints.min.js" defer></script>
-<script src="resources/assets/js/util.js" defer></script>
-<script src="resources/assets/js/main.js" defer></script>
+<script src="resources/assets/js/jquery.min.js" ></script>
+<script src="resources/assets/js/browser.min.js" ></script>
+<script src="resources/assets/js/breakpoints.min.js" ></script>
+<script src="resources/assets/js/util.js" ></script>
+<script src="resources/assets/js/main.js" ></script>
 </html>
