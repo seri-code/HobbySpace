@@ -536,7 +536,7 @@
 		let add_review = document.createElement("div");
 		add_review.textContent = loadReview[0].rvText;
 		add_review.style.width ="260px";
-		add_review.style.margin ="210px 0 5px 30px";
+		add_review.style.margin ="220px 0 10px 40px";
 		
 		review.appendChild(add_review);
 
@@ -547,7 +547,7 @@
 		let img = document.getElementById("rv_img");
 		let add_img = document.createElement("img");
 		add_img.src = "resources/images/rvimg/" + loadReview[0].rvImg;
-		add_img.style.width = "340px";
+		add_img.style.width = "400px";
 		add_img.style.height = "187px";
 		img.appendChild(add_img);
 		img.addEventListener('click', function() {
@@ -566,7 +566,7 @@
 		let add_review = document.createElement("div");
 		add_review.textContent = loadReview[1].rvText;
 		add_review.style.width ="260px";
-		add_review.style.margin ="210px 0 5px 30px";
+		add_review.style.margin ="220px 0 10px 40px";
 		
 		review.appendChild(add_review);
 
@@ -577,7 +577,7 @@
 		let img = document.getElementById("rv_img2");
 		let add_img = document.createElement("img");
 		add_img.src = "resources/images/rvimg/" + loadReview[1].rvImg;
-		add_img.style.width = "340px";
+		add_img.style.width = "400px";
 		add_img.style.height = "187px";
 		img.appendChild(add_img);
 		img.addEventListener('click', function() {
@@ -596,7 +596,7 @@
 		let add_review = document.createElement("div");
 		add_review.textContent = loadReview[2].rvText;
 		add_review.style.width ="260px";
-		add_review.style.margin ="210px 0 5px 30px";
+		add_review.style.margin = "220px 0 10px 40px";
 		
 		review.appendChild(add_review);
 
@@ -616,7 +616,7 @@
 		let img = document.getElementById("rv_img3");
 		let add_img = document.createElement("img");
 		add_img.src = "resources/images/rvimg/" + loadReview[2].rvImg;
-		add_img.style.width = "340px";
+		add_img.style.width = "400px";
 		add_img.style.height = "187px";
 		img.appendChild(add_img);
 		img.addEventListener('click', function() {
