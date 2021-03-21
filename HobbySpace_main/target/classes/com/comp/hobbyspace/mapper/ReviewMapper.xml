@@ -16,14 +16,14 @@
 	select rv_star as rvstar,rv_img as rvImg, rv_content as rvtext from rv where rv_usid=#{usId}
 	]]>
 	</select>
-	
+	 <!-- 리뷰삭제  -->
 	<delete id="deleteReview">
 		<![CDATA[
 	DELETE FROM rv WHERE rv_rdcode = #{rdCode} and rv_usid = #{usId}
 	]]>
 	</delete>
 	
-	
+	 <!-- 리뷰수정이동  -->
 	<select id="selectReview" resultType="com.comp.hobbyspace.beans.ReviewBean">
 	<![CDATA[
 	select rv_rdcode as rdCode, rv_rospcode as rdSpCode, rv_ronum as rdRoom,rv_star as rvstar,rv_img as rvImg, rv_content as rvtext 
@@ -31,4 +31,12 @@
 	where rv_rdcode = #{rdCode} and rv_usid = #{usId}
 	]]>
 	</select>
+	
+	<update id="editReview">
+	<![CDATA[
+	UPDATE rv
+	SET rv_star = #{rvstar}, rv_img = #{rvImg}, rv_content = #{rvtext}
+	where rv_rdcode = #{rdCode} and rv_usid = #{usId}
+	]]>
+	</update>
 </mapper>
