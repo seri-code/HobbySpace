@@ -191,7 +191,7 @@ img.aligncenter {
 }
 
 #menu li {
-	display: inline-block;
+	display: inline;
 }
 
 #menu a {
@@ -278,16 +278,16 @@ header.align-center{
 	border-radius: 10px;
 }
 
-.links {
-	display: block;
-	width: 96px;
-	padding: 2px 0px 2px 0px;
-	background: #A53602;
-	text-align: center;
-	text-transform: uppercase;
-	font-size: 10px;
-	color: #FFFFFF;
-}
+/* .links { */
+/* 	display: block; */
+/* 	width: 96px; */
+/* 	padding: 2px 0px 2px 0px; */
+/* 	background: #A53602; */
+/* 	text-align: center; */
+/* 	text-transform: uppercase; */
+/* 	font-size: 10px; */
+/* 	color: #FFFFFF; */
+/* } */
 
 /* Sidebar */
 
@@ -351,27 +351,4 @@ header.align-center{
 #sidebar a:hover {
 	text-decoration: underline;
 }
-
-/* Calendar */
-
-#calendar {
-}
-
-#calendar_wrap {
-	padding: 20px;
-}
-
-#calendar table {
-	width: 100%;
-}
-
-#calendar tbody td {
-	text-align: center;
-}
-
-#calendar #next {
-	text-align: right;
-}
-
-
 
