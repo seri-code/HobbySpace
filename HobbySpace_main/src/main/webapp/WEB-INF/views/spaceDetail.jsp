@@ -22,11 +22,7 @@
 <link rel="stylesheet" href="resources/assets/css/spaceDetail.css" />	
 <link rel="stylesheet" href="resources/assets/css/style.css" />	
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">	
-<script src="resources/assets/js/jquery.min.js" ></script>	
-<script src="resources/assets/js/browser.min.js" ></script>	
-<script src="resources/assets/js/breakpoints.min.js"></script>	
-<script src="resources/assets/js/util.js" ></script>	
-<script src="resources/assets/js/main.js" ></script>	
+
 </head>	
 <body class="is-preload"	
 	onLoad="init();spName();spName2();spComment();spComment2();spLong();spImg();spLocation();spPrice();spMobile();">	
@@ -55,7 +51,7 @@
 		<div id="sidebar">	
 					<ul>	
 						<li>	
-							<h2>찜하기</h2>	
+							<h2 style="font-family: 'ELAND_Choice_M';">찜하기</h2>	
 							<p>마음에 드는 공간을 찜 해보세요.</p>	
 								<br/><br/><br/>	
 						<div class="wrap">	
@@ -66,7 +62,7 @@
 						</li>	
 						<li>	
 						<br/><br/>	
-							<h2>예약하기</h2>	
+							<h2 style="font-family: 'ELAND_Choice_M';">예약하기</h2>	
 							<p>원클릭 공간 예약이 가능합니다.</p>	
 							<br/><br/><br/>	
 							<ul>	
@@ -83,7 +79,7 @@
 							</ul>	
 						</li>	
 						<li>	
-							<h2>공간 문의사항</h2>	
+							<h2 style="font-family: 'ELAND_Choice_M';">공간 문의사항</h2>	
 							<p>호스트가 빠른 응답을 해드립니다.</p>	
 							<ul>	
 								<li><a>호스트 연락처는 공간 상세를 참조하세요.</a></li>	
@@ -97,8 +93,8 @@
 			<div id="page-bgbtm">	
 				<div id="content">	
 					<div class="post">	
-						<h2 class="title"><a id="sp_name"></a></h2>	
-							<div id="sp_comment"></div>	
+						<h2 class="title" style="font-family: 'ELAND_Choice_M'; margin-top:120px;"><a id="sp_name"></a></h2>	
+							<div id="sp_comment" style="font-family: 'ELAND_Choice_M';"></div>	
 						</div>	
 					</div>	
 									
@@ -538,4 +534,10 @@ function finalall(selectdata, people, value) {
 		
 		
 </script>	
+
+<script src="resources/assets/js/jquery.min.js" ></script>	
+<script src="resources/assets/js/browser.min.js" ></script>	
+<script src="resources/assets/js/breakpoints.min.js"></script>	
+<script src="resources/assets/js/util.js" ></script>	
+<script src="resources/assets/js/main.js" ></script>	
 </html>

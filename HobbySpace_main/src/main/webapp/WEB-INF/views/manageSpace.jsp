@@ -67,11 +67,7 @@ div.button1{
 
 </body>
 	<jsp:include page="footer.jsp"></jsp:include>
-<script src="resources/assets/js/jquery.min.js" ></script>
-<script src="resources/assets/js/browser.min.js" ></script>
-<script src="resources/assets/js/breakpoints.min.js"></script>
-<script src="resources/assets/js/util.js" ></script>
-<script src="resources/assets/js/main.js" ></script>
+
 <script>
 function toInputSpace(){
 	
@@ -184,9 +180,17 @@ function toInputSpace(){
 </script>
 
 <!-- Scripts -->
+<<<<<<< HEAD
 <script src="resources/assets/js/jquery.min.js"></script>
 <script src="resources/assets/js/browser.min.js"></script>
 <script src="resources/assets/js/breakpoints.min.js"></script>
 <script src="resources/assets/js/util.js"></script>
 <script src="resources/assets/js/main.js"></script>
+=======
+<script src="resources/assets/js/jquery.min.js" ></script>
+<script src="resources/assets/js/browser.min.js" ></script>
+<script src="resources/assets/js/breakpoints.min.js" ></script>
+<script src="resources/assets/js/util.js" ></script>
+<script src="resources/assets/js/main.js" ></script>
+>>>>>>> branch 'main' of https://github.com/seri-code/HobbySpace
 </html>

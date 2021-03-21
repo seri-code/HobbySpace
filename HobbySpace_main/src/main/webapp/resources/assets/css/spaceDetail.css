@@ -291,6 +291,7 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   margin: 0 0 1.5rem 0; 
   color: #000000;
+  font-family: 'ELAND_Choice_M';
   }
   h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 
@@ -412,6 +413,7 @@ hr {
 	margin-top: -86px;
 	margin-left: -89px;
 	text-align: center;
+	font-family: 'ELAND_Choice_M';
 }
 
 .wrap2 {
@@ -421,6 +423,7 @@ hr {
 	margin-top: -86px;
 	margin-left: -89px;
 	text-align: center;
+	font-family: 'ELAND_Choice_M';
 }
 
 a {
