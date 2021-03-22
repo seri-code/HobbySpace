@@ -30,17 +30,17 @@
 	<nav id="menu">	
 		<ul class="links">	
 			<li><a><div name="user" onClick="logInForm()"	
-						style="cursor: pointer"></div></a></li>	
+						style="cursor: pointer; color:#696969; font-size:15px; "></div></a></li>	
 			<li><a><div name="res" onClick="ToReserveList()"	
-						style="cursor: pointer">예약리스트</div></a></li>	
+						style="cursor: pointer; color:#696969; font-size:15px;">예약리스트</div></a></li>	
 			<li><a><div name="review" onClick="ToReviewList()"	
-						style="cursor: pointer">후기관리</div></a></li>	
+						style="cursor: pointer; color:#696969; font-size:15px;">후기관리</div></a></li>	
 			<li><a><div name="zzim" onClick="ToZzimList()"	
-						style="cursor: pointer">찜한 공간</div></a></li>	
+						style="cursor: pointer; color:#696969; font-size:15px;">찜한 공간</div></a></li>	
 			<li><a><div name="msp" onClick="ToManageSpace()"	
-						style="cursor: pointer">공간관리</div></a></li>	
+						style="cursor: pointer; color:#696969; font-size:15px;">공간관리</div></a></li>	
 			<li><a><div name="logOut" onClick="LogOut()"	
-						style="cursor: pointer">로그아웃</div></a></li>	
+						style="cursor: pointer; color:#696969; font-size:15px;">로그아웃</div></a></li>	
 		</ul>	
 	</nav>	
 	<div id="side_right">	
