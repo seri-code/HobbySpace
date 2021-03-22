@@ -62,7 +62,7 @@ div.button1{
 	</section>
 	
 	<div class="button1">
-<button onClick="toInputSpace()" style="position:relative; background-color: darksalmon; width:13rem; height:6rem; font-size:2rem; border: 4px solid;">공간등록</button>
+<button onClick="toInputSpace()" style="position:relative; background-color: darksalmon; width:13rem; height:6rem; font-size:2rem; border: 4px solid; margin-bottom:80px;">공간등록</button>
 </div>
 
 </body>

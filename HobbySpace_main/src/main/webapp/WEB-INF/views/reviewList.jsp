@@ -132,32 +132,37 @@ div {
 	
 			let rvstar = document.createElement("div");
 			rvstar.textContent = "별점 : "; //+ review[i].rvstar;
-			rvstar.style.marginLeft="40%";
+			rvstar.style.marginLeft="20%";
 			rvstar.id = "stars" + i;
 			
 			let star1 = document.createElement("span");
 			star1.textContent = "★";
 			star1.id = "star1" + i;
+			star1.style.display = "inline";
 			star1.className = "starR";
 			rvstar.appendChild(star1);
 			let star2 = document.createElement("span");
 			star2.textContent = "★";
 			star2.id = "star2" + i;
+			star2.style.display = "inline";
 			star2.className = "starR";
 			rvstar.appendChild(star2);
 			let star3 = document.createElement("span");
 			star3.textContent = "★";
 			star3.id = "star3" + i;
+			star3.style.display = "inline";
 			star3.className = "starR";
 			rvstar.appendChild(star3);
 			let star4 = document.createElement("span");
 			star4.textContent = "★";
 			star4.id = "star4" + i;
+			star4.style.display = "inline";
 			star4.className = "starR";
 			rvstar.appendChild(star4);
 			let star5 = document.createElement("span");
 			star5.textContent = "★";
 			star5.id = "star5" + i;
+			star5.style.display = "inline";
 			star5.className = "starR";
 			rvstar.appendChild(star5);
 			
