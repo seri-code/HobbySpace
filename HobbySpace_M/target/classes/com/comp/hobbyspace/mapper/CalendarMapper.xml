@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 3.0규격을 참고해라 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=패키지명과 인터페이스 명과 같아야한다 -->
+<mapper namespace="com.comp.hobbyspace.mapper.CalendarMapper">
+	<!-- 3.0규격을 참고해라 -->
+	<insert id="insSpace">
+	<![CDATA[
+   	INSERT INTO sp(SP_CODE, SP_HOUSID, SP_CTCODE, SP_NAME, SP_LOCATION, SP_PRICE, SP_COMMENT, SP_LONG, SP_MOBILE, SP_TOPIMG)
+	VALUES (#{sp_Code},#{userId},#{ctCode},#{sp_name},#{sp_addy1},#{sp_price},#{sp_intro},#{sp_text},#{sp_mobile},#{sp_ImgName})
+      ]]>
+	</insert>
+	<!-- 주의사항 등록 -->
+	<insert id="insCaution">
+	<![CDATA[
+   	INSERT INTO wa(WA_spCode, WA_TEXT) VALUES (#{sp_Code},#{sp_caution})
+      ]]>
+	</insert>
+	
+	<!-- sns등록 -->
+	<insert id="insSns">
+	<![CDATA[
+   	INSERT INTO sns(SNS_spCode, SNS_ADDR) VALUES (#{sp_Code},#{sp_sns})
+      ]]>
+	</insert>
+	
+	<!-- tag등록 -->
+	<insert id="insTag">
+	<![CDATA[
+   	INSERT INTO tg(TG_spCode, TG_TAG) VALUES (#{sp_Code},#{sp_tag})
+      ]]>
+	</insert>
+	
+	<!-- img등록 -->
+	<insert id="insImg">
+	<![CDATA[
+   	INSERT INTO im(IM_spCode, IM_IMG) VALUES (#{sp_Code},#{sp_ImgName2})
+      ]]>
+	</insert>
+	
+	<!-- room 등록 -->
+	<insert id="insRoom">
+	<![CDATA[
+   	INSERT INTO ro(RO_NUM, RO_spCode,RO_PEOPLE,RO_STATUS) VALUES (#{sp_romm},#{sp_Code},#{sp_peopel},'O')
+      ]]>
+	</insert>
+	
+	<!-- 영업종료일 업데이트 -->
+	<update id="upfinalD">
+	<![CDATA[
+   UPDATE sp set sp_finalD = #{finalD} where sp_code = #{sp_Code}
+      ]]>
+	</update>
+	<!-- 휴무일 등록 -->
+	<insert id="insSaveD">
+	<![CDATA[
+   	INSERT INTO ca(CA_ROspCode,CA_RONUM,CA_TYPE,CA_DATE)
+	SELECT RO_spCode,RO_NUM,'C', TO_DATE(#{nDate}, 'YYYYMMDD') FROM ro
+	where RO_spCode = #{sp_Code}
+      ]]>
+	</insert>
+	<!-- 호스트여부 확인 -->
+	<select id="ifHost" resultType="int">
+	<![CDATA[
+	SELECT COUNT(*) FROM "HO" WHERE HO_USID=#{userId}
+      ]]>	
+	</select>
+	<!-- 호스트 등록 -->
+	<insert id="insHost">
+	<![CDATA[
+   	INSERT INTO "HO"(HO_USID, HO_NAME) VALUES(#{userId}, #{userNickname})
+      ]]>
+    </insert>
+</mapper>

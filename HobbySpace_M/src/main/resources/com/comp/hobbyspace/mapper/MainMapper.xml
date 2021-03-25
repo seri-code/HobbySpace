@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 구현체 -->
+<mapper namespace="com.comp.hobbyspace.mapper.MainMapper">
+   <!-- resultType를 Bean에 맞게 잡아준다면 알아서 그 추상메서드에 맞게 잘 들어가 준다.-->   
+   <!-- QUERY에 포함된 문자 중 <> & || 등 이 있다면 XML 파싱을 하지 않도록 -->
+   <!-- [CDATA[ 안에 있는 것들은 전부 문자처리를 해주어 버리겠다. ]] -->
+    <select id="getSpaceCode1" resultType="com.comp.hobbyspace.beans.MainBean"> 
+   <![CDATA[
+	select RV_ROspCode as spCode
+	FROM(select RV_ROspCode,avg(RV_STAR) as stars FROM rv GROUP by RV_ROspCode ORDER by stars DESC)
+	where rownum = 1
+      ]]>
+   </select>
+   <select id="loadStarSpace" resultType="com.comp.hobbyspace.beans.MainBean"> 
+   <![CDATA[
+   select
+      sp.sp_code as spCode,
+      sp.sp_location as spLocation,
+      sp.sp_topimg as spImg
+      from sp
+	where sp.sp_code = #{spCode}
+      ]]>
+   </select>
+    <select id="getSpaceCode2" resultType="com.comp.hobbyspace.beans.MainBean"> 
+   <![CDATA[
+     select RD_ROspCode as spCode
+     FROM(
+	select RD_ROspCode,count(*) as cnt from rd GROUP by RD_ROspCode ORDER by cnt DESC)
+	where rownum = 1
+   ]]>
+   </select>
+   <!-- 예약최대 -->
+   <select id="loadReserveSpace" resultType="com.comp.hobbyspace.beans.MainBean"> 
+   <![CDATA[
+	select sp_code as spCode,
+        sp.sp_location as spLocation,
+        sp.sp_topimg as spImg
+        from sp
+	where sp.sp_code =  #{spCode}
+   ]]>
+   </select>
+   <select id="getSpaceCode3" resultType="com.comp.hobbyspace.beans.MainBean">
+   <![CDATA[
+     select ZZ_spCode as spCode
+     FROM(
+	select ZZ_spCode,count(*) as cnt from zz GROUP by ZZ_spCode ORDER by cnt DESC)
+	where rownum = 1
+      ]]>
+   </select>
+   <!-- 찜최다 -->
+      <select id="loadZzimSpace" resultType="com.comp.hobbyspace.beans.MainBean">
+   <![CDATA[
+select sp_code as spCode,
+        sp.sp_location as spLocation,
+        sp.sp_topimg as spImg
+        from sp      
+	where sp.sp_code = #{spCode}
+      ]]>
+   </select>
+   <select id="loadReview" resultType="com.comp.hobbyspace.beans.MainBean"> 
+   <![CDATA[
+   SELECT RV_DATE AS rvDate,
+   RV_ROspCode AS spCode,
+   RV_CONTENT AS rvText,
+   RV_STAR AS rvStar,
+   RV_IMG AS rvImg
+   from(
+	select rownum rn ,RV_DATE,RV_ROspCode,RV_CONTENT,RV_STAR,RV_IMG from rv ORDER by RV_DATE DESC)
+	where rownum <= 3
+   ]]>
+   </select>
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 구현체 -->
+<mapper namespace="com.comp.hobbyspace.mapper.ZzimMapper">
+   <!-- resultType를 Bean에 맞게 잡아준다면 알아서 그 추상메서드에 맞게 잘 들어가 준다.-->   
+   <!-- QUERY에 포함된 문자 중 <> & || 등 이 있다면 XML 파싱을 하지 않도록 -->
+   <!-- [CDATA[ 안에 있는 것들은 전부 문자처리를 해주어 버리겠다. ]] -->
+   
+   <!-- 찜 추가 -->
+   <insert id="zzim" >
+   <![CDATA[
+      INSERT INTO ZZ(ZZ_USID,ZZ_spCode) VALUES(#{userId}, #{spCode})
+      ]]>   
+   </insert>
+   
+   <!-- 찜 삭제 -->
+   <delete id="deleteZzim" > 
+   <![CDATA[
+      DELETE FROM ZZ WHERE ZZ_USID = #{userId} AND ZZ_spCode = #{spCode}
+      ]]>
+   </delete>
+
+</mapper>
